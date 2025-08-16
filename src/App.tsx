@@ -1,5 +1,6 @@
 
 import BestSellers from "./components/BestSeller";
+import CTASection from "./components/CTA";
 import Footer from "./components/Footer";
 import GiftHamper from "./components/GiftHamper";
 import Header from "./components/Header";
@@ -19,6 +20,7 @@ function App() {
           <GiftHamper />
           <TeaTimeDelights />
           <Testimonials />
+          <CTASection />
       </main>
       <Footer />
     </div>
