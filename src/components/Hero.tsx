@@ -1,34 +1,75 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 function Hero() {
+  // Carousel images
+  const images = [
+    "https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg",
+    "https://t4.ftcdn.net/jpg/05/63/62/07/360_F_563620783_9icanRCanLxCe2h7SzwhSQvoEqS9RWSG.jpg",
+    "https://realfood.tesco.com/media/images/1400x919-Miniegg-cupcakes-withoutbranding-ffa3dd9a-6ac9-4329-b66e-15fe7e027a2b-0-1400x919.jpg",
+    "https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-fresh-pastry-and-bakery-items-available-on-trays-image_2581269.jpg",
+    "https://t3.ftcdn.net/jpg/00/27/57/96/360_F_27579652_tM7V4fZBBw8RLmZo0Bi8WhtO2EosTRFD.jpg"
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  // Auto slide every 5s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  type BubblePos = {
+  x: number;
+  delay: number;
+  duration: number;
+};
+
+const [bubblePositions, setBubblePositions] = useState<BubblePos[]>([]);
+
+useEffect(() => {
+  const positions: BubblePos[] = Array.from({ length: 12 }).map(() => ({
+    x: Math.random() * window.innerWidth,
+    delay: Math.random() * 5,
+    duration: 8 + Math.random() * 5,
+  }));
+  setBubblePositions(positions);
+}, []);
+
   return (
     <section
       id="home"
-      className="relative h-[90vh] bg-white flex items-center justify-start bg-cover bg-center px-10 overflow-hidden"
+      className="relative h-[100vh] bg-white flex items-center justify-start bg-cover bg-center px-10 overflow-hidden"
     >
-      {/* Background Image with Dark Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg')`,
-          filter: "brightness(55%)",
-        }}
-      ></div>
+      {/* Background Carousel */}
+      <div className="absolute inset-0">
+        {images.map((img, i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${img})` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: i === current ? 1 : 0 }}
+            transition={{ duration: 1.2 }}
+          />
+        ))}
+        {/* dark overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
 
-      {/* Floating "bubbles" (sugar particles) */}
-      {[...Array(12)].map((_, i) => (
+      {/* Floating "bubbles" */}
+      {bubblePositions.map((pos, i) => (
         <motion.div
           key={i}
           className="absolute w-3 h-3 rounded-full bg-yellow-300/70"
-          initial={{ y: "100vh", x: Math.random() * window.innerWidth, opacity: 0 }}
-          animate={{
-            y: [-20, "100vh"],
-            opacity: [0, 1, 0],
-          }}
+          initial={{ y: "100vh", x: pos.x, opacity: 0 }}
+          animate={{ y: [-20, "100vh"], opacity: [0, 1, 0] }}
           transition={{
-            duration: 8 + Math.random() * 5,
+            duration: pos.duration,
             repeat: Infinity,
-            delay: Math.random() * 5,
+            delay: pos.delay,
           }}
         />
       ))}
@@ -45,7 +86,7 @@ function Hero() {
         </motion.p>
 
         <motion.h1
-          className="text-5xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg"
+          className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -59,8 +100,8 @@ function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          From warm croissants to delightful cakes — crafted with love & joy, just
-          for you.
+          From warm croissants to delightful cakes — crafted with love & joy,
+          just for you.
         </motion.p>
 
         <motion.div
@@ -69,20 +110,16 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
+          {/* Order Button */}
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-600 transition"
+            className="relative overflow-hidden px-6 py-3 rounded-lg shadow-lg bg-white text-gray-800 group"
           >
-            Read More
-          </motion.button>
-
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-yellow-600 px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition"
-          >
-            Our Menu
+            <span className="absolute inset-0 bg-blue-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+            <span className="relative z-10 group-hover:text-white transition-colors duration-500">
+              Order Now
+            </span>
           </motion.button>
         </motion.div>
       </div>

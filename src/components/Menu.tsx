@@ -40,7 +40,7 @@ const categories = [
 
 const Menu = () => {
   return (
-    <section className="py-16 text-center">
+    <section className="py-8 text-center">
   <h2 className="text-3xl md:text-5xl font-semibold text-red-600 mb-4">
     Menu
   </h2>
