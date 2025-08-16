@@ -1,5 +1,6 @@
 
 import BestSellers from "./components/BestSeller";
+import CTASection from "./components/CTA";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -15,6 +16,7 @@ function App() {
           <Menu />
           <BestSellers />
           <Testimonials />
+          <CTASection/>
       </main>
       <Footer />
     </div>

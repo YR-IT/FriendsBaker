@@ -48,7 +48,7 @@ const Menu = () => {
 
   {/* horizontal scroll, swipeable, no scrollbar */}
   <div className="overflow-x-auto scrollbar-hide">
-    <div className="flex space-x-12 px-12">
+    <div className="flex space-x-12 px-8 sm:px-12">
       {/* left spacer */}
       <div className="flex-shrink-0 w-4"></div>
 
@@ -68,8 +68,6 @@ const Menu = () => {
   {/* sliding gradient overlay from top */}
   <div className="absolute inset-0 bg-black/20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"/>
 </div>
-
-
           <span className="text-lg font-medium text-gray-800 uppercase text-center">
             {item.title}
           </span>
