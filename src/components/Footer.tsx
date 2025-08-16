@@ -1,60 +1,114 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, ArrowUp } from "lucide-react";
 
 function Footer() {
+  // Smooth scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-blue-300 mt-auto">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+    <footer className="bg-gradient-to-r from-blue-50 via-white to-blue-50 mt-auto">
+      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Column 1: Logo & About */}
         <div>
-          <h2 className="text-2xl font-bold text-pink-600 mb-4">🍰 Friends Baker</h2>
-          <p className="text-gray-600 text-sm">
-            Bringing friends together with homemade goodness, baked fresh and
-            shared with love.
+          <h2 className="text-3xl font-extrabold text-blue-700 mb-4">
+            🥖 Friends Baker
+          </h2>
+          <p className="text-gray-700 text-sm leading-relaxed">
+            Freshly baked delights that bring friends and families together.
+            Taste the love in every bite.
           </p>
         </div>
 
         {/* Column 2: Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-gray-600">
-            <li><a href="#home" className="hover:text-pink-600">Home</a></li>
-            <li><a href="#features" className="hover:text-pink-600">Features</a></li>
-            <li><a href="#recipes" className="hover:text-pink-600">Recipes</a></li>
-            <li><a href="#contact" className="hover:text-pink-600">Contact</a></li>
+          <h3 className="text-lg font-semibold text-blue-900 mb-4">
+            Quick Links
+          </h3>
+          <ul className="space-y-3 text-gray-700">
+            {["Home", "Menu", "Recipes", "Contact"].map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  className="hover:text-blue-600 transition-colors duration-200 relative after:content-[''] after:block after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Column 3: Support */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Support</h3>
-          <ul className="space-y-2 text-gray-600">
-            <li><a href="#" className="hover:text-pink-600">Help Center</a></li>
-            <li><a href="#" className="hover:text-pink-600">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-pink-600">Terms of Service</a></li>
-            <li><a href="#" className="hover:text-pink-600">FAQs</a></li>
+          <h3 className="text-lg font-semibold text-blue-900 mb-4">Support</h3>
+          <ul className="space-y-3 text-gray-700">
+            {["Help Center", "Privacy Policy", "Terms of Service", "FAQs"].map(
+              (item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    className="hover:text-blue-600 transition-colors duration-200 relative after:content-[''] after:block after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                  >
+                    {item}
+                  </a>
+                </li>
+              )
+            )}
           </ul>
         </div>
 
-        {/* Column 4: Social Media */}
+        {/* Column 4: Newsletter & Social Media */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Follow Us</h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-4">
+            Stay Connected
+          </h3>
+          <p className="text-gray-700 text-sm mb-4">
+            Subscribe for the latest bakery specials and sweet recipes!
+          </p>
+          <form className="flex mb-6">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-3 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition"
+            >
+              Join
+            </button>
+          </form>
+
           <div className="flex gap-4">
-            <a href="#" className="text-gray-600 hover:text-pink-600 flex items-center gap-1">
-              <Facebook size={18} /> Facebook
-            </a>
-            <a href="#" className="text-gray-600 hover:text-pink-600 flex items-center gap-1">
-              <Instagram size={18} /> Instagram
-            </a>
-            <a href="#" className="text-gray-600 hover:text-pink-600 flex items-center gap-1">
-              <Twitter size={18} /> Twitter
-            </a>
+            {[{ icon: Facebook, name: "Facebook" }, { icon: Instagram, name: "Instagram" }, { icon: Twitter, name: "Twitter" }].map(
+              ({ icon: Icon, name }) => (
+                <a
+                  key={name}
+                  href="#"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-100 shadow-md text-blue-700 hover:bg-blue-600 hover:text-white transition transform hover:scale-110"
+                >
+                  <Icon size={18} />
+                </a>
+              )
+            )}
           </div>
         </div>
       </div>
 
+      {/* Divider */}
+      <div className="border-t border-gray-300 mx-6"></div>
+
       {/* Bottom Bar */}
-      <div className="bg-blue-300 py-4 text-center text-gray-700 text-sm">
+      <div className="relative py-4 text-center text-gray-700 text-sm">
         © {new Date().getFullYear()} Friends Baker. Made with ❤️ and sugar.
+        {/* Back to Top Button */}
+        <button
+          onClick={scrollToTop}
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full shadow-md hover:bg-blue-700 transition"
+        >
+          <ArrowUp size={18} />
+        </button>
       </div>
     </footer>
   );
