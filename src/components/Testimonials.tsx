@@ -36,23 +36,42 @@ function Testimonials() {
   ];
 
   const [index, setIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Autoplay every 4 seconds
+  // Autoplay every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
+      setIndex((prev) => (prev + 2) % testimonials.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, [testimonials.length]);
+
+  // Detect mobile
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Get testimonials (1 for mobile, 2 for desktop)
+  const visible = isMobile
+    ? [testimonials[index]]
+    : [testimonials[index], testimonials[(index + 1) % testimonials.length]];
+
+  // Dots logic
+  const dotCount = isMobile ? testimonials.length : Math.ceil(testimonials.length / 2);
+  const activeDot = isMobile ? index : Math.floor(index / 2);
 
   return (
     <section
       id="testimonials"
-      className="relative py-12 bg-gradient-to-b from-yellow-50 to-white overflow-hidden"
+      className="relative py-16 bg-gradient-to-b from-yellow-50 via-white to-yellow-50 overflow-hidden"
     >
-      {/* Section Title */}
       <motion.h2
-        className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-14"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12 px-4"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -60,39 +79,47 @@ function Testimonials() {
         What Our Customers Say
       </motion.h2>
 
-      {/* Slideshow */}
-      <div className="max-w-3xl mx-auto px-6 text-center relative h-72">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-auto min-h-[24rem]">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            className="absolute inset-0 flex flex-col items-center justify-center"
+            className="absolute inset-0 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch justify-center"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -40 }}
             transition={{ duration: 0.6 }}
           >
-            <img
-              src={testimonials[index].image}
-              alt={testimonials[index].name}
-              className="w-20 h-20 rounded-full object-cover border-4 border-yellow-400 mb-4"
-            />
-            <p className="text-gray-600 italic mb-4">
-              “{testimonials[index].text}”
-            </p>
-            <h4 className="font-bold text-gray-800">
-              {testimonials[index].name}
-            </h4>
+            {visible.map((t, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.03 }}
+                className="bg-gradient-to-tr from-blue-100 to-yellow-100 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300"
+              >
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-yellow-400 shadow-md mb-4"
+                />
+                <p className="text-gray-700 italic mb-6 text-base sm:text-lg leading-relaxed">
+                  “{t.text}”
+                </p>
+                <h4 className="font-bold text-gray-900 text-lg sm:text-xl">
+                  {t.name}
+                </h4>
+              </motion.div>
+            ))}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Dots Indicator */}
-      <div className="flex justify-center mt-8 space-x-2">
-        {testimonials.map((_, i) => (
-          <div
+      {/* Dots */}
+      <div className="flex justify-center space-x-2 mt-10">
+        {Array.from({ length: dotCount }).map((_, i) => (
+          <motion.div
             key={i}
-            className={`w-3 h-3 rounded-full ${
-              i === index ? "bg-yellow-500" : "bg-gray-300"
+            whileHover={{ scale: 1.2 }}
+            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors ${
+              i === activeDot ? "bg-yellow-500" : "bg-gray-300"
             }`}
           />
         ))}
