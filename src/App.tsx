@@ -1,9 +1,11 @@
 
 import BestSellers from "./components/BestSeller";
 import Footer from "./components/Footer";
+import GiftHamper from "./components/GiftHamper";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Menu from "./components/Menu";
+import TeaTimeDelights from "./components/TeaTimeDelights";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Hero />
           <Menu />
           <BestSellers />
+          <GiftHamper />
+          <TeaTimeDelights />
       </main>
       <Footer />
     </div>
