@@ -20,7 +20,7 @@ function Header() {
           <img 
             src="/logo.png" 
             alt="Friends Baker Logo" 
-            className="h-24 w-auto cursor-pointer pl-0 sm:pl-12"
+            className="h-16 sm:h-24 w-auto cursor-pointer pl-0 sm:pl-12"
           />
         </motion.h1>
 
