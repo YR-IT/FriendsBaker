@@ -1,22 +1,28 @@
 
-// import BestSellers from "./components/BestSeller";
-// import CTASection from "./components/CTA";
-import Dashboard from "./components/Dashboard";
-// import Footer from "./components/Footer";
-// import GiftHamper from "./components/GiftHamper";
-// import Header from "./components/Header";
-// import Hero from "./components/Hero";
-// import Menu from "./components/Menu";
-// import TeaTimeDelights from "./components/TeaTimeDelights";
-// import Testimonials from "./components/Testimonials";
+import BestSellers from "./components/BestSeller";
+import CTASection from "./components/CTA";
+import Footer from "./components/Footer";
+import GiftHamper from "./components/GiftHamper";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Menu from "./components/Menu";
+import TeaTimeDelights from "./components/TeaTimeDelights";
+import Testimonials from "./components/Testimonials";
 
 function App() {
   return (
      <div className="min-h-screen flex flex-col overflow-hidden">
+      <Header />
       <main className="flex-grow">
-      <Dashboard />
+          <Hero />
+          <Menu />
+          <BestSellers />
+          <GiftHamper />
+          <TeaTimeDelights />
+          <Testimonials />
+          <CTASection />
       </main>
-
+      <Footer />
     </div>
   );
 }
