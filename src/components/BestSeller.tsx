@@ -44,7 +44,7 @@ function BestSellers() {
       <div className="container mx-auto px-6 text-center">
         {/* Heading */}
         <motion.h2
-          className="text-3xl md:text-4xl font-extrabold text-blue-900"
+          className="text-3xl md:text-4xl font-bold text-blue-900"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -95,11 +95,13 @@ function BestSellers() {
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
 
               {/* Card content */}
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-blue-800">
-                  {item.name}
-                </h3>
-              </div>
+              <div className="p-5 flex items-center justify-center h-20 text-center">
+  <h3 className="text-lg font-semibold text-blue-800 leading-snug">
+    {item.name}
+  </h3>
+</div>
+
+
             </motion.div>
           ))}
         </div>

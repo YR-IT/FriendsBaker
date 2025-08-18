@@ -7,7 +7,7 @@ function CTASection() {
         
         {/* Heading */}
         <motion.h2
-          className="text-4xl md:text-5xl font-extrabold text-blue-800 mb-6"
+          className="text-4xl md:text-5xl font-bold text-blue-800 mb-6"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -16,13 +16,12 @@ function CTASection() {
           Like Our Products?
         </motion.h2>
 
-        {/* Divider dots */}
-        <div className="flex justify-center mb-10">
+        <div className="flex justify-center mt-3 mb-12">
           <div className="flex space-x-2">
-            <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
-            <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
-            <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
-            <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
+            <div className="w-3 h-3 bg-blue-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-blue-300 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-blue-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-blue-300 transform rotate-45"></div>
           </div>
         </div>
 

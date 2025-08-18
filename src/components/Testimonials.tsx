@@ -83,7 +83,7 @@ function Testimonials() {
         What Our Customers Say
       </motion.h2>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-auto min-h-[24rem]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-auto min-h-[16rem]">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -117,7 +117,7 @@ function Testimonials() {
       </div>
 
       {/* Dots */}
-      <div className="flex justify-center space-x-2 mt-10">
+      <div className="flex justify-center space-x-2 mt-20">
         {Array.from({ length: dotCount }).map((_, i) => (
           <motion.div
             key={i}

@@ -2,13 +2,33 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 function Hero() {
-  // Carousel images
+  // Carousel images with title & subtitle
   const images = [
-    "https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg",
-    "https://t4.ftcdn.net/jpg/05/63/62/07/360_F_563620783_9icanRCanLxCe2h7SzwhSQvoEqS9RWSG.jpg",
-    "https://realfood.tesco.com/media/images/1400x919-Miniegg-cupcakes-withoutbranding-ffa3dd9a-6ac9-4329-b66e-15fe7e027a2b-0-1400x919.jpg",
-    "https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-fresh-pastry-and-bakery-items-available-on-trays-image_2581269.jpg",
-    "https://t3.ftcdn.net/jpg/00/27/57/96/360_F_27579652_tM7V4fZBBw8RLmZo0Bi8WhtO2EosTRFD.jpg"
+    {
+      url: "https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg",
+      title: "Freshly Baked Everyday",
+      subtitle: "Start your morning with warm croissants & pastries",
+    },
+    {
+      url: "https://t4.ftcdn.net/jpg/05/63/62/07/360_F_563620783_9icanRCanLxCe2h7SzwhSQvoEqS9RWSG.jpg",
+      title: "Delicious Brownies",
+      subtitle: "Rich, fudgy, and baked with premium cocoa",
+    },
+    {
+      url: "https://realfood.tesco.com/media/images/1400x919-Miniegg-cupcakes-withoutbranding-ffa3dd9a-6ac9-4329-b66e-15fe7e027a2b-0-1400x919.jpg",
+      title: "Cupcakes for Every Mood",
+      subtitle: "Colorful treats to brighten your day",
+    },
+    {
+      url: "https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-fresh-pastry-and-bakery-items-available-on-trays-image_2581269.jpg",
+      title: "Freshly Baked Croissants & Pastries",
+  subtitle: "Buttery, flaky layers topped with fresh berries",
+    },
+    {
+      url: "https://t3.ftcdn.net/jpg/00/27/57/96/360_F_27579652_tM7V4fZBBw8RLmZo0Bi8WhtO2EosTRFD.jpg",
+      title: "Delicious Oven-Fresh Pizza",
+  subtitle: "Cheesy, crispy & loaded with your favorite toppings",
+    },
   ];
 
   const [current, setCurrent] = useState(0);
@@ -22,21 +42,21 @@ function Hero() {
   }, [images.length]);
 
   type BubblePos = {
-  x: number;
-  delay: number;
-  duration: number;
-};
+    x: number;
+    delay: number;
+    duration: number;
+  };
 
-const [bubblePositions, setBubblePositions] = useState<BubblePos[]>([]);
+  const [bubblePositions, setBubblePositions] = useState<BubblePos[]>([]);
 
-useEffect(() => {
-  const positions: BubblePos[] = Array.from({ length: 12 }).map(() => ({
-    x: Math.random() * window.innerWidth,
-    delay: Math.random() * 5,
-    duration: 8 + Math.random() * 5,
-  }));
-  setBubblePositions(positions);
-}, []);
+  useEffect(() => {
+    const positions: BubblePos[] = Array.from({ length: 12 }).map(() => ({
+      x: Math.random() * window.innerWidth,
+      delay: Math.random() * 5,
+      duration: 8 + Math.random() * 5,
+    }));
+    setBubblePositions(positions);
+  }, []);
 
   return (
     <section
@@ -49,7 +69,7 @@ useEffect(() => {
           <motion.div
             key={i}
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${img})` }}
+            style={{ backgroundImage: `url(${img.url})` }}
             initial={{ opacity: 0 }}
             animate={{ opacity: i === current ? 1 : 0 }}
             transition={{ duration: 1.2 }}
@@ -87,21 +107,22 @@ useEffect(() => {
 
         <motion.h1
           className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
+          key={images[current].title}
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          We Bake With Passion
+          {images[current].title}
         </motion.h1>
 
         <motion.p
           className="text-lg text-gray-200 mb-8"
+          key={images[current].subtitle}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          From warm croissants to delightful cakes — crafted with love & joy,
-          just for you.
+          {images[current].subtitle}
         </motion.p>
 
         <motion.div

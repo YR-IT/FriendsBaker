@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 function GiftHamper() {
   return (
-    <section className="bg-white py-28 px-6">
+    <section className="bg-white py-12 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-16">
         
         {/* Left Content */}
@@ -14,7 +14,7 @@ function GiftHamper() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-5xl font-extrabold text-blue-800 leading-snug mb-8"
+            className="text-5xl font-bold text-blue-800 leading-snug mb-8"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}

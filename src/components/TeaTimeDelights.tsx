@@ -22,7 +22,7 @@ function TeaTimeDelights() {
   }, []);
 
   return (
-    <section className="bg-white py-32 px-8 relative overflow-hidden">
+    <section className="bg-white py-16 px-8 relative overflow-hidden">
       {/* Decorative glowing circles in background */}
       <div className="absolute -top-20 -left-20 w-80 h-80 bg-blue-200 rounded-full blur-3xl opacity-40 animate-pulse"></div>
       <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-300 rounded-full blur-3xl opacity-40 animate-pulse"></div>
@@ -60,7 +60,7 @@ function TeaTimeDelights() {
             <span className="absolute -bottom-3 -right-3 w-10 h-10 border-b-4 border-r-4 border-blue-500 rounded-br-lg"></span>
 
             {/* Slideshow dots */}
-            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {/* <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
               {images.map((_, i) => (
                 <button
                   key={i}
@@ -70,7 +70,7 @@ function TeaTimeDelights() {
                   }`}
                 ></button>
               ))}
-            </div>
+            </div> */}
           </motion.div>
         </motion.div>
 
@@ -81,7 +81,7 @@ function TeaTimeDelights() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center md:text-left"
         >
-          <h2 className="text-5xl md:text-6xl font-extrabold text-blue-800 mb-8 leading-snug">
+          <h2 className="text-5xl md:text-6xl font-bold text-blue-800 mb-8 leading-snug">
             Tea-Time Delights
           </h2>
           <p className="text-gray-700 text-xl mb-10 max-w-lg leading-relaxed">
