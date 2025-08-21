@@ -20,17 +20,17 @@ function Header() {
           <img 
             src="/logo.png" 
             alt="Friends Baker Logo" 
-            className="h-16 sm:h-24 w-auto cursor-pointer pl-0 sm:pl-12"
+            className="h-20 w-auto cursor-pointer pl-0 sm:pl-16 py-2"
           />
         </motion.h1>
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex gap-8 font-medium">
-          <a href="#home" className="hover:text-yellow-500 transition">About Us</a>
-          <a href="#about" className="hover:text-yellow-500 transition">Products</a>
-          <a href="#services" className="hover:text-yellow-500 transition">Speciality Cakes</a>
-          <a href="#products" className="hover:text-yellow-500 transition">Find Us</a>
-          <a href="#contact" className="hover:text-yellow-500 transition">Contact Us</a>
+          <a href="#home" className="hover:text-blue-500 transition">About Us</a>
+          <a href="#about" className="hover:text-blue-500 transition">Products</a>
+          <a href="#services" className="hover:text-blue-500 transition">Speciality Cakes</a>
+          <a href="#products" className="hover:text-blue-500 transition">Find Us</a>
+          <a href="#contact" className="hover:text-blue-500 transition">Contact Us</a>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -42,13 +42,13 @@ function Header() {
         </button>
 
         {/* Call Us (desktop only) */}
-        <div className="hidden md:flex items-center gap-3 text-yellow-500 font-bold">
-          <div className="flex items-center justify-center border rounded-full p-2 border-yellow-500">
+        <div className="hidden md:flex items-center gap-3 text-blue-500 font-bold">
+          <div className="flex items-center justify-center border rounded-full p-2 border-blue-500">
             <Phone className="w-4 h-4" />
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-xs text-white font-normal">Call Us</span>
-            <span className="text-sm">+012 345 6789</span>
+            <span className="text-sm">+91 8872197774</span>
           </div>
         </div>
       </div>

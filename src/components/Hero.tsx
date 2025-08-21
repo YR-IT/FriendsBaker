@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 function Hero() {
-  // Carousel images with title & subtitle
   const images = [
     {
       url: "https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg",
@@ -97,7 +96,7 @@ function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-2xl text-left">
         <motion.p
-          className="text-yellow-400 uppercase tracking-wide mb-3 font-semibold"
+          className="text-blue-600 uppercase tracking-wide mb-3 font-semibold"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

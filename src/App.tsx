@@ -1,29 +1,21 @@
-
-import BestSellers from "./components/BestSeller";
-import CTASection from "./components/CTA";
-import Footer from "./components/Footer";
-import GiftHamper from "./components/GiftHamper";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Menu from "./components/Menu";
-import TeaTimeDelights from "./components/TeaTimeDelights";
-import Testimonials from "./components/Testimonials";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Footer from './components/Footer';
 
 function App() {
   return (
-     <div className="min-h-screen flex flex-col overflow-hidden">
-      <Header />
-      <main className="flex-grow">
-          <Hero />
-          <Menu />
-          <BestSellers />
-          <GiftHamper />
-          <TeaTimeDelights />
-          <Testimonials />
-          <CTASection />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
