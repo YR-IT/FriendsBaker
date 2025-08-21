@@ -96,13 +96,13 @@ function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-2xl text-left">
         <motion.p
-          className="text-blue-600 uppercase tracking-wide mb-3 font-semibold"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          ✦ The Best Bakery
-        </motion.p>
+  className="text-white uppercase tracking-wide mb-3 font-semibold bg-blue-500 inline-block px-2 py-1 rounded-lg"
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  ✦ The Best Bakery
+</motion.p>
 
         <motion.h1
           className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
@@ -115,7 +115,7 @@ function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-lg text-gray-200 mb-8"
+          className="text-lg text-white mb-8"
           key={images[current].subtitle}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
