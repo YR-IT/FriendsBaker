@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function About() {
   return (
     <div className="min-h-screen bg-white text-black flex flex-col items-center justify-start">
-      {/* Hero Section with Background Image */}
+      {/* Hero Section*/}
       <div
         className="relative w-full h-[80vh] bg-cover bg-center flex items-center justify-center"
         style={{ backgroundImage: "url('/about.jpg')" }} 
@@ -24,21 +24,21 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* About Section with Side Image + Text */}
+      {/* About Section */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row items-center justify-between px-6 py-16 gap-10">
         {/* Left Side Image */}
         <motion.div
-          className="w-full md:w-1/2"
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <img
-            src="/shop.png" 
-            alt="Bakery History"
-            className="rounded-xl shadow-lg w-full"
-          />
-        </motion.div>
+  className="w-full md:w-1/2"
+  initial={{ opacity: 0, x: -40 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+>
+  <img
+    src="/shop.png"
+    alt="Bakery History"
+    className="rounded-xl shadow-lg w-3/4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
+  />
+</motion.div>
 
         {/* Right Side Text */}
         <motion.div
@@ -53,14 +53,14 @@ export default function About() {
           <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-snug">
             Delivering Incredible Taste <br /> Since 2011!
           </h3>
-          <p className="text-gray-600 leading-relaxed mb-4 text-lg">
-            Renowned as “Dilli Darwaja” wala Friends Bakery, we started as one of the first commercial bakery shops in our city. With a portfolio of 150+ products baked to perfection with years of experience and expertise, we believe in delivering quality products that are fine-tuned to the taste and likings of our customers.
+          <p className="text-gray-600 leading-relaxed mb-4 ">
+            Friends Bakery has been a cherished name in our city for generations, known for blending tradition with innovation. From our humble beginnings as one of the first commercial bakeries, we’ve grown into a trusted destination for freshly baked delights that bring joy to every occasion.
           </p>
-          <p className="text-gray-600 leading-relaxed mb-4 text-lg">
-            With our commitment to hygiene and change, we have made space in the hearts of all generations. With the flair for innovation, we create products that resonate with people of all age groups.
+          <p className="text-gray-600 leading-relaxed mb-4">
+            With a wide range of 150+ products — from crispy Khari and wholesome biscuits to indulgent cookies and other baked specialties — we take pride in creating treats that cater to all age groups and tastes. Every product is crafted with a commitment to quality, hygiene, and the passion to serve only the best.
           </p> 
-          <p className="text-gray-600 leading-relaxed text-lg">
-            At Friends Bakery, we inherit the soul of our city, blending tradition with modern flavors to give our customers the best of both worlds. From crispy Khari to delightful biscuits and cookies, our offerings are crafted with love and passion.
+          <p className="text-gray-600 leading-relaxed">
+            At Friends Bakery, we carry forward the essence of our city while introducing modern flavors and techniques. Our goal is simple: to continue spreading happiness through baking, one bite at a time.
           </p>
         </motion.div>
       </div>
@@ -78,7 +78,7 @@ export default function About() {
       y: 0,
       transition: {
         duration: 0.8,
-        staggerChildren: 0.3, // controls delay between children
+        staggerChildren: 0.3, 
       },
     },
   }}
@@ -110,7 +110,7 @@ export default function About() {
         key={i}
         className="overflow-hidden rounded-xl shadow-lg"
         variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }}
-        whileHover={{ scale: 1.05, rotate: 1 }} // interactive hover effect
+        whileHover={{ scale: 1.05, rotate: 1 }}
         transition={{ duration: 0.4 }}
       >
         <img
@@ -144,7 +144,7 @@ export default function About() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.2, // delay between each card
+        staggerChildren: 0.2, 
       },
     },
   }}

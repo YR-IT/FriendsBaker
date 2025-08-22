@@ -1,7 +1,7 @@
 
 const categories = [
   {
-    title: "Classic",
+    title: "Classic Cakes",
     image: "https://liliyum.com/cdn/shop/products/GreenFloralBirthdayCake_2400x.jpg?v=1676704297",
   },
   {
@@ -41,7 +41,7 @@ const categories = [
 const Menu = () => {
   return (
     <section className="py-8 text-center">
-  <h2 className="text-3xl md:text-5xl font-semibold text-red-600 mb-4">
+  <h2 className="text-3xl md:text-5xl font-semibold text-blue-900 mb-4">
     Menu
   </h2>
   <p className="text-lg text-gray-800 mb-10 italic font-thin">What will you wish for?</p>

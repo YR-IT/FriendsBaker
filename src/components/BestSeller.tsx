@@ -26,6 +26,30 @@ const bestSellers = [
     image:
       "https://www.seriouseats.com/thmb/Mykce8jNBk43y7fKyIjaPm2BB58=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2017__06__20170526-no-bake-cheesecake-vicky-wasik-18-89991c64ba544e19bc05c774c499438c.jpg",
   },
+   {
+    id: 1,
+    name: "Fresh Cream Pineapple Cake",
+    image:
+      "https://ribbonsandballoons.com/assets1/uploads/RAsmalali_Cake_copy_808320.jpg",
+  },
+  {
+    id: 2,
+    name: "Overload Brownie",
+    image:
+      "https://media.istockphoto.com/id/1370520449/photo/slice-of-chocolate-cake-with-glaze.jpg?s=612x612&w=0&k=20&c=KK-h7w4l0FNA0YMWvkr1X8UrAAB77z0f5tTByBYgReM=",
+  },
+  {
+    id: 3,
+    name: "Dense Loaf",
+    image:
+      "https://bkmedia.bakingo.com/dainty-dry-dense-cake-cake2661dryc-AA.jpg",
+  },
+  {
+    id: 4,
+    name: "CheeseCake",
+    image:
+      "https://www.seriouseats.com/thmb/Mykce8jNBk43y7fKyIjaPm2BB58=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2017__06__20170526-no-bake-cheesecake-vicky-wasik-18-89991c64ba544e19bc05c774c499438c.jpg",
+  },
 ];
 
 function BestSellers() {
@@ -44,7 +68,7 @@ function BestSellers() {
       <div className="container mx-auto px-6 text-center">
         {/* Heading */}
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-blue-900"
+          className="text-3xl md:text-4xl font-semibold text-blue-900"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

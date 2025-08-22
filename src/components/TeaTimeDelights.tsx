@@ -81,7 +81,7 @@ function TeaTimeDelights() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center md:text-left"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-blue-800 mb-8 leading-snug">
+          <h2 className="text-5xl md:text-6xl font-semibold text-blue-900 mb-8 leading-snug">
             Tea-Time Delights
           </h2>
           <p className="text-gray-700 text-xl mb-10 max-w-lg leading-relaxed">

@@ -14,7 +14,7 @@ function GiftHamper() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-5xl font-bold text-blue-800 leading-snug mb-8"
+            className="text-5xl font-semibold text-blue-900 leading-snug mb-8"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}

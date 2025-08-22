@@ -75,7 +75,7 @@ function Testimonials() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-20 relative z-10"></div>
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-blue-900 mb-12 px-4"
+        className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-blue-900 mb-12 px-4"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
