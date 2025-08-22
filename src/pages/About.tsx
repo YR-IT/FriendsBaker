@@ -18,8 +18,8 @@ export default function About() {
           <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
             About Us
           </h1>
-          <p className="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto">
-            At <span className="text-blue-500 font-semibold">Friends Bakery</span>, we believe baking is more than just making bread and pastries—it’s about creating moments of joy. Our journey started with a simple passion for fresh, warm, and delightful treats, and today we continue to spread happiness, one bite at a time.
+          <p className="text-lg sm:text-xl text-teal-100 max-w-2xl mx-auto">
+            At <span className="text-teal-500 font-semibold">Friends Bakery</span>, we believe baking is more than just making bread and pastries—it’s about creating moments of joy. Our journey started with a simple passion for fresh, warm, and delightful treats, and today we continue to spread happiness, one bite at a time.
           </p>
         </motion.div>
       </div>
@@ -47,7 +47,7 @@ export default function About() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h2 className="uppercase text-base tracking-widest text-blue-600 font-semibold mb-4">
+          <h2 className="uppercase text-base tracking-widest text-teal-600 font-semibold mb-4">
             About Us
           </h2>
           <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-snug">
@@ -173,9 +173,9 @@ export default function About() {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
       }}
     >
-      <div className="bg-blue-50 border border-blue-200 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform p-6 text-center">
+      <div className="bg-teal-50 border border-teal-200 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform p-6 text-center">
         <div className="text-5xl mb-4">{item.icon}</div>
-        <h2 className="text-2xl font-semibold text-blue-700 mb-2">{item.title}</h2>
+        <h2 className="text-2xl font-semibold text-teal-700 mb-2">{item.title}</h2>
         <p className="text-gray-600">{item.desc}</p>
       </div>
     </motion.div>
@@ -191,7 +191,7 @@ export default function About() {
       >
         <a
           href="/menu"
-          className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-2xl shadow-lg transition-all"
+          className="px-8 py-3 bg-teal-600 hover:bg-teal-500 text-white font-semibold rounded-2xl shadow-lg transition-all"
         >
           Explore Our Menu →
         </a>
