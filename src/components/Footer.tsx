@@ -7,8 +7,8 @@ function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-blue-50 via-white to-blue-50 mt-auto">
-      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-gradient-to-r from-teal-100 via-white to-teal-100 mt-auto">
+      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Column 1: Logo & About */}
         <div>
           <h2 className="text-3xl font-bold text-blue-700 mb-4">
@@ -26,7 +26,7 @@ function Footer() {
             Quick Links
           </h3>
           <ul className="space-y-3 text-gray-700">
-            {["Home", "Menu", "Recipes", "Contact"].map((item) => (
+            {["Home", "About Us", "Products","Speciality Cakes", "Hampers", "Contact"].map((item) => (
               <li key={item}>
                 <a
                   href={`#${item.toLowerCase()}`}

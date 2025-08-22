@@ -96,7 +96,7 @@ function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-2xl text-left">
         <motion.p
-  className="text-white uppercase tracking-wide mb-3 font-semibold bg-blue-500 inline-block px-2 py-1 rounded-lg"
+  className="text-white uppercase tracking-wide mb-3 font-semibold bg-teal-500 inline-block px-2 py-1 rounded-lg"
   initial={{ opacity: 0, y: -20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6 }}
@@ -136,7 +136,7 @@ function Hero() {
             whileTap={{ scale: 0.95 }}
             className="relative overflow-hidden px-6 py-3 rounded-lg shadow-lg bg-white text-gray-800 group"
           >
-            <span className="absolute inset-0 bg-blue-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+            <span className="absolute inset-0 bg-teal-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
             <span className="relative z-10 group-hover:text-white transition-colors duration-500">
               Order Now
             </span>

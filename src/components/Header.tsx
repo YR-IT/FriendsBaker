@@ -46,7 +46,10 @@ function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8 font-medium relative">
-          <a href="/about" className="hover:text-blue-500 transition">
+          <a href="/" className="hover:text-teal-500 transition">
+            Home
+          </a>
+          <a href="/about" className="hover:text-teal-500 transition">
             About Us
           </a>
 
@@ -56,7 +59,7 @@ function Header() {
             onMouseEnter={() => setHoveredMenu("products")}
             onMouseLeave={() => setHoveredMenu(null)}
           >
-            <button className="flex items-center gap-1 hover:text-blue-500 transition">
+            <button className="flex items-center gap-1 hover:text-teal-500 transition">
               Products
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
@@ -76,10 +79,10 @@ function Header() {
               >
                 {submenus.products.map((col, i) => (
                   <div key={i}>
-                    <h3 className="font-semibold text-blue-600 mb-2">{col.title}</h3>
+                    <h3 className="font-semibold text-teal-600 mb-2">{col.title}</h3>
                     <ul className="space-y-4 text-sm">
                       {col.items.map((item, j) => (
-                        <li key={j} className="hover:text-blue-500 cursor-pointer transition">
+                        <li key={j} className="hover:text-teal-500 cursor-pointer transition">
                           {item}
                         </li>
                       ))}
@@ -96,7 +99,7 @@ function Header() {
             onMouseEnter={() => setHoveredMenu("speciality")}
             onMouseLeave={() => setHoveredMenu(null)}
           >
-            <button className="flex items-center gap-1 hover:text-blue-500 transition">
+            <button className="flex items-center gap-1 hover:text-teal-500 transition">
               Speciality Cakes
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
@@ -116,10 +119,10 @@ function Header() {
               >
                 {submenus.speciality.map((col, i) => (
                   <div key={i}>
-                    <h3 className="font-semibold text-blue-600 mb-2">{col.title}</h3>
+                    <h3 className="font-semibold text-teal-600 mb-2">{col.title}</h3>
                     <ul className="space-y-4 text-sm">
                       {col.items.map((item, j) => (
-                        <li key={j} className="hover:text-blue-500 cursor-pointer transition">
+                        <li key={j} className="hover:text-teal-500 cursor-pointer transition">
                           {item}
                         </li>
                       ))}
@@ -136,7 +139,7 @@ function Header() {
             onMouseEnter={() => setHoveredMenu("hampers")}
             onMouseLeave={() => setHoveredMenu(null)}
           >
-            <button className="flex items-center gap-1 hover:text-blue-500 transition">
+            <button className="flex items-center gap-1 hover:text-teal-500 transition">
               Hampers
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
@@ -158,7 +161,7 @@ function Header() {
                   <div key={i}>
                     <ul className="space-y-4 text-sm">
                       {col.items.map((item, j) => (
-                        <li key={j} className="hover:text-blue-500 cursor-pointer transition">
+                        <li key={j} className="hover:text-teal-500 cursor-pointer transition">
                           {item}
                         </li>
                       ))}
@@ -169,7 +172,7 @@ function Header() {
             )}
           </div>
 
-          <a href="/contact-us" className="hover:text-blue-500 transition">
+          <a href="/contact-us" className="hover:text-teal-500 transition">
             Contact Us
           </a>
         </nav>
@@ -189,19 +192,19 @@ function Header() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-20 right-0 w-[20vh] bg-blue-100 shadow-lg p-6 flex flex-col gap-4 text-gray-800 z-50 md:hidden"
+            className="absolute top-20 right-0 w-[20vh] bg-teal-100 shadow-lg p-6 flex flex-col gap-4 text-gray-800 z-50 md:hidden"
           >
-            <a href="/about" className="hover:text-blue-500 transition">About Us</a>
-            <a href="/products" className="hover:text-blue-500 transition">Products</a>
-            <a href="/speciality" className="hover:text-blue-500 transition">Speciality Cakes</a>
-            <a href="/hampers" className="hover:text-blue-500 transition">Hampers</a>
-            <a href="/contact-us" className="hover:text-blue-500 transition">Contact Us</a>
+            <a href="/about" className="hover:text-teal-500 transition">About Us</a>
+            <a href="/products" className="hover:text-teal-500 transition">Products</a>
+            <a href="/speciality" className="hover:text-teal-500 transition">Speciality Cakes</a>
+            <a href="/hampers" className="hover:text-teal-500 transition">Hampers</a>
+            <a href="/contact-us" className="hover:text-teal-500 transition">Contact Us</a>
           </motion.div>
         )}
 
         {/* Call Us */}
-        <div className="hidden md:flex items-center gap-3 text-blue-500 font-bold">
-          <div className="flex items-center justify-center border rounded-full p-2 border-blue-500">
+        <div className="hidden md:flex items-center gap-3 text-teal-500 font-bold">
+          <div className="flex items-center justify-center border rounded-full p-2 border-teal-500">
             <Phone className="w-4 h-4" />
           </div>
           <div className="flex flex-col leading-tight">
