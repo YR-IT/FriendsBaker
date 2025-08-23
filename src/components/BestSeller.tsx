@@ -68,7 +68,7 @@ function BestSellers() {
       <div className="container mx-auto px-6 text-center">
         {/* Heading */}
         <motion.h2
-          className="text-3xl md:text-4xl font-semibold text-blue-900"
+          className="text-3xl md:text-4xl font-semibold text-teal-900"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -79,9 +79,9 @@ function BestSellers() {
         {/* Decorative line */}
         <div className="flex justify-center mt-3 mb-12">
           <div className="flex space-x-2">
-            <div className="w-3 h-3 bg-blue-400 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-blue-300 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-blue-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-300 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-400 transform rotate-45"></div>
           </div>
         </div>
 
@@ -90,7 +90,7 @@ function BestSellers() {
           {bestSellers.map((item) => (
             <motion.div
               key={item.id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden border border-blue-100 hover:shadow-2xl transition cursor-pointer relative"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden border border-teal-100 hover:shadow-2xl transition cursor-pointer relative"
               whileHover={{ scale: 1.05 }}
               onMouseEnter={() =>
                 setTooltip({ visible: true, text: item.name, x: 0, y: 0 })
@@ -116,11 +116,11 @@ function BestSellers() {
               />
 
               {/* Overlay Effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-teal-900/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
 
               {/* Card content */}
               <div className="p-5 flex items-center justify-center h-20 text-center">
-  <h3 className="text-lg font-semibold text-blue-800 leading-snug">
+  <h3 className="text-lg font-semibold text-teal-800 leading-snug">
     {item.name}
   </h3>
 </div>
@@ -135,7 +135,7 @@ function BestSellers() {
       <AnimatePresence>
         {tooltip.visible && (
           <motion.div
-            className="fixed px-3 py-1 bg-blue-600 text-white text-xs rounded-md shadow-lg pointer-events-none z-50"
+            className="fixed px-3 py-1 bg-teal-600 text-white text-xs rounded-md shadow-lg pointer-events-none z-50"
             style={{
               top: tooltip.y + 15,
               left: tooltip.x + 15,

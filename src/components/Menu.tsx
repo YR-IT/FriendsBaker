@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Menu = () => {
   return (
     <section className="py-8 text-center">
-      <h2 className="text-3xl md:text-5xl font-semibold text-blue-900 mb-4">
+      <h2 className="text-3xl md:text-5xl font-semibold text-teal-900 mb-4">
         Menu
       </h2>
       <p className="text-lg text-gray-800 mb-10 italic font-thin">

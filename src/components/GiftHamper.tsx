@@ -14,7 +14,7 @@ function GiftHamper() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-5xl font-semibold text-blue-900 leading-snug mb-8"
+            className="text-5xl font-semibold text-teal-900 leading-snug mb-8"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -23,7 +23,7 @@ function GiftHamper() {
           </motion.h2>
 
           <motion.div
-            className="w-24 h-1 bg-blue-500 rounded mb-8"
+            className="w-24 h-1 bg-teal-500 rounded mb-8"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -43,7 +43,7 @@ function GiftHamper() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 text-white px-10 py-4 rounded-full font-semibold text-xl hover:bg-blue-700 shadow-lg transition"
+            className="bg-teal-600 text-white px-10 py-4 rounded-full font-semibold text-xl hover:bg-teal-700 shadow-lg transition"
           >
             Know More
           </motion.button>
@@ -60,7 +60,7 @@ function GiftHamper() {
           <motion.img
             src="/GiftHamperFinal.png"
             alt="Bakery Hamper"
-            className="rounded-2xl shadow-2xl border-4 border-blue-100"
+            className="rounded-2xl shadow-2xl border-4 border-teal-100"
             whileHover={{ scale: 1.01, rotate: 2 }}
             transition={{ type: "spring", stiffness: 200 }}
           />

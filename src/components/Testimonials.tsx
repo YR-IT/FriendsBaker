@@ -70,12 +70,12 @@ function Testimonials() {
       id="testimonials"
       className="relative py-16 bg-white overflow-hidden"
     >
-      <div className="absolute -top20 -left-20 w-80 h-80 bg-blue-200 rounded-full blur-3xl opacity-40 animate-pulse"></div>
-      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-300 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+      <div className="absolute -top20 -left-20 w-80 h-80 bg-teal-200 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-teal-300 rounded-full blur-3xl opacity-40 animate-pulse"></div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-20 relative z-10"></div>
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-blue-900 mb-12 px-4"
+        className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-teal-900 mb-12 px-4"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -97,17 +97,17 @@ function Testimonials() {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.03 }}
-                className="bg-gradient-to-tr from-blue-100 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300 border border-blue-200"
+                className="bg-gradient-to-tr from-teal-100 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300 border border-teal-200"
               >
                 <img
                   src={t.image}
                   alt={t.name}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-blue-400 shadow-md mb-4"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-teal-400 shadow-md mb-4"
                 />
                 <p className="text-gray-700 italic mb-6 text-base sm:text-lg leading-relaxed">
                   “{t.text}”
                 </p>
-                <h4 className="font-bold text-blue-800 text-lg sm:text-xl">
+                <h4 className="font-bold text-teal-800 text-lg sm:text-xl">
                   {t.name}
                 </h4>
               </motion.div>
@@ -123,7 +123,7 @@ function Testimonials() {
             key={i}
             whileHover={{ scale: 1.2 }}
             className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors ${
-              i === activeDot ? "bg-blue-500" : "bg-blue-200"
+              i === activeDot ? "bg-teal-500" : "bg-teal-200"
             }`}
           />
         ))}

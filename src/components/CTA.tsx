@@ -7,7 +7,7 @@ function CTASection() {
         
         {/* Heading */}
         <motion.h2
-          className="text-4xl md:text-5xl font-semibold text-blue-900 mb-6"
+          className="text-4xl md:text-5xl font-semibold text-teal-900 mb-6"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -18,10 +18,10 @@ function CTASection() {
 
         <div className="flex justify-center mt-3 mb-12">
           <div className="flex space-x-2">
-            <div className="w-3 h-3 bg-blue-400 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-blue-300 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-blue-400 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-blue-300 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-300 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-300 transform rotate-45"></div>
           </div>
         </div>
 
@@ -40,7 +40,7 @@ function CTASection() {
         {/* Button */}
         <motion.a
           href="#products"
-          className="inline-block bg-blue-600 text-white font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-blue-700 transition text-lg"
+          className="inline-block bg-teal-600 text-white font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-teal-700 transition text-lg"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, scale: 0.9 }}
@@ -74,8 +74,8 @@ function CTASection() {
       />
 
       {/* Flour dust / artistic gradient */}
-      <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
     </section>
   );
 }
