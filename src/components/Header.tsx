@@ -179,7 +179,7 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
         </nav>
 
         {/* Mobile Hamburger */}
-        <button className="md:hidden p-2 text-yellow-500" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className="md:hidden p-2 text-teal-500" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
         </button>
 
