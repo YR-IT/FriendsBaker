@@ -100,6 +100,7 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
                           <Link
                             to={`/products/${item.toLowerCase().replace(/\s+/g, "-")}`}
                             className="hover:text-teal-500 cursor-pointer transition"
+                            onClick={() => setHoveredMenu(null)} // submenu close
                           >
                             {item}
                           </Link>
@@ -143,6 +144,7 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
                           <Link
                             to={`/speciality/${item.toLowerCase().replace(/\s+/g, "-")}`}
                             className="hover:text-teal-500 cursor-pointer transition"
+                            onClick={() => setHoveredMenu(null)} // submenu close
                           >
                             {item}
                           </Link>
@@ -185,6 +187,7 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
                           <Link
                             to={`/hampers/${item.toLowerCase().replace(/\s+/g, "-")}`}
                             className="hover:text-teal-500 cursor-pointer transition"
+                            onClick={() => setHoveredMenu(null)} // submenu close
                           >
                             {item}
                           </Link>

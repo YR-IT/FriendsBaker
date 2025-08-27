@@ -19,14 +19,14 @@ function SubmenuPage() {
       name: "Black Forest",
       price: "₹500",
       rating: 4.6,
-      image: "https://www.pexels.com/photo/birthday-cakes-with-chocolate-19036040/",
+      image: "https://images.unsplash.com/photo-1605807646983-377bc5a76493?w=600&auto=format&fit=crop&q=60",
     },
     {
       id: 3,
       name: "Red Velvet",
       price: "₹550",
       rating: 4.9,
-      image: "https://www.pexels.com/photo/slice-of-cake-with-blueberries-23470991/",
+      image: "https://plus.unsplash.com/premium_photo-1713920189815-876dbdf5f56e?w=600&auto=format&fit=crop&q=60",
     },
     {
       id: 4,
