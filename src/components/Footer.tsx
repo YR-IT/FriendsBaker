@@ -10,41 +10,54 @@ function Footer() {
     <footer className="bg-gradient-to-r from-teal-100 via-white to-teal-100 mt-auto">
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Column 1: Logo & About */}
-        <div>
-          <h2 className="text-3xl font-bold text-teal-700 mb-4">
-             Friends Baker
-          </h2>
-          <p className="text-gray-700 text-sm leading-relaxed">
-            Freshly baked delights that bring friends and families together.
-            Taste the love in every bite.
-          </p>
-        </div>
+        <div className="text-start">
+  {/* Logo */}
+  <img
+    src="/logo.png"
+    alt="Friends Baker Logo"
+    className="w-20 h-20 mx-auto mb-3 object-contain"
+  />
+
+  {/* Heading */}
+  <h2 className="text-3xl font-bold text-teal-700 mb-2">
+    Friends Baker
+  </h2>
+
+  {/* Content */}
+  <p className="text-gray-700 text-sm leading-relaxed">
+    Freshly baked delights that bring friends and families together. <br />
+    Taste the love in every bite.
+  </p>
+</div>
 
         {/* Column 2: Quick Links */}
         <div>
-  <h3 className="text-lg font-semibold text-teal-900 mb-4">
-    Quick Links
-  </h3>
-  <ul className="space-y-3 text-gray-700">
-    {[
-      { name: "Home", link: "/" },
-      { name: "About Us", link: "/about" },
-      { name: "Products", link: "/products" },
-      { name: "Speciality Cakes", link: "/speciality-cakes" },
-      { name: "Hampers", link: "/hampers" },
-      { name: "Contact", link: "/contact-us" },
-    ].map((item) => (
-      <li key={item.name}>
-        <a
-          href={item.link}
-          className="hover:text-teal-600 transition-colors duration-200 relative after:content-[''] after:block after:w-0 after:h-[2px] after:bg-teal-600 after:transition-all after:duration-300 hover:after:w-full"
-        >
-          {item.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-</div>
+          <h3 className="text-lg font-semibold text-teal-900 mb-4">
+            Quick Links
+          </h3>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              { name: "Home", link: "/" },
+              { name: "About Us", link: "/about" },
+              { name: "Products", link: "/products" },
+              { name: "Speciality Cakes", link: "/speciality-cakes" },
+              { name: "Hampers", link: "/hampers" },
+              { name: "Contact", link: "/contact-us" },
+            ].map((item) => (
+              <li key={item.name}>
+                <a
+                  href={item.link}
+                  className="hover:text-teal-600 transition-colors duration-200 relative 
+             after:content-[''] after:inline-block after:w-0 after:h-[2px] 
+             after:bg-teal-600 after:transition-all after:duration-300 
+             hover:after:w-full after:absolute after:left-0 after:bottom-0"
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Column 3: Support */}
         <div>
@@ -55,7 +68,10 @@ function Footer() {
                 <li key={item}>
                   <a
                     href="#"
-                    className="hover:text-teal-600 transition-colors duration-200 relative after:content-[''] after:block after:w-0 after:h-[2px] after:bg-teal-600 after:transition-all after:duration-300 hover:after:w-full"
+                    className="hover:text-teal-600 transition-colors duration-200 relative 
+             after:content-[''] after:inline-block after:w-0 after:h-[2px] 
+             after:bg-teal-600 after:transition-all after:duration-300 
+             hover:after:w-full after:absolute after:left-0 after:bottom-0"
                   >
                     {item}
                   </a>
@@ -88,17 +104,19 @@ function Footer() {
           </form>
 
           <div className="flex gap-4">
-            {[{ icon: Facebook, name: "Facebook" }, { icon: Instagram, name: "Instagram" }, { icon: Twitter, name: "Twitter" }].map(
-              ({ icon: Icon, name }) => (
-                <a
-                  key={name}
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-100 shadow-md text-teal-700 hover:bg-teal-600 hover:text-white transition transform hover:scale-110"
-                >
-                  <Icon size={18} />
-                </a>
-              )
-            )}
+            {[
+              { icon: Facebook, name: "Facebook" },
+              { icon: Instagram, name: "Instagram" },
+              { icon: Twitter, name: "Twitter" },
+            ].map(({ icon: Icon, name }) => (
+              <a
+                key={name}
+                href="#"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-100 shadow-md text-teal-700 hover:bg-teal-600 hover:text-white transition transform hover:scale-110"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
           </div>
         </div>
       </div>

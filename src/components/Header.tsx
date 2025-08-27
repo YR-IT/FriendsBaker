@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { submenus } from "../../data/categories";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,22 +27,22 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
     }, 200); // delay before closing
   };
 
-  const submenus: Record<string, { title: string; items: string[] }[]> = {
-    products: [
-      { title: "Kids Cakes", items: ["1st Birthday Cakes", "Princess Cakes", "Animal Cakes","Cakes for Girls", "Cakes for Boys", "Baby Shark Cakes", "All Kids Cakes"] },
-      { title: "Anniversary Cakes", items: ["1st Anniversary Cakes", "25th Anniversary Cakes", "Anniversary Cakes for Parents", "50th Anniversary Cakes", "All Anniversary Cakes"] },
-      { title: "Character Cakes", items: ["Spiderman Cakes", "Unicorn Cakes", "Barbie Cakes", "Harry Potter Cakes", "Avenger Cakes", "Peppa Pig Cakes","Doraemon Cakes", "Naruto Cakes"] },
-      { title: "More Cakes", items: ["Rainbow Cakes", "Butterfly Cakes", "Football Cakes", "Basketball Cakes", "Rainbow Cakes", "Butterfly Cakes","Shinchan Cakes"] },
-    ],
-    speciality: [
-      { title: "Designer Cakes", items: ["3D Cakes", "Photo Cakes", "Theme Cakes"] },
-      { title: "Occasion Cakes", items: ["Birthday", "Anniversary", "Baby Shower"] },
-      { title: "Trendy Cakes", items: ["Pinata Cakes", "Pull-Me-Up Cakes", "Jar Cakes"] },
-    ],
-    hampers: [
-      { title: "", items: ["Gift Hampers", "Make Your Own Hamper", "Assorted Pastry Box", "Cupcake Delight Box", "Make Your Dessert Box"] },
-    ],
-  };
+  // const submenus: Record<string, { title: string; items: string[] }[]> = {
+  //   products: [
+  //     { title: "Kids Cakes", items: ["1st Birthday Cakes", "Princess Cakes", "Animal Cakes","Cakes for Girls", "Cakes for Boys", "Baby Shark Cakes", "All Kids Cakes"] },
+  //     { title: "Anniversary Cakes", items: ["1st Anniversary Cakes", "25th Anniversary Cakes", "Anniversary Cakes for Parents", "50th Anniversary Cakes", "All Anniversary Cakes"] },
+  //     { title: "Character Cakes", items: ["Spiderman Cakes", "Unicorn Cakes", "Barbie Cakes", "Harry Potter Cakes", "Avenger Cakes", "Peppa Pig Cakes","Doraemon Cakes", "Naruto Cakes"] },
+  //     { title: "More Cakes", items: ["Rainbow Cakes", "Butterfly Cakes", "Football Cakes", "Basketball Cakes", "Rainbow Cakes", "Butterfly Cakes","Shinchan Cakes"] },
+  //   ],
+  //   speciality: [
+  //     { title: "Designer Cakes", items: ["Gourmet Cakes", "Photo Cakes", "Theme Cakes"] },
+  //     { title: "Occasion Cakes", items: ["Birthday", "Anniversary", "Baby Shower"] },
+  //     { title: "Trendy Cakes", items: ["Pinata Cakes", "Pull-Me-Up Cakes", "Jar Cakes"] },
+  //   ],
+  //   hampers: [
+  //     { title: "", items: ["Gift Hampers", "Make Your Own Hamper", "Assorted Pastry Box", "Cupcake Delight Box", "Make Your Dessert Box"] },
+  //   ],
+  // };
 
   return (
     <header className="w-full left-0 z-50">
@@ -95,7 +96,14 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
                     <h3 className="font-semibold text-teal-600 mb-2">{col.title}</h3>
                     <ul className="space-y-4 text-sm">
                       {col.items.map((item, j) => (
-                        <li key={j} className="hover:text-teal-500 cursor-pointer transition">{item}</li>
+                        <li key={j}>
+                          <Link
+                            to={`/products/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="hover:text-teal-500 cursor-pointer transition"
+                          >
+                            {item}
+                          </Link>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -131,7 +139,14 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
                     <h3 className="font-semibold text-teal-600 mb-2">{col.title}</h3>
                     <ul className="space-y-4 text-sm">
                       {col.items.map((item, j) => (
-                        <li key={j} className="hover:text-teal-500 cursor-pointer transition">{item}</li>
+                        <li key={j}>
+                          <Link
+                            to={`/speciality/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="hover:text-teal-500 cursor-pointer transition"
+                          >
+                            {item}
+                          </Link>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -166,7 +181,14 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
                   <div key={i}>
                     <ul className="space-y-4 text-sm">
                       {col.items.map((item, j) => (
-                        <li key={j} className="hover:text-teal-500 cursor-pointer transition">{item}</li>
+                        <li key={j}>
+                          <Link
+                            to={`/hampers/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="hover:text-teal-500 cursor-pointer transition"
+                          >
+                            {item}
+                          </Link>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -177,6 +199,8 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
 
           <a href="/contact-us" className="hover:text-teal-500 transition">Contact Us</a>
         </nav>
+
+
 
         {/* Mobile Hamburger */}
         <button className="md:hidden p-2 text-teal-500" onClick={() => setMenuOpen(!menuOpen)}>
@@ -192,6 +216,7 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
     transition={{ duration: 0.3 }}
     className="absolute top-20 right-0 w-full bg-teal-100 shadow-lg p-6 flex flex-col gap-4 text-gray-800 z-50 md:hidden"
   >
+    <a href="/" className="hover:text-teal-500 transition">Home</a>
     <a href="/about" className="hover:text-teal-500 transition">About Us</a>
 
     {/* Products (collapsible) */}
@@ -229,9 +254,15 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
               {openSubmenu === col.title && (
                 <ul className="mt-1 pl-4 space-y-1">
                   {col.items.map((item, j) => (
-                    <li key={j} className="hover:text-teal-500 cursor-pointer">
-                      {item}
-                    </li>
+                    <li key={j}>
+                  <Link
+                    to={`/products/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="hover:text-teal-500 cursor-pointer transition block"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </li>
                   ))}
                 </ul>
               )}
@@ -274,9 +305,15 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
               {openSubmenu === col.title && (
                 <ul className="mt-1 pl-4 space-y-1">
                   {col.items.map((item, j) => (
-                    <li key={j} className="hover:text-teal-500 cursor-pointer">
-                      {item}
-                    </li>
+                    <li key={j}>
+                  <Link
+                    to={`/speciality/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="hover:text-teal-500 cursor-pointer transition block"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </li>
                   ))}
                 </ul>
               )}
@@ -301,9 +338,14 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
       {openMenu === "hampers" && (
         <div className="mt-2 pl-4 flex flex-col gap-2 text-sm">
           {submenus.hampers[0].items.map((item, j) => (
-            <div key={j} className="hover:text-teal-500 cursor-pointer">
-              {item}
-            </div>
+            <Link
+          key={j}
+          to={`/hampers/${item.toLowerCase().replace(/\s+/g, "-")}`}
+          className="hover:text-teal-500 cursor-pointer transition block"
+          onClick={() => setMenuOpen(false)}
+        >
+          {item}
+        </Link>
           ))}
         </div>
       )}
