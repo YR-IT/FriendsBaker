@@ -12,28 +12,28 @@ function SubmenuPage() {
       name: "Chocolate Truffle",
       price: "₹450",
       rating: 4.8,
-      image: "https://via.placeholder.com/300x200.png?text=Chocolate+Truffle",
+      image: "https://images.pexels.com/photos/4109996/pexels-photo-4109996.jpeg",
     },
     {
       id: 2,
       name: "Black Forest",
       price: "₹500",
       rating: 4.6,
-      image: "https://via.placeholder.com/300x200.png?text=Black+Forest",
+      image: "https://www.pexels.com/photo/birthday-cakes-with-chocolate-19036040/",
     },
     {
       id: 3,
       name: "Red Velvet",
       price: "₹550",
       rating: 4.9,
-      image: "https://via.placeholder.com/300x200.png?text=Red+Velvet",
+      image: "https://www.pexels.com/photo/slice-of-cake-with-blueberries-23470991/",
     },
     {
       id: 4,
       name: "Butterscotch Cake",
       price: "₹480",
       rating: 4.7,
-      image: "https://via.placeholder.com/300x200.png?text=Butterscotch+Cake",
+      image: "https://plus.unsplash.com/premium_photo-1714669889975-90386fbb03e4?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
 
