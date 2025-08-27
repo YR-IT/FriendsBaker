@@ -1,3 +1,5 @@
+// data/categories.ts
+
 export const categories = [
   {
     slug: "classic-cakes",
@@ -275,3 +277,84 @@ export const categories = [
     ],
   },
 ];
+
+
+export const submenus: Record<string, { title: string; items: string[] }[]> = {
+  products: [
+    {
+      title: "Kids Cakes",
+      items: [
+        "1st Birthday Cakes",
+        "Princess Cakes",
+        "Animal Cakes",
+        "Cakes for Girls",
+        "Cakes for Boys",
+        "Baby Shark Cakes",
+        "All Kids Cakes",
+      ],
+    },
+    {
+      title: "Anniversary Cakes",
+      items: [
+        "1st Anniversary Cakes",
+        "25th Anniversary Cakes",
+        "Anniversary Cakes for Parents",
+        "50th Anniversary Cakes",
+        "All Anniversary Cakes",
+      ],
+    },
+    {
+      title: "Character Cakes",
+      items: [
+        "Spiderman Cakes",
+        "Unicorn Cakes",
+        "Barbie Cakes",
+        "Harry Potter Cakes",
+        "Avenger Cakes",
+        "Peppa Pig Cakes",
+        "Doraemon Cakes",
+        "Naruto Cakes",
+      ],
+    },
+    {
+      title: "More Cakes",
+      items: [
+        "Rainbow Cakes",
+        "Butterfly Cakes",
+        "Football Cakes",
+        "Basketball Cakes",
+        "Rainbow Cakes",
+        "Butterfly Cakes",
+        "Shinchan Cakes",
+      ],
+    },
+  ],
+
+  speciality: [
+    {
+      title: "Designer Cakes",
+      items: ["Gourmet Cakes", "Photo Cakes", "Theme Cakes"],
+    },
+    {
+      title: "Occasion Cakes",
+      items: ["Birthday", "Anniversary", "Baby Shower"],
+    },
+    {
+      title: "Trendy Cakes",
+      items: ["Pinata Cakes", "Pull-Me-Up Cakes", "Jar Cakes"],
+    },
+  ],
+
+  hampers: [
+    {
+      title: "",
+      items: [
+        "Gift Hampers",
+        "Make Your Own Hamper",
+        "Assorted Pastry Box",
+        "Cupcake Delight Box",
+        "Make Your Dessert Box",
+      ],
+    },
+  ],
+};
