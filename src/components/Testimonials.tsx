@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 function Testimonials() {
   const testimonials = [
@@ -64,8 +65,26 @@ function Testimonials() {
     : [testimonials[index], testimonials[(index + 1) % testimonials.length]];
 
   // Dots logic
-  const dotCount = isMobile ? testimonials.length : Math.ceil(testimonials.length / 2);
+  const dotCount = isMobile
+    ? testimonials.length
+    : Math.ceil(testimonials.length / 2);
   const activeDot = isMobile ? index : Math.floor(index / 2);
+
+  const prevSlide = () => {
+    setIndex((prev) =>
+      isMobile
+        ? (prev - 1 + testimonials.length) % testimonials.length
+        : (prev - 2 + testimonials.length) % testimonials.length
+    );
+  };
+
+  const nextSlide = () => {
+    setIndex((prev) =>
+      isMobile
+        ? (prev + 1) % testimonials.length
+        : (prev + 2) % testimonials.length
+    );
+  };
 
   return (
     <section
@@ -86,35 +105,67 @@ function Testimonials() {
       </motion.h2>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-auto min-h-[16rem]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            className="absolute inset-0 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch justify-center"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -40 }}
-            transition={{ duration: 0.6 }}
-          >
-            {visible.map((t, i) => (
-              <motion.div
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={index}
+      className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch justify-center"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -40 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Left Arrow */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-[-4rem] top-1/2 -translate-y-1/2 bg-teal-200 hover:bg-teal-300 p-2 rounded-full shadow z-20"
+      >
+        <ChevronLeft className="w-6 h-6 text-gray-800" />
+      </button>
+
+      {visible.map((t, i) => (
+        <motion.div
+          key={i}
+          whileHover={{ scale: 1.03 }}
+          className="bg-gradient-to-tr from-teal-100 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300 border border-teal-200"
+        >
+          {/* 1. Name */}
+          <h4 className="font-bold text-gray-900 text-lg sm:text-xl mb-2">
+            {t.name}
+          </h4>
+
+          {/* 2. Stars */}
+          <div className="flex items-center space-x-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star
                 key={i}
-                whileHover={{ scale: 1.03 }}
-                className="bg-gradient-to-tr from-teal-100 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300 border border-teal-200"
-              >
-                <p className="text-gray-700 italic mb-6 text-base sm:text-lg leading-relaxed line-clamp-5">
-                  “{t.text}”
-                </p>
-                <h4 className="font-bold text-teal-800 text-lg sm:text-xl">
-                  {t.name}
-                </h4>
-              </motion.div>
+                className="w-5 h-5 fill-yellow-400 text-yellow-400"
+              />
             ))}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
+
+          {/* 3. Quote Symbol */}
+          <Quote className="text-gray-500 mb-4 w-6 h-6" />
+
+          {/* 4. Review Text */}
+          <p className="text-gray-900 leading-relaxed line-clamp-6">
+            {t.text}
+          </p>
+        </motion.div>
+      ))}
+
+      {/* Right Arrow */}
+      <button
+        onClick={nextSlide}
+        className="absolute right-[-4rem] top-1/2 -translate-y-1/2 bg-teal-200 hover:bg-teal-300 p-2 rounded-full shadow z-20"
+      >
+        <ChevronRight className="w-6 h-6 text-gray-800" />
+      </button>
+    </motion.div>
+  </AnimatePresence>
+</div>
 
       {/* Dots */}
-      <div className="flex justify-center space-x-2 mt-12">
+      <div className="flex justify-center space-x-2 mt-20">
         {Array.from({ length: dotCount }).map((_, i) => (
           <motion.div
             key={i}
