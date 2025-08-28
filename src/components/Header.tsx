@@ -118,14 +118,14 @@ function Header() {
           >
             <Link
               to="/"
-              className="hover:text-teal-500 transition"
+              className="hover:text-teal-500 transition font-semibold"
               onClick={() => setMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className="hover:text-teal-500 transition"
+              className="hover:text-teal-500 transition font-semibold"
               onClick={() => setMenuOpen(false)}
             >
               About Us
@@ -135,7 +135,7 @@ function Header() {
             <div>
               <button
                 onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className="flex justify-between items-center w-full hover:text-teal-500 transition"
+                className="flex justify-between items-center w-full hover:text-teal-500 transition font-semibold"
               >
                 Categories
                 <ChevronDown
@@ -146,7 +146,7 @@ function Header() {
               </button>
 
               {categoriesOpen && (
-                <ul className="mt-2 pl-4 space-y-2 text-sm">
+                <ul className="mt-2 pl-2 space-y-4 text-sm">
                   {categories.map((cat, i) => (
                     <li key={i}>
                       <Link
@@ -167,7 +167,7 @@ function Header() {
 
             <Link
               to="/contact-us"
-              className="hover:text-teal-500 transition"
+              className="hover:text-teal-500 transition font-semibold"
               onClick={() => setMenuOpen(false)}
             >
               Contact Us

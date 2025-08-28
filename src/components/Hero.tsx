@@ -135,7 +135,7 @@ function Hero() {
           whileTap={{ scale: 0.9 }}
           className={`transition-colors ${color}`}
         >
-          <Icon className="w-8 h-8 drop-shadow-md" />
+          <Icon className="sm:w-8 sm:h-8 w-6 h-6 drop-shadow-md" />
         </motion.a>
       ))}
     </div>
@@ -152,7 +152,7 @@ function Hero() {
         </motion.p>
 
         <motion.h1
-          className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
+          className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
           key={images[current].title}
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -162,7 +162,7 @@ function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-lg text-white mb-8"
+          className="text-base sm:text-lg text-white mb-8"
           key={images[current].subtitle}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

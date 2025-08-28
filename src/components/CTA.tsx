@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 function CTASection() {
   return (
-    <section className="relative py-28 bg-white overflow-hidden">
+    <section className="relative py-12 sm:py-28 bg-white overflow-hidden">
       <div className="max-w-4xl mx-auto text-center px-6 relative z-10">
         
         {/* Heading */}
