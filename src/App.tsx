@@ -6,8 +6,6 @@ import About from './pages/About';
 import Contact from './pages/ContactUs';
 import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
-import SubmenuPage from './pages/SubmenuPage';
-import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
   return (
@@ -21,8 +19,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/menu/:slug" element={<CategoryPage />} />
-             <Route path="/:category/:subcategory" element={<SubmenuPage />} />
-             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />
