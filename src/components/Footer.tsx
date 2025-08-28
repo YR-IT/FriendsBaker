@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Twitter, ArrowUp } from "lucide-react";
+import { Facebook, Instagram, ArrowUp, Youtube } from "lucide-react";
+  import { MapPin, Phone, Mail } from "lucide-react";
 
 function Footer() {
   // Smooth scroll to top
@@ -11,24 +12,25 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Column 1: Logo & About */}
         <div className="text-start">
-  {/* Logo */}
-  <img
-    src="/logo.png"
-    alt="Friends Baker Logo"
-    className="w-20 h-20 mx-auto mb-3 object-contain"
-  />
+          {/* Logo */}
+          <img
+            src="/logo.png"
+            alt="Friends Baker Logo"
+            className="w-16 h-16 mx-auto mb-3 object-contain"
+          />
 
-  {/* Heading */}
-  <h2 className="text-3xl font-bold text-teal-700 mb-2">
-    Friends Baker
-  </h2>
+          {/* Heading */}
+          <h2 className="text-3xl font-bold text-teal-700 mb-2">
+            Friends Baker
+          </h2>
 
-  {/* Content */}
-  <p className="text-gray-700 text-sm leading-relaxed">
-    Freshly baked delights that bring friends and families together. <br />
-    Taste the love in every bite.
-  </p>
-</div>
+          {/* Content */}
+          <p className="text-gray-700 text-sm leading-relaxed">
+            Freshly baked delights that bring friends and families together.{" "}
+            <br />
+            Taste the love in every bite.
+          </p>
+        </div>
 
         {/* Column 2: Quick Links */}
         <div>
@@ -39,9 +41,7 @@ function Footer() {
             {[
               { name: "Home", link: "/" },
               { name: "About Us", link: "/about" },
-              { name: "Products", link: "/products" },
-              { name: "Speciality Cakes", link: "/speciality-cakes" },
-              { name: "Hampers", link: "/hampers" },
+              { name: "Categories", link: "#menu" },
               { name: "Contact", link: "/contact-us" },
             ].map((item) => (
               <li key={item.name}>
@@ -83,42 +83,78 @@ function Footer() {
 
         {/* Column 4: Newsletter & Social Media */}
         <div>
-          <h3 className="text-lg font-semibold text-teal-900 mb-4">
-            Stay Connected
-          </h3>
-          <p className="text-gray-700 text-sm mb-4">
-            Subscribe for the latest bakery specials and sweet recipes!
-          </p>
-          <form className="flex mb-6">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-3 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
-            />
-            <button
-              type="submit"
-              className="bg-teal-600 text-white px-4 py-2 rounded-r-lg hover:bg-teal-700 transition"
-            >
-              Join
-            </button>
-          </form>
+  <h3 className="text-lg font-semibold text-teal-900 mb-4">
+    Contact Us
+  </h3>
 
-          <div className="flex gap-4">
-            {[
-              { icon: Facebook, name: "Facebook" },
-              { icon: Instagram, name: "Instagram" },
-              { icon: Twitter, name: "Twitter" },
-            ].map(({ icon: Icon, name }) => (
-              <a
-                key={name}
-                href="#"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-teal-100 shadow-md text-teal-700 hover:bg-teal-600 hover:text-white transition transform hover:scale-110"
-              >
-                <Icon size={18} />
-              </a>
-            ))}
-          </div>
-        </div>
+<div className="space-y-3 mb-6 text-sm text-gray-700">
+  <p className="flex items-center gap-2">
+    <MapPin className="w-5 h-5 text-teal-600" />
+    <a
+      href="https://www.google.com/maps/place/friends+baker/data=!4m2!3m1!1s0x390f8eedb82b11fb:0xc220acfb0050c85a?sa=X&ved=1t:242&ictx=111"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-teal-600 transition"
+    >
+       Booth 152, Sector 20, <br/> Panchkula, Haryana 134117
+    </a>
+  </p>
+
+  <p className="flex items-center gap-2">
+    <Phone className="w-5 h-5 text-teal-600" />
+    <a
+      href="tel:9257297773"
+      className="hover:text-teal-600 transition"
+    >
+       +91 9257297773
+    </a>
+  </p>
+
+  <p className="flex items-center gap-2">
+    <Mail className="w-5 h-5 text-teal-600" />
+    <a
+      href="mailto:friendsbaker834@gmail.com"
+      className="hover:text-teal-600 transition"
+    >
+     friendsbaker834@gmail.com
+    </a>
+  </p>
+</div>
+
+
+  <div className="flex gap-4">
+    {[
+      {
+        icon: Facebook,
+        name: "Facebook",
+        url: "https://www.facebook.com/share/19jEwH5Ti1/",
+        hoverColor: "hover:bg-[#1877F2] hover:text-white",
+      },
+      {
+        icon: Instagram,
+        name: "Instagram",
+        url: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==",
+        hoverColor: "hover:bg-[#E4405F] hover:text-white",
+      },
+      {
+        icon: Youtube,
+        name: "Youtube",
+        url: "https://youtube.com",
+        hoverColor: "hover:bg-[#FF0000] hover:text-white",
+      },
+    ].map(({ icon: Icon, name, url, hoverColor }) => (
+      <a
+        key={name}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`w-10 h-10 flex items-center justify-center rounded-full bg-teal-100 shadow-md text-teal-700 transition transform hover:scale-110 ${hoverColor}`}
+      >
+        <Icon size={18} />
+      </a>
+    ))}
+  </div>
+</div>
       </div>
 
       {/* Divider */}

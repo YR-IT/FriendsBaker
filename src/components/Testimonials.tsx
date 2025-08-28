@@ -4,34 +4,36 @@ import { useState, useEffect } from "react";
 function Testimonials() {
   const testimonials = [
     {
-      name: "Sophia Williams",
-      text: "The croissants here are absolutely divine! Fresh, buttery, and flaky – just like in Paris. This is my go-to bakery every weekend.",
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      name: "Surbhi Vinayak",
+      text: "Yummiest and beautiful cake. Most importantly the design looked perfect. It made our celebration more memorable. My family was really pleased to see the half birthday cake for our 6 month old baby. Thankyou so much for delivering it perfectly. Also, I order from them for a lot of occasions. It’s been a year and they have never disappointed me ever..! Happy to order from them. Getting lots of compliments from my family for the same. Whatever design I share with them, they deliver.!",
     },
     {
-      name: "James Miller",
-      text: "I ordered a custom cake for my daughter's birthday and it was beyond amazing – both in design and taste! Highly recommended.",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      name: "Pritam Kumar Das",
+      text: "Friend's Bakers was always our choice for cakes. However, I recently had a birthday celebration arranged by Friend's Bakers with Lego theme and I couldn't be happier with their service! The food was absolutely delicious—every snack was fresh, flavorful, and beautifully presented. The attention to detail in the setup added a special touch to the event. All the kids kept complimenting the food.",
     },
     {
-      name: "Emma Johnson",
-      text: "Their cupcakes are heavenly – moist, rich, and beautifully decorated. Every bite feels like happiness.",
-      image: "https://randomuser.me/api/portraits/women/12.jpg",
+      name: "Ankita Sharma",
+      text: "Absolutely loved the cake! You never fail to add that extra sparkle to our celebrations. Your cakes are not just delicious — they’re memories on a plate. You're always our first and only choice",
     },
     {
-      name: "Daniel Carter",
-      text: "Best sourdough bread in town! Crispy crust, soft inside – absolutely perfect.",
-      image: "https://randomuser.me/api/portraits/men/44.jpg",
+      name: "Jyoti Goyal",
+      text: "Cake was so delicious. My 3 years old son was very happy with his favourite train cake design exactly as i told them to design. On every birthday of my son I order the cake from this eggless bakery. Thanku for always making our day so special.",
     },
     {
-      name: "Olivia Brown",
-      text: "The pastries are always fresh and the coffee pairs perfectly. Love spending my mornings here.",
-      image: "https://randomuser.me/api/portraits/women/28.jpg",
+      name: "Santwana Das",
+      text: "Absolutely loved my experience with Frends Baker! I ordered a Lego-themed cake along with a variety of snacks for Birthday celebration, and everything was just perfect. The cake was not only stunning in design but also super delicious — soft, fresh, and full of flavor. A big thanks to the entire team at Frends & Baker for making our event extra special. Highly recommend this bakery for anyone looking for quality, creativity, and great taste!",
     },
     {
-      name: "Liam Davis",
-      text: "I’m hooked on their cheesecakes – rich, creamy, and absolutely delicious.",
-      image: "https://randomuser.me/api/portraits/men/52.jpg",
+      name: "Khyati Goel",
+      text: "I recently ordered from Friends Baker and was so impressed with the food. I ordered Healthy Sandwich, valentine mini cake, multigrain cookies and Atta Jaggery Sesame cookies. The sandwich was filling, had loads of veggies and was delicious. The Valentine mini cake was to die for❤️, first of all I’d like to mention that the cake was the cutest, just so pretty and was a chocolate cake inside, so delicious. The multigrain cookies were delicious, perfect combination of health and taste. The atta jaggery sesame cookies had such an amazing taste, just perfect. I’m definitely gonna order again from here and would highly recommend you to try this place. Not to mention that packaging of food was also really cute.",
+    },
+    {
+      name: "Amandeep Virk",
+      text: "Greetings! We were delighted to receive such a lovely and delicious cake. The quality and the warm bond they share with their customers is commendable. Love to have such amazing shop in close proximity to us.",
+    },
+    {
+      name: "Neeraj Ghai",
+      text: "We ordered mix fruit cake for our daughter's birthday with a chosen online design and Friends Baker delivered exactly the same with a great taste. Really enjoyed a lot. Highly Recommended!",
     },
   ];
 
@@ -99,12 +101,7 @@ function Testimonials() {
                 whileHover={{ scale: 1.03 }}
                 className="bg-gradient-to-tr from-teal-100 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300 border border-teal-200"
               >
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-teal-400 shadow-md mb-4"
-                />
-                <p className="text-gray-700 italic mb-6 text-base sm:text-lg leading-relaxed">
+                <p className="text-gray-700 italic mb-6 text-base sm:text-lg leading-relaxed line-clamp-5">
                   “{t.text}”
                 </p>
                 <h4 className="font-bold text-teal-800 text-lg sm:text-xl">
@@ -117,7 +114,7 @@ function Testimonials() {
       </div>
 
       {/* Dots */}
-      <div className="flex justify-center space-x-2 mt-20">
+      <div className="flex justify-center space-x-2 mt-12">
         {Array.from({ length: dotCount }).map((_, i) => (
           <motion.div
             key={i}

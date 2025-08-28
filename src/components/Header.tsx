@@ -2,13 +2,12 @@ import { motion } from "framer-motion";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { submenus } from "../../data/categories";
+import { categories } from "../../data/categories";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
-const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
-const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   // ✅ cross-platform timeout type (no NodeJS namespace needed)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -27,22 +26,9 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
     }, 200); // delay before closing
   };
 
-  // const submenus: Record<string, { title: string; items: string[] }[]> = {
-  //   products: [
-  //     { title: "Kids Cakes", items: ["1st Birthday Cakes", "Princess Cakes", "Animal Cakes","Cakes for Girls", "Cakes for Boys", "Baby Shark Cakes", "All Kids Cakes"] },
-  //     { title: "Anniversary Cakes", items: ["1st Anniversary Cakes", "25th Anniversary Cakes", "Anniversary Cakes for Parents", "50th Anniversary Cakes", "All Anniversary Cakes"] },
-  //     { title: "Character Cakes", items: ["Spiderman Cakes", "Unicorn Cakes", "Barbie Cakes", "Harry Potter Cakes", "Avenger Cakes", "Peppa Pig Cakes","Doraemon Cakes", "Naruto Cakes"] },
-  //     { title: "More Cakes", items: ["Rainbow Cakes", "Butterfly Cakes", "Football Cakes", "Basketball Cakes", "Rainbow Cakes", "Butterfly Cakes","Shinchan Cakes"] },
-  //   ],
-  //   speciality: [
-  //     { title: "Designer Cakes", items: ["Gourmet Cakes", "Photo Cakes", "Theme Cakes"] },
-  //     { title: "Occasion Cakes", items: ["Birthday", "Anniversary", "Baby Shower"] },
-  //     { title: "Trendy Cakes", items: ["Pinata Cakes", "Pull-Me-Up Cakes", "Jar Cakes"] },
-  //   ],
-  //   hampers: [
-  //     { title: "", items: ["Gift Hampers", "Make Your Own Hamper", "Assorted Pastry Box", "Cupcake Delight Box", "Make Your Dessert Box"] },
-  //   ],
-  // };
+  const handleCategoryClick = () => {
+    setHoveredMenu(null); // close dropdown immediately on click
+  };
 
   return (
     <header className="w-full left-0 z-50">
@@ -66,300 +52,128 @@ const [openMenu, setOpenMenu] = useState<string | null>(null);
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-8 font-medium relative">
-          <a href="/" className="hover:text-teal-500 transition">Home</a>
-          <a href="/about" className="hover:text-teal-500 transition">About Us</a>
+          <Link to="/" className="hover:text-teal-500 transition">
+            Home
+          </Link>
+          <Link to="/about" className="hover:text-teal-500 transition">
+            About Us
+          </Link>
 
-          {/* Products */}
+          {/* Categories Dropdown Desktop */}
           <div
             className="relative"
-            onMouseEnter={() => handleMouseEnter("products")}
+            onMouseEnter={() => handleMouseEnter("categories")}
             onMouseLeave={handleMouseLeave}
           >
-            <button className="flex items-center gap-1 hover:text-teal-500 transition">
-              Products
-              <ChevronDown className={`w-4 h-4 transition-transform ${hoveredMenu === "products" ? "rotate-180" : ""}`} />
+            <button className="flex items-center gap-2 hover:text-teal-500 transition">
+              Categories
+              <ChevronDown
+                className={`w-4 h-4 transition-transform ${
+                  hoveredMenu === "categories" ? "rotate-180" : ""
+                }`}
+              />
             </button>
 
-            {hoveredMenu === "products" && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, y: -6 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -6 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-                className="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-b-lg overflow-hidden p-6 grid grid-cols-4 gap-6 w-[700px] z-40"
-                style={{ top: "210%" }}
-                onMouseEnter={() => handleMouseEnter("products")}
-                onMouseLeave={handleMouseLeave}
-              >
-                {submenus.products.map((col, i) => (
-                  <div key={i}>
-                    <h3 className="font-semibold text-teal-600 mb-2">{col.title}</h3>
-                    <ul className="space-y-4 text-sm">
-                      {col.items.map((item, j) => (
-                        <li key={j}>
-                          <Link
-                            to={`/products/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="hover:text-teal-500 cursor-pointer transition"
-                            onClick={() => setHoveredMenu(null)} // submenu close
-                          >
-                            {item}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </motion.div>
+            {hoveredMenu === "categories" && (
+              <div className="absolute left-0 mt-2 bg-white text-gray-800 shadow-lg rounded-lg p-4 w-56 z-40 transition-all duration-300"
+              style={{ marginTop: "26px" }} >
+                <ul className="space-y-4 text-sm">
+                  {categories.map((cat, i) => (
+                    <li key={i}>
+                      <Link
+                        to={`/menu/${cat.slug}`}
+                        className="hover:text-teal-500 transition"
+                        onClick={handleCategoryClick}
+                      >
+                        {cat.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
 
-          {/* Speciality */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("speciality")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button className="flex items-center gap-1 hover:text-teal-500 transition">
-              Speciality Cakes
-              <ChevronDown className={`w-4 h-4 transition-transform ${hoveredMenu === "speciality" ? "rotate-180" : ""}`} />
-            </button>
-
-            {hoveredMenu === "speciality" && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, y: -6 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -6 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-                className="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-b-lg overflow-hidden p-6 grid grid-cols-3 gap-6 w-[700px] z-40"
-                style={{ top: "210%" }}
-                onMouseEnter={() => handleMouseEnter("speciality")}
-                onMouseLeave={handleMouseLeave}
-              >
-                {submenus.speciality.map((col, i) => (
-                  <div key={i}>
-                    <h3 className="font-semibold text-teal-600 mb-2">{col.title}</h3>
-                    <ul className="space-y-4 text-sm">
-                      {col.items.map((item, j) => (
-                        <li key={j}>
-                          <Link
-                            to={`/speciality/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="hover:text-teal-500 cursor-pointer transition"
-                            onClick={() => setHoveredMenu(null)} // submenu close
-                          >
-                            {item}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-          </div>
-
-          {/* Hampers */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("hampers")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button className="flex items-center gap-1 hover:text-teal-500 transition">
-              Hampers
-              <ChevronDown className={`w-4 h-4 transition-transform ${hoveredMenu === "hampers" ? "rotate-180" : ""}`} />
-            </button>
-
-            {hoveredMenu === "hampers" && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, y: -6 }}
-                animate={{ opacity: 1, height: "auto", y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -6 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-                className="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-b-lg overflow-hidden p-6 grid grid-cols-1 gap-4 w-[250px] z-40"
-                style={{ top: "210%" }}
-                onMouseEnter={() => handleMouseEnter("hampers")}
-                onMouseLeave={handleMouseLeave}
-              >
-                {submenus.hampers.map((col, i) => (
-                  <div key={i}>
-                    <ul className="space-y-4 text-sm">
-                      {col.items.map((item, j) => (
-                        <li key={j}>
-                          <Link
-                            to={`/hampers/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="hover:text-teal-500 cursor-pointer transition"
-                            onClick={() => setHoveredMenu(null)} // submenu close
-                          >
-                            {item}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-          </div>
-
-          <a href="/contact-us" className="hover:text-teal-500 transition">Contact Us</a>
+          <Link to="/contact-us" className="hover:text-teal-500 transition">
+            Contact Us
+          </Link>
         </nav>
 
-
-
         {/* Mobile Hamburger */}
-        <button className="md:hidden p-2 text-teal-500" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className="md:hidden p-2 text-teal-500"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           {menuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
         </button>
 
-{/* Mobile Menu */}
-{menuOpen && (
-  <motion.div
-    initial={{ opacity: 0, x: 100 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: 100 }}
-    transition={{ duration: 0.3 }}
-    className="absolute top-20 right-0 w-full bg-teal-100 shadow-lg p-6 flex flex-col gap-4 text-gray-800 z-50 md:hidden"
-  >
-    <a href="/" className="hover:text-teal-500 transition">Home</a>
-    <a href="/about" className="hover:text-teal-500 transition">About Us</a>
-
-    {/* Products (collapsible) */}
-    <div>
-      <button
-        onClick={() => setOpenMenu(openMenu === "products" ? null : "products")}
-        className="flex justify-between items-center w-full hover:text-teal-500 transition"
-      >
-        Products
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${openMenu === "products" ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {openMenu === "products" && (
-        <div className="mt-2 pl-4 flex flex-col gap-2 text-sm">
-          {submenus.products.map((col, i) => (
-            <div key={i}>
-              {/* Title Button */}
-              <button
-                onClick={() =>
-                  setOpenSubmenu(openSubmenu === col.title ? null : col.title)
-                }
-                className="flex justify-between items-center w-full text-left font-semibold text-teal-600 mt-2"
-              >
-                {col.title}
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform ${
-                    openSubmenu === col.title ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {/* Items (only open when clicked) */}
-              {openSubmenu === col.title && (
-                <ul className="mt-1 pl-4 space-y-1">
-                  {col.items.map((item, j) => (
-                    <li key={j}>
-                  <Link
-                    to={`/products/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="hover:text-teal-500 cursor-pointer transition block"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item}
-                  </Link>
-                </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-
-    {/* Same pattern for Speciality */}
-    <div>
-      <button
-        onClick={() => setOpenMenu(openMenu === "speciality" ? null : "speciality")}
-        className="flex justify-between items-center w-full hover:text-teal-500 transition"
-      >
-        Speciality Cakes
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${openMenu === "speciality" ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {openMenu === "speciality" && (
-        <div className="mt-2 pl-4 flex flex-col gap-2 text-sm">
-          {submenus.speciality.map((col, i) => (
-            <div key={i}>
-              <button
-                onClick={() =>
-                  setOpenSubmenu(openSubmenu === col.title ? null : col.title)
-                }
-                className="flex justify-between items-center w-full text-left font-semibold text-teal-600 mt-2"
-              >
-                {col.title}
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform ${
-                    openSubmenu === col.title ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {openSubmenu === col.title && (
-                <ul className="mt-1 pl-4 space-y-1">
-                  {col.items.map((item, j) => (
-                    <li key={j}>
-                  <Link
-                    to={`/speciality/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="hover:text-teal-500 cursor-pointer transition block"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item}
-                  </Link>
-                </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-
-    {/* Hampers (simpler - no nested titles) */}
-    <div>
-      <button
-        onClick={() => setOpenMenu(openMenu === "hampers" ? null : "hampers")}
-        className="flex justify-between items-center w-full hover:text-teal-500 transition"
-      >
-        Hampers
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${openMenu === "hampers" ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {openMenu === "hampers" && (
-        <div className="mt-2 pl-4 flex flex-col gap-2 text-sm">
-          {submenus.hampers[0].items.map((item, j) => (
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 100 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-20 right-0 w-full bg-teal-100 shadow-lg p-6 flex flex-col gap-4 text-gray-800 z-50 md:hidden"
+          >
             <Link
-          key={j}
-          to={`/hampers/${item.toLowerCase().replace(/\s+/g, "-")}`}
-          className="hover:text-teal-500 cursor-pointer transition block"
-          onClick={() => setMenuOpen(false)}
-        >
-          {item}
-        </Link>
-          ))}
-        </div>
-      )}
-    </div>
+              to="/"
+              className="hover:text-teal-500 transition"
+              onClick={() => setMenuOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className="hover:text-teal-500 transition"
+              onClick={() => setMenuOpen(false)}
+            >
+              About Us
+            </Link>
 
-    <a href="/contact-us" className="hover:text-teal-500 transition">
-      Contact Us
-    </a>
-  </motion.div>
-)}
+            {/* Mobile Categories Dropdown */}
+            <div>
+              <button
+                onClick={() => setCategoriesOpen(!categoriesOpen)}
+                className="flex justify-between items-center w-full hover:text-teal-500 transition"
+              >
+                Categories
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    categoriesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
+              {categoriesOpen && (
+                <ul className="mt-2 pl-4 space-y-2 text-sm">
+                  {categories.map((cat, i) => (
+                    <li key={i}>
+                      <Link
+                        to={`/menu/${cat.slug}`}
+                        className="hover:text-teal-500 transition block"
+                        onClick={() => {
+                          setMenuOpen(false);
+                          setCategoriesOpen(false);
+                        }}
+                      >
+                        {cat.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <Link
+              to="/contact-us"
+              className="hover:text-teal-500 transition"
+              onClick={() => setMenuOpen(false)}
+            >
+              Contact Us
+            </Link>
+          </motion.div>
+        )}
 
         {/* Call Us */}
         <div className="hidden md:flex items-center gap-3 text-teal-500 font-bold">

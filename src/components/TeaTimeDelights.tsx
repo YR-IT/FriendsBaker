@@ -59,18 +59,6 @@ function TeaTimeDelights() {
             <span className="absolute -bottom-3 -left-3 w-10 h-10 border-b-4 border-l-4 border-teal-500 rounded-bl-lg"></span>
             <span className="absolute -bottom-3 -right-3 w-10 h-10 border-b-4 border-r-4 border-teal-500 rounded-br-lg"></span>
 
-            {/* Slideshow dots */}
-            {/* <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === i ? "bg-teal-600 scale-125" : "bg-teal-300"
-                  }`}
-                ></button>
-              ))}
-            </div> */}
           </motion.div>
         </motion.div>
 
@@ -81,20 +69,18 @@ function TeaTimeDelights() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center md:text-left"
         >
-          <h2 className="text-5xl md:text-6xl font-semibold text-teal-900 mb-8 leading-snug">
+          <h2 className="text-4xl md:text-6xl font-semibold text-teal-900 mb-8 leading-snug">
             Tea-Time Delights
           </h2>
           <p className="text-gray-700 text-xl mb-10 max-w-lg leading-relaxed">
             Pick the perfect companion for your tea (or coffee!) from a range of
             freshly baked tea cakes & more.
           </p>
-          <motion.button
-            whileHover={{ scale: 1.1, backgroundColor: "#2563eb" }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-teal-600 text-white px-10 py-4 rounded-full font-semibold text-xl shadow-lg hover:bg-teal-700 transition"
-          >
-            Know More
-          </motion.button>
+          {/* Replaced Button with Beautiful Quote */}
+          <blockquote className="text-lg md:text-xl italic text-gray-600 border-l-4 border-teal-500 pl-4">
+            “A cup of tea & a slice of cake can turn an ordinary moment into a
+            sweet memory.”
+          </blockquote>
         </motion.div>
       </div>
     </section>

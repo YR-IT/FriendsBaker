@@ -39,8 +39,8 @@ function CTASection() {
 
         {/* Button */}
         <motion.a
-          href="#products"
-          className="inline-block bg-teal-600 text-white font-semibold py-4 px-10 rounded-full shadow-lg hover:bg-teal-700 transition text-lg"
+          href="/contact-us"
+          className="inline-block bg-teal-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-teal-700 transition text-lg"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, scale: 0.9 }}

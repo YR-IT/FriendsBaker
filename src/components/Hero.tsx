@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Instagram, Facebook, Linkedin, Youtube, Twitter } from "lucide-react";
 
 function Hero() {
   const images = [
@@ -21,14 +22,21 @@ function Hero() {
     {
       url: "https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-fresh-pastry-and-bakery-items-available-on-trays-image_2581269.jpg",
       title: "Freshly Baked Croissants & Pastries",
-  subtitle: "Buttery, flaky layers topped with fresh berries",
+      subtitle: "Buttery, flaky layers topped with fresh berries",
     },
     {
       url: "https://t3.ftcdn.net/jpg/00/27/57/96/360_F_27579652_tM7V4fZBBw8RLmZo0Bi8WhtO2EosTRFD.jpg",
       title: "Delicious Oven-Fresh Pizza",
-  subtitle: "Cheesy, crispy & loaded with your favorite toppings",
+      subtitle: "Cheesy, crispy & loaded with your favorite toppings",
     },
   ];
+
+  const socialLinks = [
+  { href: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==", icon: Instagram, color: "hover:text-pink-500" },
+  { href: "https://www.facebook.com/share/19jEwH5Ti1/", icon: Facebook, color: "hover:text-blue-500" },
+  { href: "https://x.com", icon: Twitter, color: "hover:text-sky-400" },
+  { href: "https://youtube.com", icon: Youtube, color: "hover:text-red-500" },
+];
 
   const [current, setCurrent] = useState(0);
 
@@ -63,7 +71,7 @@ function Hero() {
       className="relative h-[100vh] bg-white flex items-center justify-start bg-cover bg-center px-10 overflow-hidden"
     >
       {/* Background Carousel */}
-      <div className="absolute inset-0">
+      {/* <div className="absolute inset-0">
         {images.map((img, i) => (
           <motion.div
             key={i}
@@ -74,9 +82,29 @@ function Hero() {
             transition={{ duration: 1.2 }}
           />
         ))}
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div> */}
+
+      {/* Background Video (replaces image carousel) */}
+      <div className="absolute inset-0">
+        <video
+          className="w-full h-full object-cover"
+          style={{ filter: "brightness(90%)" }}
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source
+            src="/hero_bg.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
         {/* dark overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
+
 
       {/* Floating "bubbles" */}
       {bubblePositions.map((pos, i) => (
@@ -93,16 +121,35 @@ function Hero() {
         />
       ))}
 
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-8 z-20 text-teal-300">
+      {socialLinks.map(({ href, icon: Icon, color }, i) => (
+        <motion.a
+          key={i}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.2, type: "spring", stiffness: 120 }}
+          whileHover={{ scale: 1.3, rotate: 10 }}
+          whileTap={{ scale: 0.9 }}
+          className={`transition-colors ${color}`}
+        >
+          <Icon className="w-8 h-8 drop-shadow-md" />
+        </motion.a>
+      ))}
+    </div>
+
       {/* Content */}
-      <div className="relative z-10 max-w-2xl text-left">
+      <div className="relative z-10 max-w-2xl text-center mx-auto">
         <motion.p
-  className="text-white uppercase tracking-wide mb-3 font-semibold bg-teal-500 inline-block px-2 py-1 rounded-lg"
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
->
-  ✦ The Best Bakery
-</motion.p>
+          className="text-white uppercase tracking-wide mb-3 font-semibold bg-teal-500 inline-block px-2 py-1 rounded-lg"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          ✦ The Best Bakery
+        </motion.p>
 
         <motion.h1
           className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg"
@@ -125,22 +172,23 @@ function Hero() {
         </motion.p>
 
         <motion.div
-          className="flex space-x-4"
+          className="flex justify-center space-x-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           {/* Order Button */}
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="relative overflow-hidden px-6 py-3 rounded-lg shadow-lg bg-white text-gray-800 group"
-          >
-            <span className="absolute inset-0 bg-teal-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
-            <span className="relative z-10 group-hover:text-white transition-colors duration-500">
-              Order Now
-            </span>
-          </motion.button>
+          <motion.a
+  href="/contact-us" 
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
+  className="relative overflow-hidden px-6 py-3 rounded-lg shadow-lg bg-white text-gray-800 group inline-block"
+>
+  <span className="absolute inset-0 bg-teal-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+  <span className="relative z-10 group-hover:text-white transition-colors duration-500">
+    Order Now
+  </span>
+</motion.a>
         </motion.div>
       </div>
 

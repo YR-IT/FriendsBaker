@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import { CheckCircle } from "lucide-react";
 
 function GiftHamper() {
   return (
-    <section className="bg-white py-12 px-6">
+    <section className="bg-white pb-8 sm:py-12 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-16">
         
         {/* Left Content */}
@@ -14,7 +15,7 @@ function GiftHamper() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-5xl font-semibold text-teal-900 leading-snug mb-8"
+            className="text-4xl sm:text-5xl font-semibold text-teal-900 leading-snug mb-8"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -40,13 +41,24 @@ function GiftHamper() {
             to make every occasion unforgettable. 🎁
           </motion.p>
 
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-teal-600 text-white px-10 py-4 rounded-full font-semibold text-xl hover:bg-teal-700 shadow-lg transition"
+          {/* Features List instead of Button */}
+          <motion.ul
+            className="space-y-3 text-gray-800 text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Know More
-          </motion.button>
+            {[
+              "Handpicked bakery favorites",
+              "Beautifully wrapped & ready to gift",
+              "Perfect for every celebration",
+            ].map((feature, i) => (
+              <li key={i} className="flex items-center gap-3">
+                <CheckCircle className="text-teal-600 w-5 h-5" />
+                {feature}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
 
         {/* Right Image */}

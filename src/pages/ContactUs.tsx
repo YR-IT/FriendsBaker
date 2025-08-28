@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Coffee, Heart, Clock, Calendar } from "lucide-react";
 
 export default function Contact() {
   return (
@@ -10,10 +10,9 @@ export default function Contact() {
           "url('https://images.unsplash.com/photo-1696721497870-28dba5558938?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
       }}
     >
-      {/* Overlay to improve readability */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
 
-      {/* Content */}
       <div className="relative z-10">
         {/* Header */}
         <motion.div
@@ -28,47 +27,56 @@ export default function Contact() {
           </h1>
           <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
             Have a question, suggestion, or just want to say hello? We'd love to
-            hear from you! Fill out the form or connect with us through the
-            details below.
+            hear from you! Connect with us through the details below or visit us
+            at our store.
           </p>
         </motion.div>
 
         {/* Grid Layout */}
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Store Highlights Instead of Form */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="grid sm:grid-cols-2 gap-6 text-center"
           >
-            <div className="bg-white/80 backdrop-blur-xl shadow-2xl rounded-3xl p-8 space-y-6 border border-teal-100 transition hover:shadow-teal-200/60">
-              <motion.input
-                whileFocus={{ scale: 1.02 }}
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
-              />
-              <motion.input
-                whileFocus={{ scale: 1.02 }}
-                type="email"
-                placeholder="Your Email"
-                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
-              />
-              <motion.textarea
-                whileFocus={{ scale: 1.02 }}
-                placeholder="Your Message"
-                rows={5}
-                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 transition"
-              />
-              <motion.button
+            {[
+              {
+                icon: Coffee,
+                title: "Freshly Baked Everyday",
+                desc: "Enjoy our signature delights made fresh every morning.",
+              },
+              {
+                icon: Heart,
+                title: "Made with Love",
+                desc: "Every recipe is crafted with care and passion.",
+              },
+              {
+                icon: Clock,
+                title: "Perfect Anytime",
+                desc: "Ideal for breakfast, evening tea, or celebrations.",
+              },
+              {
+                icon: Calendar,
+                title: "Opening Hours",
+                desc: "Mon–Sat: 8:00 AM – 9:00 PM\nSunday: 9:00 AM – 6:00 PM",
+              },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <motion.div
+                key={i}
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white rounded-xl py-3 text-lg font-semibold shadow-lg transition"
+                className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-teal-100"
               >
-                <span>Send Message</span>
-                <Send size={20} />
-              </motion.button>
-            </div>
+                <div className="flex justify-center mb-4">
+    <Icon className="text-teal-600" size={28} />
+  </div>
+                <h3 className="text-xl font-semibold text-teal-900 mb-2">
+                  {title}
+                </h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Contact Details */}
