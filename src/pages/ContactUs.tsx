@@ -23,7 +23,7 @@ export default function Contact() {
         >
           <h1 className="text-5xl font-bold text-teal-900 mb-4 drop-shadow-lg">
             Get in Touch with{" "}
-            <span className="text-teal-600">Friends Baker</span>
+            <span className="text-teal-600">Friend's Baker</span>
           </h1>
           <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
             Have a question, suggestion, or just want to say hello? We'd love to

@@ -21,7 +21,7 @@ function Footer() {
 
           {/* Heading */}
           <h2 className="text-3xl font-bold text-teal-700 mb-2">
-            Friends Baker
+            Friend's Baker
           </h2>
 
           {/* Content */}
@@ -41,7 +41,7 @@ function Footer() {
             {[
               { name: "Home", link: "/" },
               { name: "About Us", link: "/about" },
-              { name: "Categories", link: "#menu" },
+              // { name: "Categories", link: "#menu" },
               { name: "Contact", link: "/contact-us" },
             ].map((item) => (
               <li key={item.name}>

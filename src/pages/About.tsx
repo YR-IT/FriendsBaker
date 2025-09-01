@@ -19,7 +19,7 @@ export default function About() {
             About Us
           </h1>
           <p className="text-lg sm:text-xl text-teal-100 max-w-2xl mx-auto">
-            At <span className="text-teal-500 font-semibold">Friends Bakery</span>, we believe baking is more than just making bread and pastries—it’s about creating moments of joy. Our journey started with a simple passion for fresh, warm, and delightful treats, and today we continue to spread happiness, one bite at a time.
+            At <span className="text-teal-500 font-semibold">Friend's Baker</span>, we believe baking is more than just making bread and pastries—it’s about creating moments of joy. Our journey started with a simple passion for fresh, warm, and delightful treats, and today we continue to spread happiness, one bite at a time.
           </p>
         </motion.div>
       </div>
@@ -54,13 +54,13 @@ export default function About() {
             Delivering Incredible Taste <br /> Since 2011!
           </h3>
           <p className="text-gray-600 leading-relaxed mb-4 text-justify">
-            Friends Bakery has been a cherished name in our city for generations, known for blending tradition with innovation. From our humble beginnings as one of the first commercial bakeries, we’ve grown into a trusted destination for freshly baked delights that bring joy to every occasion.
+            Friend's Baker has been a cherished name in our city for generations, known for blending tradition with innovation. From our humble beginnings as one of the first commercial bakeries, we’ve grown into a trusted destination for freshly baked delights that bring joy to every occasion.
           </p>
           <p className="text-gray-600 leading-relaxed mb-4 text-justify">
             With a wide range of 150+ products — from crispy Khari and wholesome biscuits to indulgent cookies and other baked specialties — we take pride in creating treats that cater to all age groups and tastes. Every product is crafted with a commitment to quality, hygiene, and the passion to serve only the best.
           </p> 
           <p className="text-gray-600 leading-relaxed text-justify">
-            At Friends Bakery, we carry forward the essence of our city while introducing modern flavors and techniques. Our goal is simple: to continue spreading happiness through baking, one bite at a time.
+            At Friend's Baker, we carry forward the essence of our city while introducing modern flavors and techniques. Our goal is simple: to continue spreading happiness through baking, one bite at a time.
           </p>
         </motion.div>
       </div>

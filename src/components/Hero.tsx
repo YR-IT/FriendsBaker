@@ -6,12 +6,12 @@ function Hero() {
   const images = [
     {
       url: "https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg",
-      title: "Freshly Baked Everyday",
+      title: "Freshly Baked Smiles",
       subtitle: "Start your morning with warm croissants & pastries",
     },
     {
       url: "https://t4.ftcdn.net/jpg/05/63/62/07/360_F_563620783_9icanRCanLxCe2h7SzwhSQvoEqS9RWSG.jpg",
-      title: "Delicious Brownies",
+      title: "No Eggs, Only Love",
       subtitle: "Rich, fudgy, and baked with premium cocoa",
     },
     {
@@ -34,8 +34,8 @@ function Hero() {
   const socialLinks = [
   { href: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==", icon: Instagram, color: "hover:text-pink-500" },
   { href: "https://www.facebook.com/share/19jEwH5Ti1/", icon: Facebook, color: "hover:text-blue-500" },
-  { href: "https://x.com", icon: Twitter, color: "hover:text-sky-400" },
-  { href: "https://youtube.com", icon: Youtube, color: "hover:text-red-500" },
+  // { href: "https://x.com", icon: Twitter, color: "hover:text-sky-400" },
+  // { href: "https://youtube.com", icon: Youtube, color: "hover:text-red-500" },
 ];
 
   const [current, setCurrent] = useState(0);
@@ -121,7 +121,7 @@ function Hero() {
         />
       ))}
 
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-8 z-20 text-teal-300">
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-12 z-20 text-teal-300">
       {socialLinks.map(({ href, icon: Icon, color }, i) => (
         <motion.a
           key={i}
