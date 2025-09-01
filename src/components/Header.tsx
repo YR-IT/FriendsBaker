@@ -176,15 +176,18 @@ function Header() {
         )}
 
         {/* Call Us */}
-        <div className="hidden md:flex items-center gap-3 text-teal-500 font-bold">
-          <div className="flex items-center justify-center border rounded-full p-2 border-teal-500">
-            <Phone className="w-4 h-4" />
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-xs text-white font-normal">Call Us</span>
-            <span className="text-sm">+91 8872197774</span>
-          </div>
-        </div>
+       <div className="hidden md:flex items-center gap-3 text-teal-500 font-bold">
+  <div className="flex items-center justify-center border rounded-full p-2 border-teal-500">
+    <Phone className="w-4 h-4" />
+  </div>
+  <a 
+    href="tel:+918872197774" 
+    className="flex flex-col leading-tight hover:underline"
+  >
+    <span className="text-xs text-white font-normal">Call Us</span>
+    <span className="text-sm">+91 8872197774</span>
+  </a>
+</div>
       </div>
     </header>
   );
