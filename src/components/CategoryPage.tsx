@@ -21,6 +21,9 @@ const CategoryPage = () => {
   const [sortOption, setSortOption] = useState("Popularity");
   const [isSortOpen, setIsSortOpen] = useState(false);
 
+  // State for platform chooser (global modal)
+  const [selectedItem, setSelectedItem] = useState<null | number>(null);
+
   const toggleFavourite = (index: number) => {
     setFavourites((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
@@ -94,7 +97,7 @@ const CategoryPage = () => {
         {sortedItems.map((item, index) => (
           <div
             key={index}
-            className="text-left"
+            className="text-left relative"
             onMouseEnter={(e) =>
               setTooltip({
                 visible: true,
@@ -114,23 +117,20 @@ const CategoryPage = () => {
             onMouseLeave={() => setTooltip({ ...tooltip, visible: false })}
           >
             {/* Image Card */}
-            <div className="relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105">
+            <div
+              className="relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
+              onClick={() => setSelectedItem(index)}
+            >
               {/* Veg symbol */}
               <div className="absolute top-4 left-4 w-6 h-6 border-2 border-green-600 flex items-center justify-center bg-white">
                 <div className="w-3 h-3 bg-green-600 rounded-full"></div>
               </div>
 
-              <a
-                href="https://www.zomato.com/mobile"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full h-80 object-cover cursor-pointer"
-                />
-              </a>
+              <img
+                src={item.img}
+                alt={item.name}
+                className="w-full h-80 object-cover"
+              />
             </div>
 
             {/* Text below image */}
@@ -171,6 +171,53 @@ const CategoryPage = () => {
           </div>
         ))}
       </div>
+
+      {/* Global popup modal */}
+      {selectedItem !== null && (
+  <div
+    className="fixed inset-0 bg-transparent bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50"
+    onClick={() => setSelectedItem(null)} // backdrop click par close
+  >
+    <div
+      className="bg-white p-8 rounded-xl shadow-xl space-y-6 w-80"
+      onClick={(e) => e.stopPropagation()} // popup ke andar click ignore
+    >
+      <p className="text-2xl font-semibold text-center">
+        Choose a platform
+      </p>
+      <div className="flex gap-4 justify-center">
+        <button
+          onClick={() => {
+            window.open(
+              "https://link.zomato.com/xqzv/rshare?id=1019787863056336c",
+              "_blank"
+            );
+            setSelectedItem(null);
+          }}
+          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 cursor-pointer"
+        >
+          Zomato
+        </button>
+        <button
+          onClick={() => {
+            window.open("https://www.swiggy.com", "_blank");
+            setSelectedItem(null);
+          }}
+          className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 cursor-pointer"
+        >
+          Swiggy
+        </button>
+      </div>
+      <button
+        onClick={() => setSelectedItem(null)}
+        className="block mx-auto text-sm text-gray-500 hover:text-gray-900 cursor-pointer"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+)}
+
       <AnimatePresence>
         {tooltip.visible && (
           <motion.div

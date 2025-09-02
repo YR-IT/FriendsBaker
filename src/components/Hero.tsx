@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Instagram, Facebook, } from "lucide-react";
+import { Instagram, Facebook, Phone, MessageCircle, } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 function Hero() {
   const images = [
@@ -34,7 +35,7 @@ function Hero() {
   const socialLinks = [
   { href: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==", icon: Instagram, color: "hover:text-pink-500" },
   { href: "https://www.facebook.com/share/19jEwH5Ti1/", icon: Facebook, color: "hover:text-blue-500" },
-  // { href: "https://x.com", icon: Twitter, color: "hover:text-sky-400" },
+  { href: "tel:+918872197774", icon: Phone, color: "hover:text-green-400" },
   // { href: "https://youtube.com", icon: Youtube, color: "hover:text-red-500" },
 ];
 
@@ -126,8 +127,8 @@ function Hero() {
         <motion.a
           key={i}
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          // target="_blank"
+          // rel="noopener noreferrer"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: i * 0.2, type: "spring", stiffness: 120 }}
@@ -210,6 +211,21 @@ function Hero() {
           ></path>
         </svg>
       </div>
+
+      <a
+      href="https://wa.me/918872197774"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50"
+    >
+      {/* Outer pulse effect */}
+      <span className="absolute inline-flex h-16 w-16 rounded-full bg-green-600 opacity-75 animate-ping"></span>
+
+      {/* Main Button */}
+      <span className="relative flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white shadow-lg hover:scale-110 transition-transform">
+        <FaWhatsapp className="w-8 h-8" />
+      </span>
+    </a>
     </section>
   );
 }
