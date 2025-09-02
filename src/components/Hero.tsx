@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Instagram, Facebook, Phone, MessageCircle, } from "lucide-react";
+import { Instagram, Facebook, Phone, } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 function Hero() {
