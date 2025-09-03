@@ -6,19 +6,26 @@ import About from './pages/About';
 import Contact from './pages/ContactUs';
 import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
-
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
 function App() {
   return (
     <Router>
        <ScrollToTop />
       <div className="min-h-screen flex flex-col">
+       
         <Header />
         <main className="flex-1">
           <Routes>
+            
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/menu/:slug" element={<CategoryPage />} />
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/admin" element={<PrivateRoute />}/>
+              
+            
           </Routes>
         </main>
         <Footer />
