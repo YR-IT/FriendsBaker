@@ -19,6 +19,8 @@ const UploadProduct: React.FC = () => {
   const [messageType, setMessageType] = useState<'success' | 'error'>('success');
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+  const [showCustomCategory, setShowCustomCategory] = useState(false);
+  const [customCategory, setCustomCategory] = useState('');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -46,7 +48,13 @@ const UploadProduct: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setProductData({ ...productData, [name]: value });
+    if (name === 'category' && value === 'add-new') {
+      setShowCustomCategory(true);
+      setProductData({ ...productData, category: '' });
+    } else {
+      setShowCustomCategory(false);
+      setProductData({ ...productData, [name]: value });
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,6 +87,7 @@ const UploadProduct: React.FC = () => {
 
   const validateForm = () => {
     const { name, price, rating, category, image } = productData;
+    const finalCategory = showCustomCategory ? customCategory : category;
 
     if (!name.trim()) {
       setMessage('Product name is required');
@@ -106,7 +115,7 @@ const UploadProduct: React.FC = () => {
       return false;
     }
 
-    if (!category.trim()) {
+    if (!finalCategory.trim()) {
       setMessage('Product category is required');
       setMessageType('error');
       return false;
@@ -131,11 +140,13 @@ const UploadProduct: React.FC = () => {
 
     setIsLoading(true);
 
+    const finalCategory = showCustomCategory ? customCategory : productData.category;
+
     const formData = new FormData();
     formData.append('name', productData.name.trim());
     formData.append('price', productData.price.trim());
     formData.append('rating', productData.rating);
-    formData.append('category', productData.category.trim());
+    formData.append('category', finalCategory.trim());
     if (productData.image) {
       formData.append('image', productData.image);
     }
@@ -170,6 +181,8 @@ const UploadProduct: React.FC = () => {
           image: null,
         });
         setImagePreview('');
+        setShowCustomCategory(false);
+        setCustomCategory('');
         // Reset file input
         const fileInput = document.getElementById('image') as HTMLInputElement;
         if (fileInput) fileInput.value = "";
@@ -284,9 +297,28 @@ const UploadProduct: React.FC = () => {
                   {cat.name}
                 </option>
               ))}
+              <option value="add-new">Add new category...</option>
             </select>
           )}
         </div>
+
+        {showCustomCategory && (
+          <div>
+            <label htmlFor="customCategory" className="block text-sm font-medium text-gray-700">
+              New Category Name *
+            </label>
+            <input
+              type="text"
+              id="customCategory"
+              name="customCategory"
+              value={customCategory}
+              onChange={(e) => setCustomCategory(e.target.value)}
+              disabled={isLoading}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+              placeholder="Enter new category name"
+            />
+          </div>
+        )}
 
         <div>
           <label htmlFor="image" className="block text-sm font-medium text-gray-700">
