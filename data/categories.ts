@@ -2,7 +2,7 @@
 
 export const categories = [
   {
-    slug: "classic-cakes",
+   
     title: "Classic Cakes",
     image:
       "https://liliyum.com/cdn/shop/products/GreenFloralBirthdayCake_2400x.jpg?v=1676704297",
@@ -52,7 +52,7 @@ export const categories = [
     ],
   },
   {
-    slug: "rakhi-cakes-hampers",
+ 
     title: "Rakhi Cakes and Hampers",
     image:
       "https://www.thegreenfuels.com/cdn/shop/files/Rakhiopt7.jpg?v=1689332850",

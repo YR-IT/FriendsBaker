@@ -23,11 +23,47 @@ const EditProducts: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<IProduct | null>(null);
+  const [editingProduct, setEditingProduct] = useState({
+      id:'',
+      name: '',
+      price: '',
+      rating: '0',
+      category: '',
+      image: null as File | null,
+    });
+  const [customCategory, setCustomCategory] = useState('');
   const [showCustomCategory, setShowCustomCategory] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [newCategoryName, setNewCategoryName] = useState('');
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>
+  ) =>{
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      // Validate file size (5MB limit)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        return;
+      }
+
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Please select a valid image file (JPEG, PNG, GIF, WebP)');
+        return;
+      }
+
+      // If a file is selected, update the editingProduct state with the new image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditingProduct({ ...editingProduct, image: file }
+        );
+      };
+      reader.readAsDataURL(file);
+    }
+    
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -60,7 +96,14 @@ const EditProducts: React.FC = () => {
   };
 
   const handleEdit = (product: IProduct) => {
-    setEditingProduct(product);
+    setEditingProduct({
+      ...product,
+      price: product.price.toString(),
+      rating: product.rating.toString(),
+      id:product._id.toString(),
+      image: null, // Image is not directly editable, user will upload new one
+    }
+    );
     setIsModalOpen(true);
     setShowCustomCategory(false);
   };
@@ -87,7 +130,17 @@ const EditProducts: React.FC = () => {
       }
     }
   };
-
+const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    if (name === 'category' && value === 'add-new') {
+      setShowCustomCategory(true);
+      setEditingProduct({ ...editingProduct, category: '' });
+    } else {
+      setShowCustomCategory(false);
+      setEditingProduct({ ...editingProduct, [name]: value });
+    }
+    }
+  
   const handleAddCategory = async () => {
     if (newCategoryName.trim() === '') {
       alert('Category name cannot be empty.');
@@ -124,7 +177,7 @@ const EditProducts: React.FC = () => {
       }
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://friends-backend-u2ve.onrender.com/api/deletecategory/${category._id}`, {
+        const response = await fetch(`https://friends-backend-u2ve.onrender.com/api/deletecategory/${category.name}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -148,33 +201,39 @@ const EditProducts: React.FC = () => {
     e.preventDefault();
     if (!editingProduct) return;
 
-    const formData = new FormData(e.currentTarget);
-    const categoryValue = formData.get('category') as string;
-    const newCategoryValue = formData.get('newCategory') as string;
-    const category = categoryValue === 'add-new' ? newCategoryValue : categoryValue;
-
-    const updatedProduct = {
-      name: formData.get('name') as string,
-      price: parseFloat(formData.get('price') as string),
-      category: category,
-      rating: parseFloat(formData.get('rating') as string),
-    };
+    const formData = new FormData();
+    formData.append("name",editingProduct.name)
+    formData.append("price",editingProduct.price)
+    formData.append("rating",editingProduct.rating)
+    formData.append("category",editingProduct.category)
+    if (editingProduct.image){
+        formData.append("image",editingProduct.image)
+    }
+    
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://friends-backend-u2ve.onrender.com/api/updateproduct/${editingProduct._id}`, {
+      const response = await fetch(`https://friends-backend-u2ve.onrender.com/api/updateproduct/${editingProduct.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(updatedProduct),
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         await fetchProducts();
         setIsModalOpen(false);
-        setEditingProduct(null);
+        setEditingProduct( {
+          id:'',
+          name: '',
+          price: '',
+          rating: '0',
+          category: '',
+          image: null,
+      }
+      );
         setShowCustomCategory(false);
       } else {
         alert('Failed to update product.');
@@ -264,11 +323,14 @@ const EditProducts: React.FC = () => {
             <form onSubmit={handleUpdate}>
               <div className="mb-4">
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" defaultValue={editingProduct.name} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+                <input type="text" name="name" id="name" defaultValue={editingProduct.name } value={editingProduct.name}
+                onChange={(e)=>setEditingProduct({ ...editingProduct, name:e.target.value })}
+                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
               </div>
               <div className="mb-4">
                 <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
-                <input type="number" name="price" id="price" defaultValue={editingProduct.price} step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+                <input type="number" name="price" id="price" defaultValue={editingProduct.price} value={editingProduct.price}
+                onChange={handleChange} step="0.01" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
               </div>
               <div className="mb-4">
                 <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
@@ -276,13 +338,8 @@ const EditProducts: React.FC = () => {
                     name="category"
                     id="category"
                     defaultValue={editingProduct.category}
-                    onChange={(e) => {
-                        if (e.target.value === 'add-new') {
-                            setShowCustomCategory(true);
-                        } else {
-                            setShowCustomCategory(false);
-                        }
-                    }}
+                    onChange={handleChange
+                    }
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 >
                     {categories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
@@ -296,18 +353,37 @@ const EditProducts: React.FC = () => {
                             type="text"
                             name="newCategory"
                             id="newCategory"
+                            value={customCategory}
+                            onChange={(e) => setCustomCategory(e.target.value)}
+                            
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
                 )}
               <div className="mb-4">
                 <label htmlFor="rating" className="block text-sm font-medium text-gray-700">Rating</label>
-                <input type="number" name="rating" id="rating" defaultValue={editingProduct.rating} step="0.1" min="0" max="5" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+                <input type="number" name="rating" id="rating" defaultValue={editingProduct.rating} value={editingProduct.rating} 
+                onChange ={(e)=>e.target.value} step="0.1" min="0" max="5" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
               </div>
               <div className="flex justify-end gap-4">
                 <button type="button" onClick={() => { setIsModalOpen(false); setShowCustomCategory(false); }} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
                 <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Update</button>
               </div>
+              <div>
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+            Product Image * (Max 5MB)
+          </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+            onChange={handleFileChange}
+            
+            disabled={isLoading}
+            className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+        </div>
             </form>
           </div>
         </div>
@@ -315,5 +391,6 @@ const EditProducts: React.FC = () => {
     </div>
   );
 };
+
 
 export default EditProducts;
