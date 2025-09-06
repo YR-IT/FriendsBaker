@@ -244,32 +244,32 @@ const EditProducts: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 flex gap-4">
+    <div className="container mx-auto p-4 flex flex-col lg:flex-row gap-8 bg-white">
       {/* Left Pane: Products */}
-      <div className="w-3/4">
-        <h1 className="text-2xl font-bold mb-4">Products</h1>
-        <div className="mb-4">
+      <div className="w-full lg:w-3/4">
+        <h1 className="text-3xl font-bold mb-6 text-purple-800">Products</h1>
+        <div className="mb-6">
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
-            <div key={product._id} className="border rounded-lg p-4 flex flex-col justify-between">
-              <img src={`data:image/jpeg;base64,${product.image}`} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
-              <div>
-                <h3 className="text-lg font-bold">{product.name}</h3>
-                <p className="text-gray-600">${product.price.toFixed(2)}</p>
+            <div key={product._id} className="bg-white border border-gray-200 rounded-lg shadow-md flex flex-col justify-between transition-transform transform hover:scale-105">
+              <img src={`data:image/jpeg;base64,${product.image}`} alt={product.name} className="w-full h-56 object-cover rounded-t-lg" />
+              <div className="p-5">
+                <h3 className="text-xl font-bold text-purple-800">{product.name}</h3>
+                <p className="text-gray-700 font-semibold">${product.price.toFixed(2)}</p>
                 <p className="text-sm text-gray-500">Category: {product.category}</p>
                 <p className="text-sm text-gray-500">Rating: {product.rating} / 5</p>
               </div>
-              <div className="mt-4 flex justify-end gap-2">
-                <button onClick={() => handleEdit(product)} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</button>
-                <button onClick={() => handleDelete(product._id)} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+              <div className="p-5 flex justify-end gap-3">
+                <button onClick={() => handleEdit(product)} className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">Edit</button>
+                <button onClick={() => handleDelete(product._id)} className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">Delete</button>
               </div>
             </div>
           ))}
@@ -277,90 +277,92 @@ const EditProducts: React.FC = () => {
       </div>
 
       {/* Right Pane: Categories */}
-      <div className="w-1/4">
-        <h2 className="text-xl font-semibold mb-4">Categories</h2>
-        <div className="mb-4">
+      <div className="w-full lg:w-1/4">
+        <h2 className="text-2xl font-semibold mb-6 text-purple-800">Categories</h2>
+        <div className="mb-6 bg-gray-50 p-4 rounded-lg">
           <input
             type="text"
             placeholder="New category name"
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md mb-2"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-3 focus:ring-purple-500 focus:border-purple-500"
           />
-          <button onClick={handleAddCategory} className="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Add Category</button>
+          <button onClick={handleAddCategory} className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">Add Category</button>
         </div>
-        <ul>
+        <ul className="space-y-2">
           {categories.map((category) => (
             <li
               key={category._id}
               onClick={() => setSelectedCategory(category.name)}
-              className={`flex justify-between items-center p-2 rounded-md cursor-pointer ${selectedCategory === category.name ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}`}
+              className={`flex justify-between items-center p-3 rounded-lg cursor-pointer transition-colors ${selectedCategory === category.name ? 'bg-purple-600 text-white' : 'bg-white hover:bg-purple-100'}`}
             >
-              <span className="capitalize">{category.name}</span>
-              <button onClick={(e) => { e.stopPropagation(); handleDeleteCategory(category.name); }} className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-xs">Delete</button>
+              <span className="capitalize font-medium">{category.name}</span>
+              <button onClick={(e) => { e.stopPropagation(); handleDeleteCategory(category.name); }} className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-xs transition-colors">Delete</button>
             </li>
           ))}
         </ul>
       </div>
 
       {isModalOpen && editingProduct && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg w-full max-w-md">
-            <h2 className="text-2xl font-bold mb-4">Edit {editingProduct.name}</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg mx-4">
+            <h2 className="text-3xl font-bold mb-6 text-purple-800">Edit {editingProduct.name}</h2>
             <form onSubmit={handleUpdate}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                <input 
-                  type="text" 
-                  name="name" 
-                  id="name" 
-                  value={editingProduct.name}
-                  onChange={handleChange} 
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
-                <input 
-                  type="number" 
-                  name="price" 
-                  id="price" 
-                  value={editingProduct.price}
-                  onChange={handleChange} 
-                  step="0.01" 
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="rating" className="block text-sm font-medium text-gray-700">Rating</label>
-                <input 
-                  type="number" 
-                  name="rating" 
-                  id="rating" 
-                  value={editingProduct.rating} 
-                  onChange={handleChange}
-                  step="0.1" 
-                  min="0" 
-                  max="5" 
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" 
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
-                <select
-                    name="category"
-                    id="category"
-                    value={editingProduct.category}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <input 
+                    type="text" 
+                    name="name" 
+                    id="name" 
+                    value={editingProduct.name}
+                    onChange={handleChange} 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" 
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                  <input 
+                    type="number" 
+                    name="price" 
+                    id="price" 
+                    value={editingProduct.price}
+                    onChange={handleChange} 
+                    step="0.01" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" 
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-1">Rating</label>
+                  <input 
+                    type="number" 
+                    name="rating" 
+                    id="rating" 
+                    value={editingProduct.rating} 
                     onChange={handleChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                >
-                    {categories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
-                    <option value="add-new">Add new category</option>
-                </select>
+                    step="0.1" 
+                    min="0" 
+                    max="5" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" 
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                  <select
+                      name="category"
+                      id="category"
+                      value={editingProduct.category}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
+                  >
+                      {categories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
+                      <option value="add-new">Add new category</option>
+                  </select>
+                </div>
               </div>
               
-              <div className="mb-4">
-                <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+              <div className="mb-6">
+                <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
                   Product Image (Max 5MB)
                 </label>
                 <input
@@ -370,12 +372,12 @@ const EditProducts: React.FC = () => {
                   accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
                   onChange={handleFileChange}
                   disabled={isLoading}
-                  className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
               <div className="flex justify-end gap-4">
-                <button type="button" onClick={() => { setIsModalOpen(false);  }} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
-                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Update</button>
+                <button type="button" onClick={() => { setIsModalOpen(false);  }} className="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors">Cancel</button>
+                <button type="submit" className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">Update</button>
               </div>
             </form>
           </div>

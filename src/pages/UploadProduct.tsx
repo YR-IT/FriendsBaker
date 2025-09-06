@@ -210,8 +210,8 @@ const UploadProduct: React.FC = () => {
   };
 
   return (
-    <div className="container mt-15 p-4 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Upload Product</h1>
+    <div className="container mt-15 p-4 max-w-2xl mx-auto bg-white text-gray-800">
+      <h1 className="text-3xl font-bold mb-6 text-purple-800">Upload Product</h1>
       
       {message && (
         <div className={`mb-4 p-4 rounded-md ${
@@ -223,9 +223,9 @@ const UploadProduct: React.FC = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6 p-8 bg-gray-50 rounded-lg shadow-md">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
             Product Name *
           </label>
           <input
@@ -235,13 +235,13 @@ const UploadProduct: React.FC = () => {
             value={productData.name}
             onChange={handleChange}
             disabled={isLoading}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200"
             placeholder="Enter product name"
           />
         </div>
 
         <div>
-          <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
             Product Price ($) *
           </label>
           <input
@@ -253,13 +253,13 @@ const UploadProduct: React.FC = () => {
             disabled={isLoading}
             min="0"
             step="0.01"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200"
             placeholder="0.00"
           />
         </div>
 
         <div>
-          <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="rating" className="block text-sm font-medium text-gray-700 mb-1">
             Product Rating (0-5) *
           </label>
           <input
@@ -272,12 +272,12 @@ const UploadProduct: React.FC = () => {
             min="0"
             max="5"
             step="0.1"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200"
           />
         </div>
 
         <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
             Product Category *
           </label>
           {isLoadingCategories ? (
@@ -289,7 +289,7 @@ const UploadProduct: React.FC = () => {
               value={productData.category}
               onChange={handleChange}
               disabled={isLoading}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200"
             >
               <option value="">Select a category</option>
               {categories.map((cat) => (
@@ -304,7 +304,7 @@ const UploadProduct: React.FC = () => {
 
         {showCustomCategory && (
           <div>
-            <label htmlFor="customCategory" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="customCategory" className="block text-sm font-medium text-gray-700 mb-1">
               New Category Name *
             </label>
             <input
@@ -314,14 +314,14 @@ const UploadProduct: React.FC = () => {
               value={customCategory}
               onChange={(e) => setCustomCategory(e.target.value)}
               disabled={isLoading}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200"
               placeholder="Enter new category name"
             />
           </div>
         )}
 
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
             Product Image * (Max 5MB)
           </label>
           <input
@@ -331,7 +331,7 @@ const UploadProduct: React.FC = () => {
             accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
             onChange={handleFileChange}
             disabled={isLoading}
-            className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -341,7 +341,7 @@ const UploadProduct: React.FC = () => {
             <img 
               src={imagePreview} 
               alt="Product preview" 
-              className="mt-2 h-48 w-auto object-cover rounded-md border border-gray-300" 
+              className="mt-2 h-48 w-auto object-cover rounded-lg border border-gray-300 shadow-sm" 
             />
           </div>
         )}
@@ -349,10 +349,10 @@ const UploadProduct: React.FC = () => {
         <button
           type="submit"
           disabled={isLoading || isLoadingCategories}
-          className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+          className={`w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors ${
             isLoading || isLoadingCategories
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-indigo-600 hover:bg-indigo-700'
+              : 'bg-purple-600 hover:bg-purple-700'
           }`}
         >
           {isLoading ? 'Uploading...' : 'Upload Product'}
