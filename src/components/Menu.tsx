@@ -12,7 +12,7 @@ const Menu = () => {
       y: 0,
     });
   return (
-    <section id="#menu" className="py-8 text-center">
+    <section id="menu" className="py-8 text-center">
       <h2 className="text-3xl md:text-5xl font-semibold text-teal-900 mb-4">
         Menu
       </h2>
