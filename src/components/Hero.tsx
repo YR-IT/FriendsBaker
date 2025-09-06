@@ -33,14 +33,14 @@ function Hero() {
   ];
 
   const socialLinks = [
-  { href: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==", icon: Instagram, color: "hover:text-pink-500", label: "Instagram" },
-  { href: "https://www.facebook.com/share/19jEwH5Ti1/", icon: Facebook, color: "hover:text-blue-500", label: "Facebook" },
-  { href: "tel:+918872197774", icon: Phone, color: "hover:text-green-400", label: "Phone" },
-];
+    { href: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==", icon: Instagram, color: "hover:text-pink-500", label: "Instagram" },
+    { href: "https://www.facebook.com/share/19jEwH5Ti1/", icon: Facebook, color: "hover:text-blue-500", label: "Facebook" },
+    { href: "tel:+918872197774", icon: Phone, color: "hover:text-green-400", label: "Phone" },
+  ];
 
   const [current, setCurrent] = useState(0);
 
-  // Auto slide every 5s
+  // Auto slide every 4s
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -79,7 +79,7 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative h-[100vh] bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 flex items-center justify-start overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-red-50 flex items-center justify-start overflow-hidden"
     >
       {/* Background Video */}
       <div className="absolute inset-0">
@@ -92,7 +92,7 @@ function Hero() {
           playsInline
         >
           <source
-            src="/hero_bg.mp4"
+            src="https://www.pexels.com/download/video/4686874/"          
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -106,7 +106,7 @@ function Hero() {
       {floatingIcons.map((item, i) => (
         <motion.div
           key={i}
-          className="absolute text-amber-300/30"
+          className="absolute text-blue-300/30"
           style={{
             left: `${15 + i * 15}%`,
             top: `${20 + (i % 2) * 40}%`,
@@ -125,7 +125,7 @@ function Hero() {
             ease: "easeInOut"
           }}
         >
-          <item.icon className="w-8 h-8 md:w-12 md:h-12" />
+          <item.icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12" />
         </motion.div>
       ))}
 
@@ -160,7 +160,7 @@ function Hero() {
 
       {/* Enhanced Social Links */}
       <motion.div 
-        className="absolute left-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-20"
+        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 sm:gap-6 z-20"
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
@@ -184,11 +184,11 @@ function Hero() {
               boxShadow: "0 10px 25px rgba(0,0,0,0.2)"
             }}
             whileTap={{ scale: 0.9 }}
-            className={`group relative p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 ${color} hover:bg-white/20`}
+            className={`group relative p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 ${color} hover:bg-white/20`}
           >
-            <Icon className="w-6 h-6 text-white drop-shadow-lg transition-transform group-hover:scale-110" />
+            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-lg transition-transform group-hover:scale-110" />
             <motion.div 
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400/20 to-orange-500/20"
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-orange-500/20"
               initial={{ opacity: 0, scale: 0 }}
               whileHover={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
@@ -198,10 +198,10 @@ function Hero() {
       </motion.div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center">
         {/* Badge with enhanced animation */}
         <motion.div
-          className="inline-flex items-center gap-2 mb-6"
+          className="inline-flex items-center gap-2 mb-4 sm:mb-6"
           initial={{ opacity: 0, y: -50, scale: 0.5 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ 
@@ -213,7 +213,7 @@ function Hero() {
           whileHover={{ scale: 1.05, rotate: 2 }}
         >
           <motion.div 
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-white font-semibold shadow-lg backdrop-blur-sm"
+            className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-blue-400 to-orange-500 text-white font-semibold shadow-lg backdrop-blur-sm text-sm sm:text-base"
             animate={{ 
               boxShadow: [
                 "0 4px 15px rgba(251, 191, 36, 0.3)",
@@ -228,9 +228,9 @@ function Hero() {
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               >
-                <Star className="w-4 h-4 fill-current" />
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
               </motion.div>
-              <span className="text-sm uppercase tracking-wider">The Best Bakery</span>
+              <span className="text-xs sm:text-sm uppercase tracking-wider">The Best Bakery</span>
               <motion.div
                 animate={{ 
                   scale: [1, 1.2, 1],
@@ -238,15 +238,15 @@ function Hero() {
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
               </motion.div>
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Main Title with letter-by-letter animation */}
+        {/* Main Title */}
         <motion.h1
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight whitespace-nowrap"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
           key={images[current].title}
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -258,7 +258,7 @@ function Hero() {
           }}
         >
           <motion.span 
-            className="bg-gradient-to-r from-white via-amber-100 to-orange-200 bg-clip-text text-transparent drop-shadow-2xl inline-block"
+            className="bg-gradient-to-r from-white via-blue-100 to-orange-200 bg-clip-text text-transparent drop-shadow-2xl inline-block"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -281,9 +281,9 @@ function Hero() {
           </motion.span>
         </motion.h1>
 
-        {/* Subtitle with typewriter effect */}
+        {/* Subtitle */}
         <motion.p
-          className="text-xl md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed"
           key={images[current].subtitle}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -292,14 +292,14 @@ function Hero() {
           {images[current].subtitle}
         </motion.p>
 
-        {/* CTA Buttons with enhanced animations */}
+        {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row justify-center items-center gap-4"
+          className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          {/* Primary CTA with pulse effect */}
+          {/* Primary CTA */}
           <motion.a
             href="/contact-us" 
             whileHover={{ 
@@ -308,7 +308,7 @@ function Hero() {
               boxShadow: "0 15px 35px rgba(251, 191, 36, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="group relative overflow-hidden px-8 py-4 rounded-full shadow-2xl bg-gradient-to-r from-amber-400 to-orange-500 text-white font-semibold text-lg transition-all duration-300"
+            className="group relative overflow-hidden px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-2xl bg-gradient-to-r from-blue-400 to-orange-500 text-white font-semibold text-base sm:text-lg transition-all duration-300"
             animate={{
               boxShadow: [
                 "0 8px 25px rgba(251, 191, 36, 0.3)",
@@ -344,15 +344,15 @@ function Hero() {
               borderColor: "rgba(255, 255, 255, 0.6)"
             }}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 rounded-full border-2 border-white/30 text-white font-semibold text-lg backdrop-blur-sm transition-all duration-300"
+            className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white/30 text-white font-semibold text-base sm:text-lg backdrop-blur-sm transition-all duration-300"
           >
             View Menu
           </motion.a>
         </motion.div>
 
-        {/* Stats with counter animation */}
+        {/* Stats */}
         <motion.div
-          className="flex justify-center items-center gap-8 mt-12 text-white/80"
+          className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 mt-8 sm:mt-12 text-white/80"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
@@ -364,12 +364,12 @@ function Hero() {
           ].map((stat, i) => (
             <motion.div 
               key={i}
-              className="text-center"
+              className="text-center relative px-2"
               whileHover={{ scale: 1.1, y: -5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <motion.div 
-                className="text-2xl font-bold text-amber-300"
+                className="text-lg sm:text-2xl font-bold text-blue-300"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ 
@@ -380,14 +380,14 @@ function Hero() {
               >
                 {stat.number}
               </motion.div>
-              <div className="text-sm">{stat.label}</div>
-              {i < 2 && <div className="w-px h-8 bg-white/30 absolute right-0 top-0"></div>}
+              <div className="text-xs sm:text-sm">{stat.label}</div>
+              {i < 2 && <div className="hidden sm:block w-px h-8 bg-white/30 absolute right-0 top-0"></div>}
             </motion.div>
           ))}
         </motion.div>
       </div>
 
-      {/* Enhanced Decorative Bottom Curve */}
+      {/* Decorative Bottom Curve */}
       <motion.div 
         className="absolute bottom-0 left-0 w-full overflow-hidden leading-none"
         initial={{ y: 100 }}
@@ -395,7 +395,7 @@ function Hero() {
         transition={{ duration: 1, delay: 2 }}
       >
         <svg
-          className="relative block w-full h-24 text-white"
+          className="relative block w-full h-16 sm:h-24 text-white"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
           viewBox="0 0 1200 120"
@@ -421,12 +421,12 @@ function Hero() {
         </svg>
       </motion.div>
 
-      {/* Enhanced WhatsApp Button */}
+      {/* WhatsApp Button */}
       <motion.a
         href="https://wa.me/918872197774"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 group"
+        className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 group"
         whileHover={{ scale: 1.15, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
         initial={{ opacity: 0, scale: 0, rotate: 180 }}
@@ -438,21 +438,21 @@ function Hero() {
           duration: 0.8
         }}
       >
-        {/* Enhanced pulse effects */}
+        {/* Pulse effects */}
         <motion.span 
-          className="absolute inline-flex h-16 w-16 rounded-full bg-green-500 opacity-60"
+          className="absolute inline-flex h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-green-500 opacity-60"
           animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0, 0.6] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
         <motion.span 
-          className="absolute inline-flex h-20 w-20 rounded-full bg-green-400 opacity-40"
+          className="absolute inline-flex h-14 w-14 sm:h-20 sm:w-20 rounded-full bg-green-400 opacity-40"
           animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
           transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
         />
 
         {/* Main Button */}
         <motion.span 
-          className="relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white shadow-2xl transition-all duration-300"
+          className="relative flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white shadow-2xl transition-all duration-300"
           whileHover={{ 
             boxShadow: "0 15px 35px rgba(34, 197, 94, 0.5)",
             background: "linear-gradient(45deg, #22c55e, #16a34a)"
@@ -462,7 +462,7 @@ function Hero() {
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <FaWhatsapp className="w-8 h-8" />
+            <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8" />
           </motion.div>
         </motion.span>
       </motion.a>

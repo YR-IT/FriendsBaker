@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -8,24 +9,31 @@ import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
+import Loader from './components/Loader'; // Import Loader
+
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000); // Show loader for 3s
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) return <Loader />; // Display loader while loading
+
   return (
     <Router>
-       <ScrollToTop />
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col">
-       
         <Header />
         <main className="flex-1">
           <Routes>
-            
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/menu/:slug" element={<CategoryPage />} />
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/admin" element={<PrivateRoute />}/>
-              
-            
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<PrivateRoute />} />
           </Routes>
         </main>
         <Footer />
