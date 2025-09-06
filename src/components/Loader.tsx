@@ -2,11 +2,10 @@ import { motion } from "framer-motion";
 import React from "react";
 
 interface LoaderProps {
-  logoSrc?: string;
   duration?: number;
 }
 
-const Loader: React.FC<LoaderProps> = ({ logoSrc, duration = 3 }) => {
+const Loader: React.FC<LoaderProps> = ({ duration = 3 }) => {
   const [visible, setVisible] = React.useState(true);
 
   React.useEffect(() => {
