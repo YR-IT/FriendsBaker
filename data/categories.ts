@@ -3,7 +3,7 @@
 export const categories = [
   {
    
-    title: "Classic Cakes",
+    name: "Classic Cakes",
     image:
       "https://liliyum.com/cdn/shop/products/GreenFloralBirthdayCake_2400x.jpg?v=1676704297",
     items: [
@@ -53,7 +53,7 @@ export const categories = [
   },
   {
  
-    title: "Rakhi Cakes and Hampers",
+    name: "Rakhi Cakes and Hampers",
     image:
       "https://www.thegreenfuels.com/cdn/shop/files/Rakhiopt7.jpg?v=1689332850",
     items: [
@@ -81,8 +81,7 @@ export const categories = [
     ],
   },
   {
-  slug: "cake-jars",
-  title: "Cake Jars",
+  name: "Cake Jars",
   image:
     "https://bkmedia.bakingo.com/sq-red-velvet-oreo-chocolate-jar-cake-jar25redvchoc-AA.jpg",
   items: [
@@ -117,8 +116,7 @@ export const categories = [
   ],
 },
   {
-  slug: "pastries",
-  title: "Pastries",
+  name: "Pastries",
   image:
     "https://img.freepik.com/free-photo/assortment-pieces-cake_114579-85732.jpg",
   items: [
@@ -153,8 +151,8 @@ export const categories = [
   ],
 },
   {
-  slug: "snacks",
-  title: "Snacks",
+ 
+  name: "Snacks",
   image:
     "https://img.freepik.com/free-photo/samsa-samosas-with-meat_658428-358.jpg?semt=ais_hybrid&w=740&q=80",
   items: [
@@ -189,8 +187,8 @@ export const categories = [
   ],
 },
   {
-    slug: "burger-sandwiches",
-    title: "Burger and Sandwiches",
+    
+    name: "Burger and Sandwiches",
     image:
       "https://hips.hearstapps.com/hmg-prod/images/banh-mi-turkey-burger-secondary-6578982fea00a.jpg",
     items: [
@@ -211,8 +209,7 @@ export const categories = [
     ],
   },
   {
-    slug: "cupcakes",
-    title: "Cupcakes",
+    name: "Cupcakes",
     image:
       "https://thescranline.com/wp-content/uploads/2021/09/FUNFETTI-CUPCAKES-THUMBNAIL-24.jpg",
     items: [
@@ -233,8 +230,8 @@ export const categories = [
     ],
   },
   {
-    slug: "cookies",
-    title: "Cookies",
+  
+    name: "Cookies",
     image:
       "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29va2llc3xlbnwwfHwwfHx8MA%3D%3D",
     items: [
@@ -255,8 +252,8 @@ export const categories = [
     ],
   },
   {
-    slug: "pasta-pizza",
-    title: "Pasta and Pizza",
+   
+    name: "Pasta and Pizza",
     image:
       "https://static6.depositphotos.com/1042799/616/i/450/depositphotos_6160885-stock-photo-italian-pizza.jpg",
     items: [
@@ -279,10 +276,10 @@ export const categories = [
 ];
 
 
-export const submenus: Record<string, { title: string; items: string[] }[]> = {
+export const submenus: Record<string, { name: string; items: string[] }[]> = {
   products: [
     {
-      title: "Kids Cakes",
+      name: "Kids Cakes",
       items: [
         "1st Birthday Cakes",
         "Princess Cakes",
@@ -294,7 +291,7 @@ export const submenus: Record<string, { title: string; items: string[] }[]> = {
       ],
     },
     {
-      title: "Anniversary Cakes",
+      name: "Anniversary Cakes",
       items: [
         "1st Anniversary Cakes",
         "25th Anniversary Cakes",
@@ -304,7 +301,7 @@ export const submenus: Record<string, { title: string; items: string[] }[]> = {
       ],
     },
     {
-      title: "Character Cakes",
+      name: "Character Cakes",
       items: [
         "Spiderman Cakes",
         "Unicorn Cakes",
@@ -317,7 +314,7 @@ export const submenus: Record<string, { title: string; items: string[] }[]> = {
       ],
     },
     {
-      title: "More Cakes",
+      name: "More Cakes",
       items: [
         "Rainbow Cakes",
         "Butterfly Cakes",
@@ -332,22 +329,22 @@ export const submenus: Record<string, { title: string; items: string[] }[]> = {
 
   speciality: [
     {
-      title: "Designer Cakes",
+      name: "Designer Cakes",
       items: ["Gourmet Cakes", "Photo Cakes", "Theme Cakes"],
     },
     {
-      title: "Occasion Cakes",
+      name: "Occasion Cakes",
       items: ["Birthday", "Anniversary", "Baby Shower"],
     },
     {
-      title: "Trendy Cakes",
+      name: "Trendy Cakes",
       items: ["Pinata Cakes", "Pull-Me-Up Cakes", "Jar Cakes"],
     },
   ],
 
   hampers: [
     {
-      title: "",
+      name: "",
       items: [
         "Gift Hampers",
         "Make Your Own Hamper",

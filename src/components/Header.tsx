@@ -1,13 +1,29 @@
 import { motion } from "framer-motion";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { categories } from "../../data/categories";
+import { getProducts } from "../../data/products";
+import type { IProduct } from "../../data/products"
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const [productCategories, setProductCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const products: IProduct[] = await getProducts();
+        const uniqueCategories = Array.from(new Set(products.map(p => p.category)));
+        setProductCategories(uniqueCategories);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   // ✅ cross-platform timeout type (no NodeJS namespace needed)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -78,14 +94,14 @@ function Header() {
               <div className="absolute left-0 mt-2 bg-white text-gray-800 shadow-lg rounded-lg p-4 w-56 z-40 transition-all duration-300"
               style={{ marginTop: "26px" }} >
                 <ul className="space-y-4 text-sm">
-                  {categories.map((cat, i) => (
+                  {productCategories.map((cat, i) => (
                     <li key={i}>
                       <Link
-                        to={`/menu/${cat.slug}`}
+                        to={`/menu/${cat}`}
                         className="hover:text-teal-500 transition"
                         onClick={handleCategoryClick}
                       >
-                        {cat.title}
+                        {cat}
                       </Link>
                     </li>
                   ))}
@@ -147,17 +163,17 @@ function Header() {
 
               {categoriesOpen && (
                 <ul className="mt-2 pl-2 space-y-4 text-sm">
-                  {categories.map((cat, i) => (
+                  {productCategories.map((cat, i) => (
                     <li key={i}>
                       <Link
-                        to={`/menu/${cat.slug}`}
+                        to={`/menu/${cat}`}
                         className="hover:text-teal-500 transition block"
                         onClick={() => {
                           setMenuOpen(false);
                           setCategoriesOpen(false);
                         }}
                       >
-                        {cat.title}
+                        {cat}
                       </Link>
                     </li>
                   ))}

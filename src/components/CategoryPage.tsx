@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
-import { categories } from "../../data/categories";
+import { getProducts } from "../../data/products";
+import type { IProduct } from "../../data/products";
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const CategoryPage = () => {
-  const { slug } = useParams();
-  const category = categories.find((cat) => cat.slug === slug);
+  const { name } = useParams();
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [tooltip, setTooltip] = useState({
     visible: false,
     text: "",
@@ -15,35 +16,46 @@ const CategoryPage = () => {
   });
 
   // State to handle favourites
-  const [favourites, setFavourites] = useState<number[]>([]);
+  const [favourites, setFavourites] = useState<string[]>([]);
 
   // State for sorting dropdown
   const [sortOption, setSortOption] = useState("Popularity");
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   // State for platform chooser (global modal)
-  const [selectedItem, setSelectedItem] = useState<null | number>(null);
+  const [selectedItem, setSelectedItem] = useState<IProduct | null>(null);
 
-  const toggleFavourite = (index: number) => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const allProducts = await getProducts();
+        const filteredProducts = allProducts.filter(p => p.category === name);
+        setProducts(filteredProducts);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [name]);
+
+  const toggleFavourite = (productId: string) => {
     setFavourites((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+      prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
     );
   };
 
-  if (!category) {
-    return <p className="text-center text-xl mt-10">Category not found</p>;
+  if (products.length === 0) {
+    return <p className="text-center text-xl mt-10">Loading products...</p>;
   }
 
   // Sorting logic
-  const sortedItems = [...category.items].sort((a, b) => {
-    const priceA = Number(a.price.toString().replace(/[^0-9.-]+/g, ""));
-    const priceB = Number(b.price.toString().replace(/[^0-9.-]+/g, ""));
-
+  const sortedItems = [...products].sort((a, b) => {
     if (sortOption === "Price Low To High") {
-      return priceA - priceB;
+      return a.price - b.price;
     }
     if (sortOption === "Price High To Low") {
-      return priceB - priceA;
+      return b.price - a.price;
     }
     return 0; // Popularity or default
   });
@@ -51,7 +63,7 @@ const CategoryPage = () => {
   return (
     <section className="sm:py-28 py-24 sm:px-20 px-6">
       <h2 className="text-3xl md:text-5xl font-semibold text-teal-900 mb-10 text-center">
-        {category.title}
+        {name}
       </h2>
 
       {/* Sort button */}
@@ -94,9 +106,9 @@ const CategoryPage = () => {
 
       {/* Cakes Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-        {sortedItems.map((item, index) => (
+        {sortedItems.map((item) => (
           <div
-            key={index}
+            key={item._id}
             className="text-left relative"
             onMouseEnter={(e) =>
               setTooltip({
@@ -119,7 +131,7 @@ const CategoryPage = () => {
             {/* Image Card */}
             <div
               className="relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
-              onClick={() => setSelectedItem(index)}
+              onClick={() => setSelectedItem(item)}
             >
               {/* Veg symbol */}
               <div className="absolute top-4 left-4 w-6 h-6 border-2 border-green-600 flex items-center justify-center bg-white">
@@ -127,7 +139,7 @@ const CategoryPage = () => {
               </div>
 
               <img
-                src={item.img}
+                src={`data:image/jpeg;base64,${item.image}`}
                 alt={item.name}
                 className="w-full h-80 object-cover"
               />
@@ -141,7 +153,7 @@ const CategoryPage = () => {
                     {item.name}
                   </h3>
                   <p className="text-lg font-bold text-gray-900">
-                    {item.price}
+                    ₹{item.price}
                   </p>
 
                   {/* Reviews */}
@@ -155,12 +167,12 @@ const CategoryPage = () => {
 
                 {/* Heart (Favourite) Icon */}
                 <button
-                  onClick={() => toggleFavourite(index)}
+                  onClick={() => toggleFavourite(item._id)}
                   className="ml-3 bg-white p-1 rounded-full shadow hover:bg-pink-100 transition"
                 >
                   <Heart
                     className={`w-5 h-5 ${
-                      favourites.includes(index)
+                      favourites.includes(item._id)
                         ? "text-red-600 fill-pink-600"
                         : "text-gray-800 fill-none"
                     }`}

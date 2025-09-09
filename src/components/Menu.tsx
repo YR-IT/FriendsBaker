@@ -1,16 +1,43 @@
-import { useState } from "react";
-import { categories } from "../../data/categories";
+import { useState, useEffect } from "react";
+import { getProducts } from "../../data/products";
+import type { IProduct } from "../../data/products"
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Menu = () => {
+interface MenuCategory {
+  name: string;
+  image: string;
+}
 
+const Menu = () => {
+  const [menuCategories, setMenuCategories] = useState<MenuCategory[]>([]);
   const [tooltip, setTooltip] = useState({
       visible: false,
       text: "",
       x: 0,
       y: 0,
     });
+
+  useEffect(() => {
+    const fetchAndSetMenuCategories = async () => {
+      try {
+        const products: IProduct[] = await getProducts();
+        const categoriesMap = new Map<string, string>();
+        products.forEach(p => {
+          if (!categoriesMap.has(p.category)) {
+            categoriesMap.set(p.category, p.image);
+          }
+        });
+        const categories = Array.from(categoriesMap, ([name, image]) => ({ name, image }));
+        setMenuCategories(categories);
+      } catch (error) {
+        console.error("Failed to fetch menu categories:", error);
+      }
+    };
+
+    fetchAndSetMenuCategories();
+  }, []);
+
   return (
     <section id="menu" className="py-8 text-center">
       <h2 className="text-3xl md:text-5xl font-semibold text-teal-900 mb-4">
@@ -24,27 +51,27 @@ const Menu = () => {
           {/* left spacer */}
           <div className="flex-shrink-0 w-4"></div>
 
-          {categories.map((item, index) => (
-            <Link key={index} to={`/menu/${item.slug}`}>
+          {menuCategories.map((item, index) => (
+            <Link key={index} to={`/menu/${item.name}`}>
               <div className="flex-shrink-0 flex flex-col items-center w-56 cursor-pointer"
               onMouseEnter={(e) =>
-                setTooltip({ visible: true, text: item.title, x: e.clientX, y: e.clientY })
+                setTooltip({ visible: true, text: item.name, x: e.clientX, y: e.clientY })
               }
               onMouseMove={(e) =>
-                setTooltip({ visible: true, text: item.title, x: e.clientX, y: e.clientY })
+                setTooltip({ visible: true, text: item.name, x: e.clientX, y: e.clientY })
               }
               onMouseLeave={() => setTooltip({ ...tooltip, visible: false })}
               >
                 <div className="w-60 h-72 bg-white rounded-lg overflow-hidden shadow-md mb-4 relative group">
                   <img
-                    src={item.image}
-                    alt={item.title}
+                    src={`data:image/jpeg;base64,${item.image}`}
+                    alt={item.name}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/20 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                 </div>
                 <span className="text-lg font-medium text-gray-800 uppercase text-center">
-                  {item.title}
+                  {item.name}
                 </span>
               </div>
             </Link>
