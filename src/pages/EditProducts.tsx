@@ -166,7 +166,7 @@ const EditProducts: React.FC = () => {
       }
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://friends-backend-u2ve.onrender.com/api/deletecategory/${category.name}`, {
+        const response = await fetch(`https://friends-backend-u2ve.onrender.com/api/deleteproductcategory/${category.name}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,
