@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { getProducts } from "../../data/products";
-import type { IProduct } from "../../data/products"
+import type { IProduct } from "../../data/products";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-<<<<<<< HEAD
 interface MenuCategory {
   name: string;
   image: string;
@@ -13,11 +12,11 @@ interface MenuCategory {
 const Menu = () => {
   const [menuCategories, setMenuCategories] = useState<MenuCategory[]>([]);
   const [tooltip, setTooltip] = useState({
-      visible: false,
-      text: "",
-      x: 0,
-      y: 0,
-    });
+    visible: false,
+    text: "",
+    x: 0,
+    y: 0,
+  });
 
   useEffect(() => {
     const fetchAndSetMenuCategories = async () => {
@@ -38,15 +37,6 @@ const Menu = () => {
 
     fetchAndSetMenuCategories();
   }, []);
-=======
-const Menu = () => {
-  const [tooltip, setTooltip] = useState({
-    visible: false,
-    text: "",
-    x: 0,
-    y: 0,
-  });
->>>>>>> f1167f2 (home page)
 
   return (
     <section
@@ -76,57 +66,26 @@ const Menu = () => {
         <div className="flex space-x-8 px-8 sm:px-16">
           <div className="flex-shrink-0 w-4" /> {/* left spacer */}
 
-<<<<<<< HEAD
           {menuCategories.map((item, index) => (
             <Link key={index} to={`/menu/${item.name}`}>
-              <div className="flex-shrink-0 flex flex-col items-center w-56 cursor-pointer"
-              onMouseEnter={(e) =>
-                setTooltip({ visible: true, text: item.name, x: e.clientX, y: e.clientY })
-              }
-              onMouseMove={(e) =>
-                setTooltip({ visible: true, text: item.name, x: e.clientX, y: e.clientY })
-              }
-              onMouseLeave={() => setTooltip({ ...tooltip, visible: false })}
-=======
-          {categories.map((item, index) => (
-            <Link key={index} to={`/menu/${item.slug}`}>
               <motion.div
                 className="flex-shrink-0 flex flex-col items-center w-60 cursor-pointer group relative"
                 onMouseEnter={(e) =>
-                  setTooltip({
-                    visible: true,
-                    text: item.title,
-                    x: e.clientX,
-                    y: e.clientY,
-                  })
+                  setTooltip({ visible: true, text: item.name, x: e.clientX, y: e.clientY })
                 }
                 onMouseMove={(e) =>
-                  setTooltip({
-                    visible: true,
-                    text: item.title,
-                    x: e.clientX,
-                    y: e.clientY,
-                  })
+                  setTooltip({ visible: true, text: item.name, x: e.clientX, y: e.clientY })
                 }
-                onMouseLeave={() =>
-                  setTooltip({ ...tooltip, visible: false })
-                }
+                onMouseLeave={() => setTooltip({ ...tooltip, visible: false })}
                 whileHover={{ scale: 1.08, rotateX: 5, rotateY: 5 }}
                 transition={{ type: "spring", stiffness: 220, damping: 15 }}
->>>>>>> f1167f2 (home page)
               >
                 <div className="w-60 h-72 bg-gray-900 rounded-xl overflow-hidden shadow-xl mb-4 relative border-2 border-gray-700 hover:border-pink-500 transition-all duration-300 glitter-card hover:shadow-pink-500/40">
                   {/* Image */}
                   <img
-<<<<<<< HEAD
                     src={`data:image/jpeg;base64,${item.image}`}
                     alt={item.name}
-                    className="w-full h-full object-cover"
-=======
-                    src={item.image}
-                    alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
->>>>>>> f1167f2 (home page)
                   />
 
                   {/* Gradient overlay */}
@@ -135,15 +94,10 @@ const Menu = () => {
                   {/* Glitter overlay */}
                   <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition duration-700 glitter-overlay"></div>
                 </div>
-<<<<<<< HEAD
-                <span className="text-lg font-medium text-gray-800 uppercase text-center">
-                  {item.name}
-=======
 
                 {/* Title */}
                 <span className="text-lg font-semibold text-gray-200 uppercase text-center group-hover:text-pink-400 transition-colors duration-300 tracking-wide font-lato glow-text">
-                  {item.title}
->>>>>>> f1167f2 (home page)
+                  {item.name}
                 </span>
               </motion.div>
             </Link>
@@ -169,6 +123,7 @@ const Menu = () => {
         )}
       </AnimatePresence>
 
+      {/* Styles */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700;900&display=swap');
 

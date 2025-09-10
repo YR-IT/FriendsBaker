@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart } from "lucide-react";
 import { getProducts } from "../../data/products";
-import type { IProduct } from "../../data/products"
+import type { IProduct } from "../../data/products";
 
 function BestSellers() {
   const [bestSellers, setBestSellers] = useState<IProduct[]>([]);
@@ -24,7 +24,6 @@ function BestSellers() {
         console.error("Failed to fetch best sellers:", error);
       }
     };
-
     fetchBestSellers();
   }, []);
 
@@ -63,13 +62,8 @@ function BestSellers() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
           {bestSellers.map((item) => (
             <motion.div
-<<<<<<< HEAD
               key={item._id}
-              className="text-left relative"
-=======
-              key={item.id}
               className="text-left relative group"
->>>>>>> f1167f2 (home page)
               onMouseEnter={(e) =>
                 setTooltip({
                   visible: true,
@@ -116,53 +110,31 @@ function BestSellers() {
               </div>
 
               {/* Text below image */}
-              <div className="mt-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-200 font-modern group-hover:text-teal-400 transition-colors duration-300">
-                      {item.name}
-                    </h3>
-<<<<<<< HEAD
-                    <p className="text-lg font-bold text-gray-900">
-                      ₹{item.price}
-=======
-                    <p className="text-lg font-bold text-white">
-                      {item.price}
->>>>>>> f1167f2 (home page)
-                    </p>
-                    <div className="flex items-center text-sm text-gray-400">
-                      <span className="font-semibold text-teal-300">
-                        {item.rating}
-                      </span>
-                      <span className="text-yellow-400 ml-1">★</span>
-                    </div>
+              <div className="mt-3 flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-200 font-modern group-hover:text-teal-400 transition-colors duration-300">
+                    {item.name}
+                  </h3>
+                  <p className="text-lg font-bold text-white">₹{item.price}</p>
+                  <div className="flex items-center text-sm text-gray-400">
+                    <span className="font-semibold text-teal-300">{item.rating}</span>
+                    <span className="text-yellow-400 ml-1">★</span>
                   </div>
-
-                  {/* Heart Icon */}
-                  <button
-<<<<<<< HEAD
-                    onClick={() => toggleFavourite(item._id)}
-                    className="ml-3 bg-white p-1 rounded-full shadow hover:bg-pink-100 transition"
-                  >
-                    <Heart
-                      className={`w-5 h-5 ${
-                        favourites.includes(item._id)
-                          ? "text-red-600 fill-pink-600"
-                          : "text-gray-800 fill-none"
-=======
-                    onClick={() => toggleFavourite(item.id)}
-                    className="ml-3 bg-gray-900 p-1 rounded-full shadow hover:bg-pink-100/20 transition"
-                  >
-                    <Heart
-                      className={`w-5 h-5 ${
-                        favourites.includes(item.id)
-                          ? "text-red-500 fill-red-500"
-                          : "text-gray-400 fill-none"
->>>>>>> f1167f2 (home page)
-                      }`}
-                    />
-                  </button>
                 </div>
+
+                {/* Heart Icon */}
+                <button
+                  onClick={() => toggleFavourite(item._id)}
+                  className="ml-3 bg-gray-900 p-1 rounded-full shadow hover:bg-pink-100/20 transition"
+                >
+                  <Heart
+                    className={`w-5 h-5 ${
+                      favourites.includes(item._id)
+                        ? "text-red-500 fill-red-500"
+                        : "text-gray-400 fill-none"
+                    }`}
+                  />
+                </button>
               </div>
             </motion.div>
           ))}
