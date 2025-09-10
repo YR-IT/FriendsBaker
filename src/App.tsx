@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -12,12 +12,12 @@ import Login from './pages/Login';
 
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000); // Show loader for 3s
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setLoading(false), 3000); // Show loader for 3s
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   
 
