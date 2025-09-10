@@ -9,7 +9,7 @@ import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
-import Loader from './components/Loader'; // Import Loader
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) return <Loader />; // Display loader while loading
+  
 
   return (
     <Router>

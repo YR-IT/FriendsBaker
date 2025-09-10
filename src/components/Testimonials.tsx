@@ -6,53 +6,41 @@ function Testimonials() {
   const testimonials = [
     {
       name: "Surbhi Vinayak",
-      text: "Yummiest and beautiful cake. Most importantly the design looked perfect. It made our celebration more memorable. My family was really pleased to see the half birthday cake for our 6 month old baby. Thankyou so much for delivering it perfectly. Also, I order from them for a lot of occasions. It’s been a year and they have never disappointed me ever..! Happy to order from them. Getting lots of compliments from my family for the same. Whatever design I share with them, they deliver.!",
+      text: "Yummiest and beautiful cake. Most importantly the design looked perfect. It made our celebration more memorable. My family was really pleased to see the half birthday cake for our 6 month old baby...",
     },
     {
       name: "Pritam Kumar Das",
-      text: "Friend's Bakers was always our choice for cakes. However, I recently had a birthday celebration arranged by Friend's Bakers with Lego theme and I couldn't be happier with their service! The food was absolutely delicious—every snack was fresh, flavorful, and beautifully presented. The attention to detail in the setup added a special touch to the event. All the kids kept complimenting the food.",
+      text: "Friend's Bakers was always our choice for cakes. However, I recently had a birthday celebration arranged with Lego theme and I couldn't be happier with their service! The food was absolutely delicious...",
     },
     {
       name: "Ankita Sharma",
-      text: "Absolutely loved the cake! You never fail to add that extra sparkle to our celebrations. Your cakes are not just delicious — they’re memories on a plate. You're always our first and only choice",
+      text: "Absolutely loved the cake! You never fail to add that extra sparkle to our celebrations. Your cakes are not just delicious — they’re memories on a plate.",
     },
     {
       name: "Jyoti Goyal",
-      text: "Cake was so delicious. My 3 years old son was very happy with his favourite train cake design exactly as i told them to design. On every birthday of my son I order the cake from this eggless bakery. Thanku for always making our day so special.",
+      text: "Cake was so delicious. My 3 years old son was very happy with his favourite train cake design exactly as i told them. On every birthday of my son I order the cake from this bakery...",
     },
     {
       name: "Santwana Das",
-      text: "Absolutely loved my experience with Frends Baker! I ordered a Lego-themed cake along with a variety of snacks for Birthday celebration, and everything was just perfect. The cake was not only stunning in design but also super delicious — soft, fresh, and full of flavor. A big thanks to the entire team at Frends & Baker for making our event extra special. Highly recommend this bakery for anyone looking for quality, creativity, and great taste!",
-    },
-    {
-      name: "Khyati Goel",
-      text: "I recently ordered from Friends Baker and was so impressed with the food. I ordered Healthy Sandwich, valentine mini cake, multigrain cookies and Atta Jaggery Sesame cookies. The sandwich was filling, had loads of veggies and was delicious. The Valentine mini cake was to die for❤️, first of all I’d like to mention that the cake was the cutest, just so pretty and was a chocolate cake inside, so delicious. The multigrain cookies were delicious, perfect combination of health and taste. The atta jaggery sesame cookies had such an amazing taste, just perfect. I’m definitely gonna order again from here and would highly recommend you to try this place. Not to mention that packaging of food was also really cute.",
-    },
-    {
-      name: "Amandeep Virk",
-      text: "Greetings! We were delighted to receive such a lovely and delicious cake. The quality and the warm bond they share with their customers is commendable. Love to have such amazing shop in close proximity to us.",
-    },
-    {
-      name: "Neeraj Ghai",
-      text: "We ordered mix fruit cake for our daughter's birthday with a chosen online design and Friends Baker delivered exactly the same with a great taste. Really enjoyed a lot. Highly Recommended!",
+      text: "Absolutely loved my experience! I ordered a Lego-themed cake along with snacks for Birthday celebration, and everything was just perfect. The cake was stunning in design and super delicious.",
     },
   ];
 
   const [index, setIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Autoplay every 5 seconds
+  // Autoplay every 6s
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 2) % testimonials.length);
-    }, 5000);
+      setIndex((prev) => (prev + (isMobile ? 1 : 2)) % testimonials.length);
+    }, 6000);
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [isMobile, testimonials.length]);
 
   // Detect mobile
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
+      setIsMobile(window.innerWidth < 768);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -89,89 +77,92 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-16 bg-white overflow-hidden"
+      className="relative py-20 bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden"
     >
-      <div className="absolute -top20 -left-20 w-80 h-80 bg-teal-200 rounded-full blur-3xl opacity-40 animate-pulse"></div>
-      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-teal-300 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+      {/* Floating Glow Orbs */}
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute -bottom-32 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-20 relative z-10"></div>
       <motion.h2
-        className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center text-teal-900 mb-12 px-4"
+        className="text-3xl sm:text-5xl font-bold text-center text-white mb-16 relative z-10"
         initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
       >
         What Our Customers Say
       </motion.h2>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative h-auto min-h-[16rem]">
-  <AnimatePresence mode="wait">
-    <motion.div
-      key={index}
-      className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch justify-center"
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -40 }}
-      transition={{ duration: 0.6 }}
-    >
-      {/* Left Arrow */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-[-4rem] top-1/2 -translate-y-1/2 bg-teal-200 hover:bg-teal-300 p-2 rounded-full shadow z-20"
-      >
-        <ChevronLeft className="w-6 h-6 text-gray-800" />
-      </button>
+      {/* Testimonials Container */}
+      <div className="max-w-6xl mx-auto px-6 relative min-h-[20rem] z-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Left Arrow */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-[-3rem] top-1/2 -translate-y-1/2 bg-gradient-to-tr from-teal-600 to-teal-400 hover:opacity-90 p-3 rounded-full shadow-xl z-20"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
 
-      {visible.map((t, i) => (
-        <motion.div
-          key={i}
-          whileHover={{ scale: 1.03 }}
-          className="bg-gradient-to-tr from-teal-100 to-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center w-full transition-all duration-300 border border-teal-200"
-        >
-          {/* 1. Name */}
-          <h4 className="font-bold text-gray-900 text-lg sm:text-xl mb-2">
-            {t.name}
-          </h4>
-
-          {/* 2. Stars */}
-          <div className="flex items-center space-x-1 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Star
+            {visible.map((t, i) => (
+              <motion.div
                 key={i}
-                className="w-5 h-5 fill-yellow-400 text-yellow-400"
-              />
+                whileHover={{ scale: 1.02 }}
+                className="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full border border-gray-700 hover:border-teal-400 transition-all duration-300"
+              >
+                {/* Stars */}
+                <div className="flex items-center space-x-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-yellow-400 text-yellow-400 drop-shadow"
+                    />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <Quote className="text-teal-400 mb-4 w-7 h-7" />
+
+                {/* Text */}
+                <p className="text-gray-300 leading-relaxed mb-6 italic">
+                  {t.text}
+                </p>
+
+                {/* Name */}
+                <h4 className="font-semibold text-teal-300 text-lg">
+                  — {t.name}
+                </h4>
+              </motion.div>
             ))}
-          </div>
 
-          {/* 3. Quote Symbol */}
-          <Quote className="text-gray-500 mb-4 w-6 h-6" />
-
-          {/* 4. Review Text */}
-          <p className="text-gray-900 leading-relaxed line-clamp-6">
-            {t.text}
-          </p>
-        </motion.div>
-      ))}
-
-      {/* Right Arrow */}
-      <button
-        onClick={nextSlide}
-        className="absolute right-[-4rem] top-1/2 -translate-y-1/2 bg-teal-200 hover:bg-teal-300 p-2 rounded-full shadow z-20"
-      >
-        <ChevronRight className="w-6 h-6 text-gray-800" />
-      </button>
-    </motion.div>
-  </AnimatePresence>
-</div>
+            {/* Right Arrow */}
+            <button
+              onClick={nextSlide}
+              className="absolute right-[-3rem] top-1/2 -translate-y-1/2 bg-gradient-to-tr from-teal-600 to-teal-400 hover:opacity-90 p-3 rounded-full shadow-xl z-20"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Dots */}
-      <div className="flex justify-center space-x-2 mt-20">
+      <div className="flex justify-center space-x-3 mt-14 z-10 relative">
         {Array.from({ length: dotCount }).map((_, i) => (
           <motion.div
             key={i}
             whileHover={{ scale: 1.2 }}
-            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-colors ${
-              i === activeDot ? "bg-teal-500" : "bg-teal-200"
+            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 ${
+              i === activeDot
+                ? "bg-teal-400 shadow-lg shadow-teal-500/50"
+                : "bg-gray-600"
             }`}
           />
         ))}
