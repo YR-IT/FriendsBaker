@@ -3,23 +3,23 @@ import { CheckCircle } from "lucide-react";
 
 function GiftHamper() {
   return (
-    <section className="relative bg-gradient-to-br from-gray-900 via-black to-gray-800 py-16 px-6 overflow-hidden">
-      {/* Starry Background */}
-      <div className="absolute inset-0 z-0 star-bg"></div>
+    <section className="relative bg-gradient-to-br from-white via-gray-50 to-teal-50 py-16 px-6 overflow-hidden">
+      {/* Soft Decorative Background */}
+      <div className="absolute inset-0 z-0 pastel-bg"></div>
 
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-16">
         
         {/* Left Content */}
         <motion.div
-          className="mt-10 text-white"
+          className="mt-10 text-gray-800"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-4xl sm:text-5xl font-bold leading-snug mb-8 text-teal-300"
+            className="text-4xl sm:text-5xl font-bold leading-snug mb-8 text-teal-600"
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -35,7 +35,7 @@ function GiftHamper() {
           ></motion.div>
 
           <motion.p
-            className="text-gray-300 text-lg mb-10 leading-relaxed"
+            className="text-gray-600 text-lg mb-10 leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -47,7 +47,7 @@ function GiftHamper() {
 
           {/* Features List */}
           <motion.ul
-            className="space-y-3 text-gray-200 text-lg"
+            className="space-y-3 text-gray-700 text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -58,7 +58,7 @@ function GiftHamper() {
               "Perfect for every celebration",
             ].map((feature, i) => (
               <li key={i} className="flex items-center gap-3">
-                <CheckCircle className="text-teal-400 w-5 h-5" />
+                <CheckCircle className="text-teal-500 w-5 h-5" />
                 {feature}
               </li>
             ))}
@@ -76,40 +76,20 @@ function GiftHamper() {
           <motion.img
             src="/GiftHamperFinal.png"
             alt="Bakery Hamper"
-            className="rounded-2xl shadow-2xl border-4 border-teal-500/30"
+            className="rounded-2xl shadow-xl border-4 border-teal-200/50"
             whileHover={{ scale: 1.02, rotate: 2 }}
             transition={{ type: "spring", stiffness: 200 }}
           />
         </motion.div>
       </div>
 
-      {/* Starry Background CSS */}
+      {/* Decorative Background CSS */}
       <style>{`
-        .star-bg {
-          background: transparent;
+        .pastel-bg {
+          background: radial-gradient(circle at top left, rgba(56,189,248,0.15), transparent 60%),
+                      radial-gradient(circle at bottom right, rgba(167,243,208,0.15), transparent 60%);
           position: absolute;
           inset: 0;
-          overflow: hidden;
-        }
-        .star-bg::before, 
-        .star-bg::after {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-          animation: stars 100s linear infinite;
-          opacity: 0.4;
-        }
-        .star-bg::after {
-          animation-duration: 160s;
-          opacity: 0.2;
-        }
-        @keyframes stars {
-          from { transform: translateY(0); }
-          to { transform: translateY(1000px); }
         }
       `}</style>
     </section>

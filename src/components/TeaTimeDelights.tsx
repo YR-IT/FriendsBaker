@@ -22,8 +22,8 @@ function TeaTimeDelights() {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-gray-900 via-black to-gray-800 py-16 px-8 overflow-hidden">
-      {/* Floating Bubbles Background */}
+    <section className="relative bg-gradient-to-br from-white via-gray-50 to-teal-50 py-16 px-8 overflow-hidden">
+      {/* Floating Pastel Bubbles Background */}
       <div className="absolute inset-0 z-0">
         {[...Array(15)].map((_, i) => (
           <div
@@ -52,7 +52,7 @@ function TeaTimeDelights() {
           <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200 }}
-            className="relative rounded-3xl shadow-2xl"
+            className="relative rounded-3xl shadow-xl"
           >
             <AnimatePresence mode="wait">
               <motion.img
@@ -63,7 +63,7 @@ function TeaTimeDelights() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.8 }}
-                className="rounded-2xl w-[450px] h-[450px] object-cover border-4 border-teal-500/30"
+                className="rounded-2xl w-[450px] h-[450px] object-cover border-4 border-teal-200/50"
               />
             </AnimatePresence>
 
@@ -80,17 +80,17 @@ function TeaTimeDelights() {
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center md:text-left text-white"
+          className="text-center md:text-left text-gray-800"
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-teal-300 mb-8 leading-snug">
+          <h2 className="text-4xl md:text-6xl font-bold text-teal-600 mb-8 leading-snug">
             Tea-Time Delights
           </h2>
-          <p className="text-gray-300 text-xl mb-10 max-w-lg leading-relaxed">
+          <p className="text-gray-600 text-xl mb-10 max-w-lg leading-relaxed">
             Pick the perfect companion for your tea (or coffee!) from a range of
             freshly baked tea cakes & more.
           </p>
           {/* Beautiful Quote */}
-          <blockquote className="text-lg md:text-xl italic text-gray-400 border-l-4 border-teal-500 pl-4">
+          <blockquote className="text-lg md:text-xl italic text-gray-500 border-l-4 border-teal-500 pl-4">
             “A cup of tea & a slice of cake can turn an ordinary moment into a
             sweet memory.”
           </blockquote>
@@ -106,10 +106,10 @@ function TeaTimeDelights() {
         @keyframes floatUp {
           0% {
             transform: translateY(0) scale(1);
-            opacity: 0.4;
+            opacity: 0.3;
           }
           50% {
-            opacity: 0.7;
+            opacity: 0.6;
             transform: translateY(-200px) scale(1.1);
           }
           100% {

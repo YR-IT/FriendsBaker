@@ -35,13 +35,13 @@ function BestSellers() {
 
   return (
     <section
-      className="py-16 relative bg-gradient-to-br from-gray-900 via-black to-gray-800"
+      className="py-16 relative bg-gradient-to-br from-white via-gray-50 to-teal-50"
       id="best-sellers"
     >
       <div className="container mx-auto px-6 text-center">
         {/* Heading */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-white font-modern"
+          className="text-4xl md:text-5xl font-bold text-gray-800 font-modern"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -52,9 +52,9 @@ function BestSellers() {
         {/* Decorative line */}
         <div className="flex justify-center mt-3 mb-12">
           <div className="flex space-x-2">
+            <div className="w-3 h-3 bg-teal-500 transform rotate-45"></div>
             <div className="w-3 h-3 bg-teal-400 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-teal-300 transform rotate-45"></div>
-            <div className="w-3 h-3 bg-teal-400 transform rotate-45"></div>
+            <div className="w-3 h-3 bg-teal-500 transform rotate-45"></div>
           </div>
         </div>
 
@@ -85,7 +85,7 @@ function BestSellers() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
             >
               {/* Image Card */}
-              <div className="relative bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-700 hover:border-teal-400 transition-all duration-500 glitter-card">
+              <div className="relative bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-teal-400 transition-all duration-500 glitter-card">
                 {/* Veg symbol */}
                 <div className="absolute top-4 left-4 w-6 h-6 border-2 border-green-600 flex items-center justify-center bg-white rounded">
                   <div className="w-3 h-3 bg-green-600 rounded-full"></div>
@@ -103,8 +103,8 @@ function BestSellers() {
                   />
                 </a>
 
-                {/* Dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Light gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 {/* Glitter shimmer overlay */}
                 <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition duration-700 glitter-overlay"></div>
               </div>
@@ -112,20 +112,20 @@ function BestSellers() {
               {/* Text below image */}
               <div className="mt-3 flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-200 font-modern group-hover:text-teal-400 transition-colors duration-300">
+                  <h3 className="text-lg font-semibold text-gray-800 font-modern group-hover:text-teal-600 transition-colors duration-300">
                     {item.name}
                   </h3>
-                  <p className="text-lg font-bold text-white">₹{item.price}</p>
-                  <div className="flex items-center text-sm text-gray-400">
-                    <span className="font-semibold text-teal-300">{item.rating}</span>
-                    <span className="text-yellow-400 ml-1">★</span>
+                  <p className="text-lg font-bold text-gray-900">₹{item.price}</p>
+                  <div className="flex items-center text-sm text-gray-600">
+                    <span className="font-semibold text-teal-600">{item.rating}</span>
+                    <span className="text-yellow-500 ml-1">★</span>
                   </div>
                 </div>
 
                 {/* Heart Icon */}
                 <button
                   onClick={() => toggleFavourite(item._id)}
-                  className="ml-3 bg-gray-900 p-1 rounded-full shadow hover:bg-pink-100/20 transition"
+                  className="ml-3 bg-gray-100 p-1 rounded-full shadow hover:bg-pink-100/50 transition"
                 >
                   <Heart
                     className={`w-5 h-5 ${
@@ -145,7 +145,7 @@ function BestSellers() {
       <AnimatePresence>
         {tooltip.visible && (
           <motion.div
-            className="fixed px-3 py-1 bg-gray-900 text-teal-400 text-xs rounded-md shadow-lg border border-gray-700 pointer-events-none z-50"
+            className="fixed px-3 py-1 bg-white text-teal-600 text-xs rounded-md shadow-lg border border-gray-200 pointer-events-none z-50"
             style={{
               top: tooltip.y + 15,
               left: tooltip.x + 15,
@@ -169,9 +169,9 @@ function BestSellers() {
         }
 
         @keyframes glitter {
-          0% { background-position: 0 0; opacity: 0.6; }
-          50% { background-position: 10px 10px; opacity: 1; }
-          100% { background-position: 0 0; opacity: 0.6; }
+          0% { background-position: 0 0; opacity: 0.5; }
+          50% { background-position: 10px 10px; opacity: 0.8; }
+          100% { background-position: 0 0; opacity: 0.5; }
         }
 
         .glitter-card::after {
@@ -184,7 +184,7 @@ function BestSellers() {
           background: linear-gradient(
             120deg,
             transparent 30%,
-            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0.6) 50%,
             transparent 70%
           );
           transform: rotate(25deg);

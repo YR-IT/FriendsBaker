@@ -47,12 +47,10 @@ function Testimonials() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Get testimonials (1 for mobile, 2 for desktop)
   const visible = isMobile
     ? [testimonials[index]]
     : [testimonials[index], testimonials[(index + 1) % testimonials.length]];
 
-  // Dots logic
   const dotCount = isMobile
     ? testimonials.length
     : Math.ceil(testimonials.length / 2);
@@ -77,14 +75,14 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-20 bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden"
+      className="relative py-20 bg-gradient-to-br from-teal-50 via-white to-teal-100 overflow-hidden"
     >
-      {/* Floating Glow Orbs */}
-      <div className="absolute -top-20 -left-20 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute -bottom-32 -right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      {/* Floating Glow Orbs (light pastel) */}
+      <div className="absolute -top-20 -left-20 w-80 h-80 bg-teal-200/40 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute -bottom-32 -right-20 w-96 h-96 bg-pink-200/40 rounded-full blur-3xl animate-pulse"></div>
 
       <motion.h2
-        className="text-3xl sm:text-5xl font-bold text-center text-white mb-16 relative z-10"
+        className="text-3xl sm:text-5xl font-bold text-center text-gray-800 mb-16 relative z-10"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -115,7 +113,7 @@ function Testimonials() {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.02 }}
-                className="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full border border-gray-700 hover:border-teal-400 transition-all duration-300"
+                className="bg-white/90 backdrop-blur-md rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full border border-gray-200 hover:border-teal-400 transition-all duration-300"
               >
                 {/* Stars */}
                 <div className="flex items-center space-x-1 mb-4">
@@ -128,15 +126,15 @@ function Testimonials() {
                 </div>
 
                 {/* Quote */}
-                <Quote className="text-teal-400 mb-4 w-7 h-7" />
+                <Quote className="text-teal-500 mb-4 w-7 h-7" />
 
                 {/* Text */}
-                <p className="text-gray-300 leading-relaxed mb-6 italic">
+                <p className="text-gray-700 leading-relaxed mb-6 italic">
                   {t.text}
                 </p>
 
                 {/* Name */}
-                <h4 className="font-semibold text-teal-300 text-lg">
+                <h4 className="font-semibold text-teal-700 text-lg">
                   — {t.name}
                 </h4>
               </motion.div>
@@ -161,8 +159,8 @@ function Testimonials() {
             whileHover={{ scale: 1.2 }}
             className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 ${
               i === activeDot
-                ? "bg-teal-400 shadow-lg shadow-teal-500/50"
-                : "bg-gray-600"
+                ? "bg-teal-500 shadow-lg shadow-teal-400/50"
+                : "bg-gray-300"
             }`}
           />
         ))}
