@@ -402,9 +402,9 @@ function Hero() {
         >
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgba(45, 43, 43, 0.9)" />
-              <stop offset="50%" stopColor="rgb(66, 65, 65)" />
-              <stop offset="100%" stopColor="rgba(137, 130, 130, 0.9)" />
+              <stop offset="0%" stopColor="rgba(50, 16, 220, 0.9)" />
+              <stop offset="50%" stopColor="rgb(24, 21, 101)" />
+              <stop offset="100%" stopColor="rgba(120, 135, 231, 0.9)" />
             </linearGradient>
           </defs>
           <motion.path
@@ -454,7 +454,7 @@ function Hero() {
         <motion.span 
           className="relative flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white shadow-2xl transition-all duration-300"
           whileHover={{ 
-            boxShadow: "0 15px 35px rgba(34, 197, 94, 0.5)",
+            boxShadow: "0 15px 35px rgba(37, 34, 197, 0.5)",
             background: "linear-gradient(45deg, #22c55e, #16a34a)"
           }}
         >
