@@ -158,44 +158,63 @@ function Hero() {
         />
       ))}
 
-      {/* Enhanced Social Links */}
+     
+    {/* Enhanced Social Links */}
+{/* Enhanced Social Links */}
+<motion.div 
+  className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 sm:gap-6 z-20"
+  initial={{ opacity: 0, x: -100 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 1, delay: 0.5 }}
+>
+  {socialLinks.map(({ href, icon: Icon, label }, i) => (
+    <motion.a
+      key={i}
+      href={href}
+      title={label}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, x: -50, rotate: -180 }}
+      animate={{ opacity: 1, x: 0, rotate: 0 }}
+      transition={{ 
+        delay: 0.7 + i * 0.15, 
+        type: "spring", 
+        stiffness: 100,
+        duration: 0.8
+      }}
+      whileHover={{ 
+        scale: 1.3, 
+        rotate: 10,
+        boxShadow: "0 10px 25px rgba(0,0,0,0.25)"
+      }}
+      whileTap={{ scale: 0.9 }}
+      className="group relative p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:bg-white/20"
+    >
+      {/* Icon with brand color hover */}
+      <Icon 
+        className={`w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-lg transition-colors duration-300
+          ${
+            label === "Instagram" 
+              ? "group-hover:text-[#E4405F]"  // Instagram pink
+              : label === "Facebook"
+              ? "group-hover:text-[#1877F2]" // Facebook blue
+              : label === "Phone"
+              ? "group-hover:text-[#25D366]" // WhatsApp/phone green
+              : ""
+          }`}
+      />
+      
+      {/* Subtle hover gradient highlight */}
       <motion.div 
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 sm:gap-6 z-20"
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        {socialLinks.map(({ href, icon: Icon, color, label }, i) => (
-          <motion.a
-            key={i}
-            href={href}
-            title={label}
-            initial={{ opacity: 0, x: -50, rotate: -180 }}
-            animate={{ opacity: 1, x: 0, rotate: 0 }}
-            transition={{ 
-              delay: 0.7 + i * 0.15, 
-              type: "spring", 
-              stiffness: 100,
-              duration: 0.8
-            }}
-            whileHover={{ 
-              scale: 1.3, 
-              rotate: 10,
-              boxShadow: "0 10px 25px rgba(0,0,0,0.2)"
-            }}
-            whileTap={{ scale: 0.9 }}
-            className={`group relative p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 ${color} hover:bg-white/20`}
-          >
-            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-lg transition-transform group-hover:scale-110" />
-            <motion.div 
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-orange-500/20"
-              initial={{ opacity: 0, scale: 0 }}
-              whileHover={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.a>
-        ))}
-      </motion.div>
+        className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-orange-500/20"
+        initial={{ opacity: 0, scale: 0 }}
+        whileHover={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+      />
+    </motion.a>
+  ))}
+</motion.div>
+
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -351,40 +370,52 @@ function Hero() {
         </motion.div>
 
         {/* Stats */}
-        <motion.div
-          className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 mt-8 sm:mt-12 text-white/80"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-        >
-          {[
-            { number: "500+", label: "Happy Customers" },
-            { number: "Fresh", label: "Daily Baking" },
-            { number: "100%", label: "Eggless" }
-          ].map((stat, i) => (
-            <motion.div 
-              key={i}
-              className="text-center relative px-2"
-              whileHover={{ scale: 1.1, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div 
-                className="text-lg sm:text-2xl font-bold text-blue-300"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ 
-                  delay: 1.7 + i * 0.2,
-                  type: "spring",
-                  stiffness: 200
-                }}
-              >
-                {stat.number}
-              </motion.div>
-              <div className="text-xs sm:text-sm">{stat.label}</div>
-              {i < 2 && <div className="hidden sm:block w-px h-8 bg-white/30 absolute right-0 top-0"></div>}
-            </motion.div>
-          ))}
-        </motion.div>
+   {/* Stats Section - Modern Card Boxes */}
+<motion.div
+  className="mt-10 sm:mt-14 flex flex-wrap justify-center gap-4 sm:gap-6 max-w-3xl mx-auto"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 1.5 }}
+>
+  {[
+    { number: "500+", label: "Happy Customers" },
+    { number: "Fresh", label: "Daily Baking" },
+    { number: "100%", label: "Eggless" }
+  ].map((stat, i) => (
+    <motion.div
+      key={i}
+      whileHover={{ scale: 1.08, y: -6 }}
+      transition={{ type: "spring", stiffness: 250 }}
+      className="relative flex flex-col items-center justify-center px-6 py-5 sm:px-8 sm:py-6 rounded-2xl 
+                 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl 
+                 text-white hover:bg-white/20 transition-all duration-300 w-[140px] sm:w-[180px]"
+    >
+      {/* Animated Glow Effect */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-400/10 via-yellow-300/10 to-transparent"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      />
+      {/* Number */}
+      <motion.div
+        className="text-xl sm:text-2xl font-bold text-blue-300 relative z-10"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          delay: 1.7 + i * 0.2,
+          type: "spring",
+          stiffness: 200
+        }}
+      >
+        {stat.number}
+      </motion.div>
+      {/* Label */}
+      <div className="text-xs sm:text-sm mt-1 relative z-10">{stat.label}</div>
+    </motion.div>
+  ))}
+</motion.div>
+
       </div>
 
       {/* Decorative Bottom Curve */}
@@ -404,7 +435,7 @@ function Hero() {
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="rgb(244, 244, 245)" />
               <stop offset="50%" stopColor="rgb(241, 241, 245)" />
-              <stop offset="100%" stopColor="rgb(252, 252, 252)" />
+              <stop offset="100%" stopColor="rgba(252, 252, 252, 0.9)" />
             </linearGradient>
           </defs>
           <motion.path
