@@ -1,123 +1,295 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { ArrowLeft, ArrowRight, Sparkles, Coffee } from "lucide-react";
 
 const images = [
-  "/TeaTimeDelights.png",
-  "/tea.png",
-  "/tea1.png",
-  "/tea2.png",
-  "/tea3.png",
-  "/tea4.png",
+  "https://images.pexels.com/photos/230477/pexels-photo-230477.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1638710/pexels-photo-1638710.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/2703468/pexels-photo-2703468.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1793037/pexels-photo-1793037.jpeg?auto=compress&cs=tinysrgb&w=800",
 ];
 
 function TeaTimeDelights() {
   const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   useEffect(() => {
-    const interval = setInterval(
-      () => setIndex((prev) => (prev + 1) % images.length),
-      4000
-    );
-    return () => clearInterval(interval);
-  }, []);
+    if (!isHovered) {
+      const interval = setInterval(
+        () => setIndex((prev) => (prev + 1) % images.length),
+        4500
+      );
+      return () => clearInterval(interval);
+    }
+  }, [isHovered]);
+
+  const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
+  const prevSlide = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
 
   return (
-    <section className="relative bg-gradient-to-br from-white via-gray-50 to-teal-50 py-16 px-8 overflow-hidden">
-      {/* Floating Pastel Bubbles Background */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(15)].map((_, i) => (
-          <div
+    <section 
+      ref={containerRef}
+      className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-20 px-6 overflow-hidden"
+    >
+      {/* Animated Mesh Gradient Background */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-cyan-600/20 to-teal-600/20 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-l from-indigo-600/20 via-blue-600/20 to-cyan-600/20 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
+
+      {/* Floating Orbs */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        style={{ y }}
+      >
+        {[...Array(20)].map((_, i) => (
+          <motion.div
             key={i}
-            className="bubble absolute rounded-full bg-teal-400/20"
+            className="orb absolute rounded-full"
+            initial={{ 
+              scale: 0,
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight
+            }}
+            animate={{
+              scale: [0, 1, 0],
+              x: [
+                Math.random() * (window.innerWidth || 1000),
+                Math.random() * (window.innerWidth || 1000),
+                Math.random() * (window.innerWidth || 1000),
+              ],
+              y: [
+                Math.random() * (window.innerHeight || 1000),
+                Math.random() * (window.innerHeight || 1000),
+                Math.random() * (window.innerHeight || 1000),
+              ],
+            }}
+            transition={{
+              duration: Math.random() * 20 + 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 5,
+            }}
             style={{
-              width: `${Math.random() * 40 + 20}px`,
-              height: `${Math.random() * 40 + 20}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 10 + 10}s`,
-              animationDelay: `${Math.random() * 10}s`,
+              width: `${Math.random() * 100 + 50}px`,
+              height: `${Math.random() * 100 + 50}px`,
+              background: `radial-gradient(circle, ${[
+                'rgba(59, 130, 246, 0.1)',
+                'rgba(14, 165, 233, 0.1)',
+                'rgba(59, 130, 246, 0.1)',
+                'rgba(6, 182, 212, 0.1)',
+                'rgba(34, 197, 94, 0.1)'
+              ][Math.floor(Math.random() * 5)]})`,
+              filter: 'blur(1px)',
+            }}
+          />
+        ))}
+      </motion.div>
+
+      <motion.div 
+        style={{ opacity }}
+        className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-2 items-center gap-16 lg:gap-24"
+      >
+        {/* Left Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          viewport={{ once: true }}
+          className="order-2 xl:order-1 text-center xl:text-left"
+        >
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-white/80"
+          >
+            <Sparkles size={16} className="text-cyan-400" />
+            <span className="text-sm font-medium">Premium Collection</span>
+          </motion.div>
+
+          {/* Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-5xl md:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-white via-blue-200 to-cyan-200 bg-clip-text text-transparent mb-8 leading-tight"
+          >
+            Tea-Time
+            <br />
+            <span className="text-gradient bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text">
+              Delights
+            </span>
+          </motion.h2>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-white/70 text-lg md:text-xl mb-10 max-w-xl leading-relaxed"
+          >
+            Discover the perfect harmony of flavors with our artisanal selection of tea cakes, pastries, and delectable treats crafted for your special moments.
+          </motion.p>
+
+          {/* Quote */}
+          <motion.blockquote
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10"
+          >
+            <div className="absolute top-4 left-4 text-blue-400 opacity-30">
+              <Coffee size={24} />
+            </div>
+            <p className="text-white/80 text-lg italic pl-8">
+              "Every sip deserves its perfect companion - a symphony of taste that transforms ordinary moments into extraordinary memories."
+            </p>
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
+          </motion.blockquote>
+        </motion.div>
+
+        {/* Right Slideshow */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          viewport={{ once: true }}
+          className="order-1 xl:order-2 flex justify-center"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="relative">
+            {/* Main Image Container */}
+            <motion.div
+              whileHover={{ scale: 1.02, rotateY: 5 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              className="relative group"
+            >
+              {/* Glassmorphism Frame */}
+              <div className="relative w-[500px] h-[500px] p-4 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={images[index]}
+                    src={images[index]}
+                    alt="Tea-Time Delight"
+                    initial={{ opacity: 0, scale: 1.1, rotateY: 10 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, rotateY: -10 }}
+                    transition={{ 
+                      duration: 0.8, 
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }}
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+                </AnimatePresence>
+                
+                {/* Floating indicators */}
+                <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
+                  {images.map((_, i) => (
+                    <motion.button
+                      key={i}
+                      onClick={() => setIndex(i)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        i === index 
+                          ? 'bg-white shadow-lg' 
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                      whileHover={{ scale: 1.5 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation Arrows */}
+              <motion.button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                whileHover={{ scale: 1.1, x: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ArrowLeft size={20} />
+              </motion.button>
+
+              <motion.button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 opacity-0 group-hover:opacity-100"
+                whileHover={{ scale: 1.1, x: 2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ArrowRight size={20} />
+              </motion.button>
+            </motion.div>
+
+            {/* Decorative Elements */}
+            <motion.div
+              animate={{ 
+                rotate: 360,
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full opacity-60 blur-sm"
+            />
+            
+            <motion.div
+              animate={{ 
+                rotate: -360,
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ 
+                rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+              }}
+              className="absolute -bottom-8 -left-8 w-20 h-20 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full opacity-40 blur-sm"
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Particle System */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute w-1 h-1 bg-cyan-300 rounded-full"
+            initial={{
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
+              opacity: 0,
+            }}
+            animate={{
+              y: [null, -100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeOut",
             }}
           />
         ))}
       </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-20">
-        {/* Left Slideshow */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="flex justify-center"
-        >
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            className="relative rounded-3xl shadow-xl"
-          >
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={images[index]}
-                src={images[index]}
-                alt="Tea-Time Delight"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                className="rounded-2xl w-[450px] h-[450px] object-cover border-4 border-teal-200/50"
-              />
-            </AnimatePresence>
-
-            {/* teal decorative corner borders */}
-            <span className="absolute -top-3 -left-3 w-10 h-10 border-t-4 border-l-4 border-teal-400 rounded-tl-lg"></span>
-            <span className="absolute -top-3 -right-3 w-10 h-10 border-t-4 border-r-4 border-teal-400 rounded-tr-lg"></span>
-            <span className="absolute -bottom-3 -left-3 w-10 h-10 border-b-4 border-l-4 border-teal-400 rounded-bl-lg"></span>
-            <span className="absolute -bottom-3 -right-3 w-10 h-10 border-b-4 border-r-4 border-teal-400 rounded-br-lg"></span>
-          </motion.div>
-        </motion.div>
-
-        {/* Right Content */}
-        <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center md:text-left text-gray-800"
-        >
-          <h2 className="text-4xl md:text-6xl font-bold text-teal-600 mb-8 leading-snug">
-            Tea-Time Delights
-          </h2>
-          <p className="text-gray-600 text-xl mb-10 max-w-lg leading-relaxed">
-            Pick the perfect companion for your tea (or coffee!) from a range of
-            freshly baked tea cakes & more.
-          </p>
-          {/* Beautiful Quote */}
-          <blockquote className="text-lg md:text-xl italic text-gray-500 border-l-4 border-teal-500 pl-4">
-            “A cup of tea & a slice of cake can turn an ordinary moment into a
-            sweet memory.”
-          </blockquote>
-        </motion.div>
-      </div>
-
-      {/* Bubble Animation CSS */}
-      <style>{`
-        .bubble {
-          animation: floatUp linear infinite;
-        }
-
-        @keyframes floatUp {
-          0% {
-            transform: translateY(0) scale(1);
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 0.6;
-            transform: translateY(-200px) scale(1.1);
-          }
-          100% {
-            transform: translateY(-400px) scale(1);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </section>
   );
 }

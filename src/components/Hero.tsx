@@ -402,9 +402,9 @@ function Hero() {
         >
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgba(50, 16, 220, 0.9)" />
-              <stop offset="50%" stopColor="rgb(24, 21, 101)" />
-              <stop offset="100%" stopColor="rgba(120, 135, 231, 0.9)" />
+              <stop offset="0%" stopColor="rgb(244, 244, 245)" />
+              <stop offset="50%" stopColor="rgb(241, 241, 245)" />
+              <stop offset="100%" stopColor="rgb(252, 252, 252)" />
             </linearGradient>
           </defs>
           <motion.path
