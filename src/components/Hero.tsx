@@ -363,7 +363,8 @@ function Hero() {
               borderColor: "rgba(255, 255, 255, 0.6)"
             }}
             whileTap={{ scale: 0.98 }}
-            className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-white/30 text-white font-semibold text-base sm:text-lg backdrop-blur-sm transition-all duration-300"
+            className="px-6 sm:px-8 py-3 sm:py-4 rounded-full text-white font-semibold text-base sm:text-lg backdrop-blur-sm transition-all duration-300"
+
           >
             View Menu
           </motion.a>
