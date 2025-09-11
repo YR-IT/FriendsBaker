@@ -73,7 +73,7 @@ function BestSellers() {
 
   return (
     <section
-      className="py-20 relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/20"
+      className="py-12 relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/20"
       id="best-sellers"
     >
       {/* Animated Background Elements */}
@@ -162,7 +162,7 @@ function BestSellers() {
 
                   {/* Veg Symbol */}
                   <div className="absolute top-3 right-3 z-20">
-                    <div className="w-6 h-6 border-2 border-green-500 bg-white/90 backdrop-blur-sm rounded flex items-center justify-center shadow-sm">
+                    <div className="w-6 h-6 border-2 border-green-500 bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
                   </div>
@@ -258,13 +258,13 @@ function BestSellers() {
                     <div className="flex-grow"></div>
 
                     {/* Quick Add Button */}
-                    <motion.button
+                    {/* <motion.button
                       className="w-full mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       Quick Add
-                    </motion.button>
+                    </motion.button> */}
                   </div>
 
                   {/* Bottom Glow */}

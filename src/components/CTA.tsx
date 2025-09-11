@@ -53,7 +53,7 @@ function CTASection() {
 
         {/* Main heading with gradient text */}
         <motion.h2
-          className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-8 leading-tight"
+          className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-8 leading-tight"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -86,7 +86,7 @@ function CTASection() {
 
         {/* Enhanced description */}
         <motion.p
-          className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed font-medium"
+          className="text-lg md:text-xl text-gray-700 mb-12 max-w-3xl mx-auto leading-relaxed font-medium"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -147,7 +147,7 @@ function CTASection() {
           </motion.a>
 
           {/* Secondary action */}
-          <motion.button
+          {/* <motion.button
             className="group inline-flex items-center gap-2 text-blue-600 font-semibold py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -159,11 +159,11 @@ function CTASection() {
             >
               <ArrowRight className="w-4 h-4" />
             </motion.div>
-          </motion.button>
+          </motion.button> */}
         </motion.div>
 
         {/* Trust indicators */}
-        <motion.div
+        {/* <motion.div
           className="flex flex-wrap justify-center items-center gap-8 mt-16 pt-8 border-t border-blue-100"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -185,7 +185,7 @@ function CTASection() {
               <span className="text-sm font-medium">{text}</span>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Enhanced decorative elements */}
@@ -205,7 +205,7 @@ function CTASection() {
       <motion.img
         src="https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=400"
         alt="Decorative Cake"
-        className="hidden lg:block absolute bottom-0 left-12 w-80 rounded-2xl shadow-2xl opacity-90"
+        className="hidden lg:block absolute bottom-10 left-12 w-80 rounded-2xl shadow-2xl opacity-90"
         initial={{ opacity: 0, y: 100, rotate: -10 }}
         whileInView={{ opacity: 1, y: 0, rotate: -5 }}
         animate={{ 

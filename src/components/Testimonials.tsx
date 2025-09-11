@@ -97,7 +97,7 @@ function Testimonials() {
     <section
       ref={containerRef}
       id="testimonials"
-      className="relative min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20 sm:py-32 px-6 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 sm:py-20 px-6 overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -160,7 +160,7 @@ function Testimonials() {
             </motion.div>
           </motion.div>
 
-          <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-8 leading-tight">
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent mb-8 leading-tight">
             What Our Customers
             <br />
             <span className="bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text">
@@ -352,7 +352,7 @@ function Testimonials() {
 
         {/* Enhanced Dots Navigation */}
         <motion.div 
-          className="flex justify-center space-x-4 mt-16"
+          className="flex justify-center space-x-4 mt-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
@@ -382,7 +382,7 @@ function Testimonials() {
         </motion.div>
 
         {/* Trust indicators */}
-        <motion.div
+        {/* <motion.div
           className="flex flex-wrap justify-center items-center gap-8 mt-16 pt-8 border-t border-blue-200"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -404,7 +404,7 @@ function Testimonials() {
               <span className="text-sm font-medium">{text}</span>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </motion.div>
 
       {/* Enhanced Particle System */}

@@ -47,78 +47,78 @@ function GiftHamper() {
         >
           {/* Icon with animation */}
           <motion.div
-            className="flex items-center gap-3 mb-4"
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <motion.div
-              className="p-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-lg"
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.8 }}
-            >
-              <Gift className="w-5 h-5 text-white" />
-            </motion.div>
-            <motion.div
-              className="flex gap-1"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
+  className="flex items-center gap-4 mb-6 justify-center lg:justify-start"
+  initial={{ opacity: 0, scale: 0 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
+  viewport={{ once: true }}
+>
+  <motion.div
+    className="p-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-lg"
+    whileHover={{ rotate: 360 }}
+    transition={{ duration: 0.8 }}
+  >
+    <Gift className="w-6 h-6 text-white" />
+  </motion.div>
+  <motion.div
+    className="flex gap-1"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    transition={{ delay: 0.3 }}
+  >
+    {[...Array(3)].map((_, i) => (
+      <motion.div
+        key={i}
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+      >
+        <Sparkles className="w-4 h-4 text-blue-500" />
+      </motion.div>
+    ))}
+  </motion.div>
+</motion.div>
 
           <motion.h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
-            initial={{ y: -30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent">
-              Packed with love
-            </span>
-            <br />
-            <span className="text-gray-800">
-              & all your favourites!
-            </span>
-          </motion.h2>
+  className="text-5xl sm:text-6xl  font-bold leading-tight mb-8 text-center lg:text-left"
+  initial={{ y: -40, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  viewport={{ once: true }}
+>
+  <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent">
+    Packed with love
+  </span>
+  <br />
+  <span className="text-gray-800">
+    & all your favourites!
+  </span>
+</motion.h2>
 
           {/* Animated accent line */}
           <motion.div
-            className="flex items-center gap-3 mb-6"
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="relative">
-              <motion.div
-                className="h-1 w-28 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
-                animate={{ scaleX: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute top-0 left-0 h-1 w-6 bg-white rounded-full shadow-lg"
-                animate={{ x: [0, 88, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </div>
-            <Heart className="w-4 h-4 text-red-500 animate-pulse" />
-          </motion.div>
+  className="flex items-center gap-4 mb-8 justify-center lg:justify-start"
+  initial={{ opacity: 0, scale: 0 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  viewport={{ once: true }}
+>
+  <div className="relative">
+    <motion.div
+      className="h-1 w-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
+      animate={{ scaleX: [1, 1.2, 1] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute top-0 left-0 h-1 w-8 bg-white rounded-full shadow-lg"
+      animate={{ x: [0, 96, 0] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+    />
+  </div>
+  <Heart className="w-5 h-5 text-red-500 animate-pulse" />
+</motion.div>
 
           <motion.p
-            className="text-gray-700 text-lg mb-8 leading-relaxed font-medium max-w-md"
+            className="text-gray-700 text-lg mb-8 leading-relaxed font-medium max-w-md text-justify"
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -170,35 +170,6 @@ function GiftHamper() {
                 </span>
               </motion.div>
             ))}
-          </motion.div>
-
-          {/* CTA Button */}
-          <motion.div
-            className="pt-6"
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            viewport={{ once: true }}
-          >
-            <motion.button
-              className="relative group inline-flex items-center gap-2.5 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg overflow-hidden text-base"
-              whileHover={{ scale: 1.05, boxShadow: "0 16px 32px rgba(59, 130, 246, 0.25)" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                <Gift className="w-4 h-4" />
-                Shop Gift Hampers
-              </span>
-              
-              {/* Animated background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-700 opacity-0 group-hover:opacity-100"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
           </motion.div>
         </motion.div>
 
