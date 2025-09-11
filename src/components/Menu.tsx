@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getProducts } from "../../data/products";
 import type { IProduct } from "../../data/products";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { Sparkles, ChefHat, ArrowRight, Utensils } from "lucide-react";
 
 interface MenuCategory {
@@ -49,7 +49,8 @@ const Menu = () => {
     fetchAndSetMenuCategories();
   }, []);
 
-  const containerVariants = {
+  // ✅ Explicitly typed variants (fixes TS error)
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -60,7 +61,7 @@ const Menu = () => {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 80, scale: 0.8 },
     visible: {
       opacity: 1,
