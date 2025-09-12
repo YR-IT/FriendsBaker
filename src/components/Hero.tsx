@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Coffee, Croissant, Award, Users, Clock } from 'lucide-react';
 
 const BakeryHero = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
