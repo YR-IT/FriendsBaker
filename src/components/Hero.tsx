@@ -89,20 +89,16 @@ const BakeryHero = () => {
               </div>
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-sky-400 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-300/40 hover:-translate-y-1 hover:scale-105 transition-all duration-300">
-                  <span className="relative flex items-center gap-2">
-                    <Coffee className="w-5 h-5" />
-                    Order Fresh Now
-                  </span>
-                </button>
-                <button className="group px-8 py-4 bg-white/70 backdrop-blur-sm text-blue-700 font-semibold rounded-2xl border border-blue-200 hover:bg-white/90 hover:border-blue-400 hover:-translate-y-1 transition-all duration-300">
-                  <span className="flex items-center gap-2">
-                    <Croissant className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                    Explore Menu
-                  </span>
-                </button>
-              </div>
+           
+<div className="flex justify-center sm:justify-center mt-6">
+  <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-sky-400 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-300/40 hover:-translate-y-1 hover:scale-105 transition-all duration-300">
+    <span className="relative flex items-center gap-2">
+      <Coffee className="w-5 h-5" />
+      Order Fresh Now
+    </span>
+  </button>
+</div>
+
             </div>
 
             {/* Right Image Card */}
