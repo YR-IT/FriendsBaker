@@ -1,493 +1,162 @@
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { Instagram, Facebook, Phone, Star, Sparkles, Coffee, Cookie, Cake } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Coffee, Croissant, Award, Users, Clock } from 'lucide-react';
 
-function Hero() {
-  const images = [
-    {
-      url: "https://t4.ftcdn.net/jpg/09/81/79/17/360_F_981791783_PEM4F0bEnzZDH5DNtPYBQwwV7dLjkMFw.jpg",
-      title: "Freshly Baked Smiles",
-      subtitle: "Start your morning with warm croissants & pastries",
-    },
-    {
-      url: "https://t4.ftcdn.net/jpg/05/63/62/07/360_F_563620783_9icanRCanLxCe2h7SzwhSQvoEqS9RWSG.jpg",
-      title: "No Eggs, Only Love",
-      subtitle: "Rich, fudgy, and baked with premium cocoa",
-    },
-    {
-      url: "https://realfood.tesco.com/media/images/1400x919-Miniegg-cupcakes-withoutbranding-ffa3dd9a-6ac9-4329-b66e-15fe7e027a2b-0-1400x919.jpg",
-      title: "Cupcakes for Every Mood",
-      subtitle: "Colorful treats to brighten your day",
-    },
-    {
-      url: "https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-fresh-pastry-and-bakery-items-available-on-trays-image_2581269.jpg",
-      title: "Freshly Baked Croissants & Pastries",
-      subtitle: "Buttery, flaky layers topped with fresh berries",
-    },
-    {
-      url: "https://t3.ftcdn.net/jpg/00/27/57/96/360_F_27579652_tM7V4fZBBw8RLmZo0Bi8WhtO2EosTRFD.jpg",
-      title: "Delicious Oven-Fresh Pizza",
-      subtitle: "Cheesy, crispy & loaded with your favorite toppings",
-    },
-  ];
-
-  const socialLinks = [
-    { href: "https://www.instagram.com/friends.baker?igsh=MWVhZTNsNWg2azRkZQ==", icon: Instagram, color: "hover:text-pink-500", label: "Instagram" },
-    { href: "https://www.facebook.com/share/19jEwH5Ti1/", icon: Facebook, color: "hover:text-blue-500", label: "Facebook" },
-    { href: "tel:+918872197774", icon: Phone, color: "hover:text-green-400", label: "Phone" },
-  ];
-
-  const [current, setCurrent] = useState(0);
-
-  // Auto slide every 4s
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [images.length]);
-
-  type BubblePos = {
-    x: number;
-    delay: number;
-    duration: number;
-    size: number;
-  };
-
-  const [bubblePositions, setBubblePositions] = useState<BubblePos[]>([]);
+const BakeryHero = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const positions: BubblePos[] = Array.from({ length: 15 }).map(() => ({
-      x: Math.random() * window.innerWidth,
-      delay: Math.random() * 8,
-      duration: 10 + Math.random() * 8,
-      size: 8 + Math.random() * 16,
-    }));
-    setBubblePositions(positions);
+    setIsLoaded(true);
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Floating bakery icons
-  const floatingIcons = [
-    { icon: Coffee, delay: 0 },
-    { icon: Cookie, delay: 1 },
-    { icon: Cake, delay: 2 },
-    { icon: Star, delay: 0.5 },
-    { icon: Sparkles, delay: 1.5 },
-  ];
-
   return (
-    <section
-      id="home"
-      className="relative min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-red-50 flex items-center justify-start overflow-hidden"
-    >
-      {/* Background Video */}
-      <div className="absolute inset-0">
-        <video
-          className="w-full h-full object-cover"
-          style={{ filter: "brightness(75%) contrast(110%)" }}
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source
-            src="https://www.pexels.com/download/video/4686874/"          
-            type="video/mp4"
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-pink-50 to-sky-50">
+      {/* Soft Gradient Spots */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[
+          { top: '10%', left: '5%', color: 'from-blue-200/40 to-transparent', size: 'w-[350px] h-[350px]' },
+          { top: '25%', right: '10%', color: 'from-pink-300/40 to-transparent', size: 'w-[280px] h-[280px]' },
+          { bottom: '-8%', left: '15%', color: 'from-sky-200/50 to-transparent', size: 'w-[400px] h-[400px]' }
+        ].map((spot, i) => (
+          <div
+            key={i}
+            className={`absolute ${spot.size} rounded-full bg-gradient-to-br ${spot.color} blur-3xl animate-pulse`}
+            style={{ top: spot.top, left: spot.left, right: spot.right }}
           />
-          Your browser does not support the video tag.
-        </video>
-        {/* Enhanced gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
+        ))}
       </div>
 
-      {/* Floating Bakery Icons */}
-      {floatingIcons.map((item, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-blue-300/30"
-          style={{
-            left: `${15 + i * 15}%`,
-            top: `${20 + (i % 2) * 40}%`,
-          }}
-          initial={{ opacity: 0, scale: 0, rotate: 0 }}
-          animate={{ 
-            opacity: [0.3, 0.7, 0.3], 
-            scale: [1, 1.2, 1],
-            rotate: [0, 360],
-            y: [-20, 20, -20]
-          }}
-          transition={{
-            duration: 6 + i,
-            repeat: Infinity,
-            delay: item.delay,
-            ease: "easeInOut"
-          }}
-        >
-          <item.icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12" />
-        </motion.div>
-      ))}
-
-      {/* Enhanced floating particles */}
-      {bubblePositions.map((pos, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full"
-          style={{
-            width: pos.size,
-            height: pos.size,
-            background: `linear-gradient(45deg, 
-              ${i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#f59e0b' : '#d97706'}40, 
-              ${i % 3 === 0 ? '#f59e0b' : i % 3 === 1 ? '#d97706' : '#b45309'}60)`,
-            boxShadow: '0 0 20px rgba(251, 191, 36, 0.3)',
-          }}
-          initial={{ y: "100vh", x: pos.x, opacity: 0, scale: 0 }}
-          animate={{ 
-            y: [-50, "100vh"], 
-            opacity: [0, 0.8, 0], 
-            scale: [0, 1, 0],
-            rotate: [0, 360]
-          }}
-          transition={{
-            duration: pos.duration,
-            repeat: Infinity,
-            delay: pos.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-
-     
-    {/* Enhanced Social Links */}
-{/* Enhanced Social Links */}
-<motion.div 
-  className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 sm:gap-6 z-20"
-  initial={{ opacity: 0, x: -100 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1, delay: 0.5 }}
->
-  {socialLinks.map(({ href, icon: Icon, label }, i) => (
-    <motion.a
-      key={i}
-      href={href}
-      title={label}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, x: -50, rotate: -180 }}
-      animate={{ opacity: 1, x: 0, rotate: 0 }}
-      transition={{ 
-        delay: 0.7 + i * 0.15, 
-        type: "spring", 
-        stiffness: 100,
-        duration: 0.8
-      }}
-      whileHover={{ 
-        scale: 1.3, 
-        rotate: 10,
-        boxShadow: "0 10px 25px rgba(0,0,0,0.25)"
-      }}
-      whileTap={{ scale: 0.9 }}
-      className="group relative p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:bg-white/20"
-    >
-      {/* Icon with brand color hover */}
-      <Icon 
-        className={`w-5 h-5 sm:w-6 sm:h-6 text-white drop-shadow-lg transition-colors duration-300
-          ${
-            label === "Instagram" 
-              ? "group-hover:text-[#E4405F]"  // Instagram pink
-              : label === "Facebook"
-              ? "group-hover:text-[#1877F2]" // Facebook blue
-              : label === "Phone"
-              ? "group-hover:text-[#25D366]" // WhatsApp/phone green
-              : ""
-          }`}
-      />
-      
-      {/* Subtle hover gradient highlight */}
-      <motion.div 
-        className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-orange-500/20"
-        initial={{ opacity: 0, scale: 0 }}
-        whileHover={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-      />
-    </motion.a>
-  ))}
-</motion.div>
-
+      {/* Floating Sprinkles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-blue-300 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${3 + Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        {/* Badge with enhanced animation */}
-        <motion.div
-          className="inline-flex items-center gap-2 mb-4 sm:mb-6"
-          initial={{ opacity: 0, y: -50, scale: 0.5 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            duration: 1,
-            type: "spring",
-            stiffness: 200,
-            delay: 0.2
-          }}
-          whileHover={{ scale: 1.05, rotate: 2 }}
-        >
-          <motion.div 
-            className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-gradient-to-r from-blue-400 to-orange-500 text-white font-semibold shadow-lg backdrop-blur-sm text-sm sm:text-base"
-            animate={{ 
-              boxShadow: [
-                "0 4px 15px rgba(251, 191, 36, 0.3)",
-                "0 8px 25px rgba(251, 191, 36, 0.5)",
-                "0 4px 15px rgba(251, 191, 36, 0.3)"
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <div className="flex items-center gap-2">
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              >
-                <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
-              </motion.div>
-              <span className="text-xs sm:text-sm uppercase tracking-wider">The Best Bakery</span>
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
-              </motion.div>
+      <div className="relative z-10 flex items-center min-h-screen px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+
+            {/* Left Content */}
+            <div className={`space-y-8 transition-all duration-1000 ${
+              isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-12 opacity-0'
+            }`}>
+              {/* Badge */}
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 backdrop-blur-md border border-blue-200 rounded-full shadow-md animate-bounce">
+                <Award className="w-5 h-5 text-blue-500 animate-pulse" />
+                <span className="text-blue-700 font-medium">Premium Artisan Bakery</span>
+                <Sparkles className="w-5 h-5 text-sky-400 animate-spin-slow" />
+              </div>
+
+              {/* Title */}
+              <div className="space-y-4">
+                <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
+                  <span className="block bg-gradient-to-r from-blue-500 via-sky-400 to-pink-500 bg-clip-text text-transparent animate-gradient-x">
+                    Crafted with Love
+                  </span>
+                  <span className="block text-blue-700">Baked Fresh Every Day</span>
+                </h1>
+                <p className="text-lg text-blue-900/80 max-w-lg leading-relaxed">
+                  Our bakery blends tradition with creativity — bringing you warm breads, buttery croissants, and desserts that melt in your mouth.
+                </p>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6">
+                {[
+                  { value: '25+', label: 'Years Experience' },
+                  { value: '50k+', label: 'Happy Customers' },
+                  { value: '100+', label: 'Daily Varieties' }
+                ].map((stat, i) => (
+                  <div key={i} className="text-center group cursor-default">
+                    <div className="text-3xl font-bold text-blue-700 group-hover:scale-110 transition-transform">{stat.value}</div>
+                    <div className="text-sm text-blue-500">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-sky-400 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-300/40 hover:-translate-y-1 hover:scale-105 transition-all duration-300">
+                  <span className="relative flex items-center gap-2">
+                    <Coffee className="w-5 h-5" />
+                    Order Fresh Now
+                  </span>
+                </button>
+                <button className="group px-8 py-4 bg-white/70 backdrop-blur-sm text-blue-700 font-semibold rounded-2xl border border-blue-200 hover:bg-white/90 hover:border-blue-400 hover:-translate-y-1 transition-all duration-300">
+                  <span className="flex items-center gap-2">
+                    <Croissant className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                    Explore Menu
+                  </span>
+                </button>
+              </div>
             </div>
-          </motion.div>
-        </motion.div>
 
-        {/* Main Title */}
-        <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
-          key={images[current].title}
-          initial={{ opacity: 0, y: 50, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 12,
-            duration: 0.8
-          }}
-        >
-          <motion.span 
-            className="bg-gradient-to-r from-white via-blue-100 to-orange-200 bg-clip-text text-transparent drop-shadow-2xl inline-block"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            {images[current].title.split('').map((letter, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: i * 0.05,
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 10
-                }}
-                className="inline-block"
-              >
-                {letter === ' ' ? '\u00A0' : letter}
-              </motion.span>
-            ))}
-          </motion.span>
-        </motion.h1>
+            {/* Right Image Card */}
+            <div className={`relative transition-all duration-1000 delay-300 ${
+              isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'
+            }`}>
+              <div className="relative group max-w-md mx-auto">
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-sky-300 rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 scale-105" />
+                
+                {/* Image Card */}
+                <div className="relative bg-white/70 backdrop-blur-md border border-blue-200 rounded-3xl p-6 shadow-2xl hover:shadow-blue-200/60 transition-shadow duration-500">
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 group">
+                    {/* New Bakery Image */}
+                    <img
+                      src="https://images.pexels.com/photos/7491894/pexels-photo-7491894.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="Artisan bakery interior with pastries"
+                      className="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition-all duration-700"
+                    />
+                    {/* Subtle Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 via-transparent to-transparent opacity-50" />
+                  </div>
 
-        {/* Subtitle */}
-        <motion.p
-          className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-10 max-w-2xl mx-auto leading-relaxed"
-          key={images[current].subtitle}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-        >
-          {images[current].subtitle}
-        </motion.p>
+                  {/* Features */}
+                  <div className="space-y-3">
+                    {[
+                      { icon: Clock, title: 'Fresh Daily', desc: 'Baked every morning at 5 AM' },
+                      { icon: Users, title: 'Master Bakers', desc: 'Trained in European traditions' }
+                    ].map((f, i) => (
+                      <div key={i} className="flex items-center gap-4 p-3 bg-white/80 rounded-xl border border-blue-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-sky-400 rounded-xl flex items-center justify-center">
+                          <f.icon className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-blue-800 font-semibold">{f.title}</div>
+                          <div className="text-blue-500 text-sm">{f.desc}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-        {/* CTA Buttons */}
-        <motion.div
-          className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          {/* Primary CTA */}
-          <motion.a
-            href="/contact-us" 
-            whileHover={{ 
-              scale: 1.08, 
-              y: -5,
-              boxShadow: "0 15px 35px rgba(251, 191, 36, 0.4)"
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative overflow-hidden px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-2xl bg-gradient-to-r from-blue-400 to-orange-500 text-white font-semibold text-base sm:text-lg transition-all duration-300"
-            animate={{
-              boxShadow: [
-                "0 8px 25px rgba(251, 191, 36, 0.3)",
-                "0 12px 35px rgba(251, 191, 36, 0.5)",
-                "0 8px 25px rgba(251, 191, 36, 0.3)"
-              ]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.span 
-              className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500"
-              initial={{ opacity: 0, scale: 0 }}
-              whileHover={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-            <span className="relative z-10 flex items-center gap-2">
-              Order Now
-              <motion.span
-                animate={{ x: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </span>
-          </motion.a>
-
-          {/* Secondary CTA */}
-       
-        </motion.div>
-
-        {/* Stats */}
-   {/* Stats Section - Modern Card Boxes */}
-<motion.div
-  className="mt-10 sm:mt-14 flex flex-wrap justify-center gap-4 sm:gap-6 max-w-3xl mx-auto"
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 1.5 }}
->
-  {[
-    { number: "500+", label: "Happy Customers" },
-    { number: "Fresh", label: "Daily Baking" },
-    { number: "100%", label: "Eggless" }
-  ].map((stat, i) => (
-    <motion.div
-      key={i}
-      whileHover={{ scale: 1.08, y: -6 }}
-      transition={{ type: "spring", stiffness: 250 }}
-      className="relative flex flex-col items-center justify-center px-6 py-5 sm:px-8 sm:py-6 rounded-2xl 
-                 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl 
-                 text-white hover:bg-white/20 transition-all duration-300 w-[140px] sm:w-[180px]"
-    >
-      {/* Animated Glow Effect */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-400/10 via-yellow-300/10 to-transparent"
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      />
-      {/* Number */}
-      <motion.div
-        className="text-xl sm:text-2xl font-bold text-blue-300 relative z-10"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{
-          delay: 1.7 + i * 0.2,
-          type: "spring",
-          stiffness: 200
-        }}
-      >
-        {stat.number}
-      </motion.div>
-      {/* Label */}
-      <div className="text-xs sm:text-sm mt-1 relative z-10">{stat.label}</div>
-    </motion.div>
-  ))}
-</motion.div>
-
+              {/* Floating Accent */}
+              <div className="absolute -top-5 -right-5 w-16 h-16 bg-gradient-to-br from-sky-300 to-blue-300 rounded-full shadow-lg flex items-center justify-center animate-bounce-slow">
+                <Sparkles className="w-8 h-8 text-white animate-spin-slow" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Decorative Bottom Curve */}
-      <motion.div 
-        className="absolute bottom-0 left-0 w-full overflow-hidden leading-none"
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1, delay: 2 }}
-      >
-        <svg
-          className="relative block w-full h-16 sm:h-24 text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          viewBox="0 0 1200 120"
-        >
-          <defs>
-            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgb(244, 244, 245)" />
-              <stop offset="50%" stopColor="rgb(241, 241, 245)" />
-              <stop offset="100%" stopColor="rgba(252, 252, 252, 0.9)" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            d="M321.39 56.3c58-11.72 114.16-31.94 172-41.86 
-            82-14.3 168.29-8.1 250.29 11.06 
-            57.6 13.29 113.78 32.27 172 41.86 
-            82 13.8 168.29 6.1 250.29-13.06V120H0V16.48
-            a600.21 600.21 0 00321.39 39.82z"
-            fill="url(#waveGradient)"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, delay: 2 }}
-          />
-        </svg>
-      </motion.div>
-
-      {/* WhatsApp Button */}
-      <motion.a
-        href="https://wa.me/918872197774"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 group"
-        whileHover={{ scale: 1.15, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, scale: 0, rotate: 180 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ 
-          delay: 2.5, 
-          type: "spring", 
-          stiffness: 200,
-          duration: 0.8
-        }}
-      >
-        {/* Pulse effects */}
-        <motion.span 
-          className="absolute inline-flex h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-green-500 opacity-60"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.6, 0, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        <motion.span 
-          className="absolute inline-flex h-14 w-14 sm:h-20 sm:w-20 rounded-full bg-green-400 opacity-40"
-          animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-        />
-
-        {/* Main Button */}
-        <motion.span 
-          className="relative flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-green-500 to-green-600 text-white shadow-2xl transition-all duration-300"
-          whileHover={{ 
-            boxShadow: "0 15px 35px rgba(37, 34, 197, 0.5)",
-            background: "linear-gradient(45deg, #22c55e, #16a34a)"
-          }}
-        >
-          <motion.div
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8" />
-          </motion.div>
-        </motion.span>
-      </motion.a>
-    </section>
+    </div>
   );
-}
+};
 
-export default Hero;
+export default BakeryHero;
