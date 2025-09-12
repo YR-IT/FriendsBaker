@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Sparkles, Coffee, Croissant, Award, Users, Clock } from 'lucide-react';
+import { Sparkles, Coffee, Award, Users, Clock } from 'lucide-react';
 
 const BakeryHero = () => {
   const [, setScrollY] = useState(0);
