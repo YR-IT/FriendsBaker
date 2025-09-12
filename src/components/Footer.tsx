@@ -2,7 +2,7 @@ import { Mail, Phone, Facebook, Instagram } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="bg-pink-50 border-t border-pink-200">
+    <footer className="bg-blue-50 border-t border-blue-200">
       {/* Top Section */}
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center items-center">
         
@@ -75,8 +75,17 @@ function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="relative py-4 text-center text-gray-600 text-sm bg-gray-100 border-t border-pink-200">
-        © {new Date().getFullYear()} Friends Baker. Made with ❤️ and sugar.
+      <div className="relative py-4 text-center text-gray-600 text-sm bg-gray-100 border-t border-blue-200">
+        © {new Date().getFullYear()} Friends Baker. Made with ❤️ and sugar. <br />
+        Designed and developed by{" "}
+        <a
+          href="https://www.yritsolutions.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          YR IT Solutions
+        </a>
       </div>
     </footer>
   );

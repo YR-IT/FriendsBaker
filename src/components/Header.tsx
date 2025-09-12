@@ -72,7 +72,7 @@ function Header() {
             Home
           </Link>
           <Link to="/about" className="hover:text-teal-500 transition">
-            About Us
+            Our Story
           </Link>
 
           {/* Categories Dropdown Desktop */}
