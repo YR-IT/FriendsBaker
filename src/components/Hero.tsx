@@ -57,7 +57,7 @@ const BakeryHero = () => {
               {/* Badge */}
               <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 backdrop-blur-md border border-blue-200 rounded-full shadow-md animate-bounce">
                 <Award className="w-5 h-5 text-blue-500 animate-pulse" />
-                <span className="text-blue-700 font-medium">Premium Artisan Bakery</span>
+                <span className="text-blue-700 font-medium">Premium Friend's Bakery</span>
                 <Sparkles className="w-5 h-5 text-sky-400 animate-spin-slow" />
               </div>
 
