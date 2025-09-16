@@ -39,15 +39,6 @@ export default function About() {
     },
   };
 
-  const cardHover = {
-    scale: 1.05,
-    rotateY: 5,
-    boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
-    transition: {
-      duration: 0.3,
-      ease: "easeOut",
-    },
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-800 overflow-hidden">
