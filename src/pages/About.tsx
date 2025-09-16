@@ -1,187 +1,498 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Heart, Award, Users, Star, ChefHat, Clock, MapPin, Phone, Mail } from "lucide-react";
 
 export default function About() {
-  return (
-    <div className="min-h-screen bg-white text-black flex flex-col items-center justify-start">
-      {/* Hero Section*/}
-      <div
-        className="relative w-full h-[80vh] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: "url('/about.jpg')" }} 
-      >
-        <div className="absolute inset-0 bg-black/50"></div> 
-        <motion.div
-          className="relative z-10 text-center px-6"
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
-            About Us
-          </h1>
-          <p className="text-lg sm:text-xl text-teal-100 max-w-2xl mx-auto">
-            At <span className="text-teal-500 font-semibold">Friend's Baker</span>, we believe baking is more than just making bread and pastries—it’s about creating moments of joy. Our journey started with a simple passion for fresh, warm, and delightful treats, and today we continue to spread happiness, one bite at a time.
-          </p>
-        </motion.div>
-      </div>
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
-      {/* About Section */}
-      <div className="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between px-6 py-16 gap-10">
-        {/* Left Side Image */}
-        <motion.div
-  className="w-full md:w-1/2 flex justify-center"
-  initial={{ opacity: 0, x: -40 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8 }}
->
-  <img
-    src="/shop.png"
-    alt="Bakery History"
-    className="rounded-xl shadow-lg w-3/4 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
-  />
-</motion.div>
+  useEffect(() => {
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", updateMousePosition);
+    return () => window.removeEventListener("mousemove", updateMousePosition);
+  }, []);
 
-        {/* Right Side Text */}
-        <motion.div
-          className="w-full md:w-1/2 text-center sm:text-left"
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h2 className="uppercase text-base tracking-widest text-teal-600 font-semibold mb-4">
-            About Us
-          </h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 leading-snug">
-            Delivering Incredible Taste <br /> Since 2011!
-          </h3>
-          <p className="text-gray-600 leading-relaxed mb-4 text-justify">
-            Friend's Baker has been a cherished name in our city for generations, known for blending tradition with innovation. From our humble beginnings as one of the first commercial bakeries, we’ve grown into a trusted destination for freshly baked delights that bring joy to every occasion.
-          </p>
-          <p className="text-gray-600 leading-relaxed mb-4 text-justify">
-            With a wide range of 150+ products — from crispy Khari and wholesome biscuits to indulgent cookies and other baked specialties — we take pride in creating treats that cater to all age groups and tastes. Every product is crafted with a commitment to quality, hygiene, and the passion to serve only the best.
-          </p> 
-          <p className="text-gray-600 leading-relaxed text-justify">
-            At Friend's Baker, we carry forward the essence of our city while introducing modern flavors and techniques. Our goal is simple: to continue spreading happiness through baking, one bite at a time.
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Glimpse of Our Store Section */}
-<motion.section
-  className="w-full bg-gray-50 py-12 flex flex-col items-center px-6"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.2 }}
-  variants={{
-    hidden: { opacity: 0, y: 40 },
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.8,
-        staggerChildren: 0.3, 
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
       },
     },
-  }}
->
-  {/* Heading */}
-  <motion.h2
-    className="text-3xl sm:text-5xl font-bold text-gray-800 text-center mb-4"
-    variants={{ hidden: { opacity: 0, y: -30 }, visible: { opacity: 1, y: 0 } }}
-  >
-    A Glimpse Of Our Store
-  </motion.h2>
+  };
 
-  {/* Subtext */}
-  <motion.p
-    className="text-gray-600 text-center max-w-3xl mb-12 text-lg"
-    variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-  >
-    Although we wish we could stimulate your sense of smell as well here on our website,
-    but here is how we deliver visual treat that could be a feast for your eyes!
-  </motion.p>
-
-  {/* Image Grid */}
-  <motion.div
-    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl"
-    variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
-  >
-    {["/shop.png", "/shop.png", "/shop.png"].map((src, i) => (
-      <motion.div
-        key={i}
-        className="overflow-hidden rounded-xl shadow-lg"
-        variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }}
-        whileHover={{ scale: 1.05, rotate: 1 }}
-        transition={{ duration: 0.4 }}
-      >
-        <img
-          src={src}
-          alt={`Store view ${i + 1}`}
-          className="w-full h-72 object-cover"
-        />
-      </motion.div>
-    ))}
-  </motion.div>
-</motion.section>
-
-     {/* Intro text */}
-      <motion.p
-        className="max-w-3xl text-center text-lg sm:text-xl mb-12 text-gray-700 px-6 mt-12"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-      >
-        ✦ Where passion meets sweetness ✦ <br /> 
-        From the first loaf to the finest pastries, our story has always been about love, community, and flavor. Every treat is baked fresh with handpicked ingredients and care.
-      </motion.p>
-
-      {/* Cards Section */}
-<motion.div
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl px-6 mb-8"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.2 }}
-  variants={{
-    hidden: {},
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
     visible: {
+      y: 0,
+      opacity: 1,
       transition: {
-        staggerChildren: 0.2, 
+        duration: 0.6,
+        ease: "easeOut",
       },
     },
-  }}
->
-  {[
-    {
-      title: "Our Story",
-      desc: "Born from a small kitchen dream, Friends Bakery grew into a community favorite, serving love in every slice.",
-      icon: "🥖",
-    },
-    {
-      title: "Our Promise",
-      desc: "We use only natural, locally sourced ingredients, ensuring freshness and flavor you can trust.",
-      icon: "🌿",
-    },
-    {
-      title: "Our People",
-      desc: "Every pastry is baked with care by skilled hands that treat baking as an art and service as a joy.",
-      icon: "👩‍🍳",
-    },
-  ].map((item, i) => (
-    <motion.div
-      key={i}
-      variants={{
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-      }}
-    >
-      <div className="bg-teal-50 border border-teal-200 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform p-6 text-center">
-        <div className="text-5xl mb-4">{item.icon}</div>
-        <h2 className="text-2xl font-semibold text-teal-700 mb-2">{item.title}</h2>
-        <p className="text-gray-600">{item.desc}</p>
-      </div>
-    </motion.div>
-  ))}
-</motion.div>
+  };
 
+  const cardHover = {
+    scale: 1.05,
+    rotateY: 5,
+    boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
+    transition: {
+      duration: 0.3,
+      ease: "easeOut",
+    },
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-800 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute w-96 h-96 bg-gradient-to-r from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl"
+          animate={{
+            x: mousePosition.x * 0.02,
+            y: mousePosition.y * 0.02,
+          }}
+          transition={{ type: "spring", stiffness: 50, damping: 30 }}
+          style={{ left: '10%', top: '20%' }}
+        />
+        <motion.div 
+          className="absolute w-80 h-80 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl"
+          animate={{
+            x: mousePosition.x * -0.01,
+            y: mousePosition.y * -0.01,
+          }}
+          transition={{ type: "spring", stiffness: 30, damping: 40 }}
+          style={{ right: '15%', bottom: '30%' }}
+        />
+      </div>
+
+      {/* Hero Section */}
+      <motion.div
+        className="relative w-full h-screen flex items-center justify-center overflow-hidden"
+        style={{ y, opacity }}
+      >
+        {/* Background with parallax effect */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ 
+            backgroundImage: "linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(37, 99, 235, 0.8) 50%, rgba(29, 78, 216, 0.9) 100%), url('https://images.pexels.com/photos/1109197/pexels-photo-1109197.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')" 
+          }}
+        />
+        
+        {/* Floating particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white/30 rounded-full"
+            initial={{ 
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+              scale: Math.random() * 0.5 + 0.5
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.3, 1, 0.3],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2
+            }}
+          />
+        ))}
+
+        <motion.div
+          className="relative z-10 text-center px-6 max-w-5xl"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mb-6"
+          >
+            <div className="inline-block p-3 bg-white/20 backdrop-blur-sm rounded-full mb-6">
+              <ChefHat className="w-8 h-8 text-white" />
+            </div>
+          </motion.div>
+          
+          <motion.h1 
+            className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight"
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+          >
+            About{" "}
+            <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+              Friend's Baker
+            </span>
+          </motion.h1>
+          
+          <motion.p 
+            className="text-xl sm:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+          >
+            Where passion meets perfection, creating moments of pure joy through the art of baking. 
+            Every loaf tells a story, every pastry carries our love.
+          </motion.p>
+
+          <motion.div
+            className="mt-12 flex justify-center space-x-8"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 1.2, duration: 0.6, type: "spring" }}
+          >
+            {[
+              { icon: Award, text: "13+ Years" },
+              { icon: Users, text: "50k+ Happy Customers" },
+              { icon: Star, text: "150+ Products" }
+            ].map((item, i) => (
+              <motion.div 
+                key={i}
+                className="text-center"
+                whileHover={{ scale: 1.1, y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="p-3 bg-white/20 backdrop-blur-sm rounded-full mb-2 inline-block">
+                  <item.icon className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white/90 font-semibold">{item.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <motion.div
+              className="w-1 h-3 bg-white rounded-full mt-2"
+              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="relative z-10 bg-white">
+        {/* Story Section */}
+        <motion.div 
+          className="w-full max-w-7xl mx-auto px-6 py-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div variants={itemVariants}>
+              <div className="relative group">
+                <motion.img
+                  src="https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Our Bakery Story"
+                  className="rounded-3xl shadow-2xl w-full h-96 object-cover"
+                  whileHover={{ scale: 1.02, rotate: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Floating badge */}
+                <motion.div
+                  className="absolute -top-4 -right-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-full font-bold shadow-lg"
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                >
+                  Est. 2011
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="space-y-8">
+              <div className="space-y-6">
+                <motion.div 
+                  className="inline-block"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <span className="px-4 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 rounded-full text-sm font-semibold tracking-wide uppercase">
+                    Our Journey
+                  </span>
+                </motion.div>
+                
+                <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">
+                  Delivering Incredible Taste Since{" "}
+                  <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    2011
+                  </span>
+                </h2>
+              </div>
+              
+              <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  Friend's Baker has been a cherished name in our city for generations, known for blending tradition with innovation. From our humble beginnings as one of the first commercial bakeries, we've grown into a trusted destination for freshly baked delights.
+                </motion.p>
+                
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  With over 150 handcrafted products ranging from our signature Khari to indulgent cookies, each item reflects our unwavering commitment to quality, hygiene, and the pure joy of exceptional baking that brings happiness to every occasion.
+                </motion.p>
+              </div>
+
+              <motion.div 
+                className="flex flex-wrap gap-4 pt-4"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+              >
+                {[
+                  { icon: Heart, text: "Made with Love", color: "from-pink-400 to-rose-500" },
+                  { icon: Clock, text: "Fresh Daily", color: "from-blue-400 to-indigo-500" }
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className="flex items-center space-x-3 px-6 py-3 bg-white rounded-full shadow-lg border border-gray-100"
+                  >
+                    <div className={`p-2 bg-gradient-to-r ${item.color} rounded-full`}>
+                      <item.icon className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="font-semibold text-gray-700">{item.text}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Store Gallery Section */}
+        <motion.section
+          className="py-20 bg-gradient-to-b from-blue-50 to-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div variants={itemVariants} className="text-center mb-16">
+              <motion.h2 
+                className="text-4xl lg:text-6xl font-bold text-gray-800 mb-6"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                A Glimpse Of Our{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  Store
+                </span>
+              </motion.h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Although we wish we could stimulate your sense of smell as well here on our website, 
+                but here is how we deliver visual treat that could be a feast for your eyes!
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+            >
+              {[
+                "https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg?auto=compress&cs=tinysrgb&w=600",
+                "https://images.pexels.com/photos/1070942/pexels-photo-1070942.jpeg?auto=compress&cs=tinysrgb&w=600",
+                "https://images.pexels.com/photos/1395319/pexels-photo-1395319.jpeg?auto=compress&cs=tinysrgb&w=600"
+              ].map((src, i) => (
+                <motion.div
+                key={i}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, rotateY: 5 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                style={{ boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)" }}
+                className="relative group cursor-pointer overflow-hidden rounded-2xl"
+              >
+              
+                  <img
+                    src={src}
+                    alt={`Store view ${i + 1}`}
+                    className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <motion.div 
+                    className="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100"
+                    initial={{ y: 20 }}
+                    whileHover={{ y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <h3 className="text-xl font-bold mb-2">Our Space</h3>
+                    <p className="text-sm text-blue-200">Where magic happens daily</p>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* Intro text */}
+        <motion.div
+          className="text-center py-16 px-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div className="inline-flex items-center justify-center space-x-2 text-2xl mb-8">
+            <span className="text-blue-500">✦</span>
+            <span className="text-blue-600 font-semibold">Where Passion Meets Sweetness</span>
+            <span className="text-blue-500">✦</span>
+          </div>
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            From our first loaf to our finest pastries, our story has always been about love, community, and exceptional flavor. 
+            Every treat is baked fresh with handpicked ingredients and infinite care.
+          </p>
+        </motion.div>
+
+        {/* Values Section */}
+        <motion.section 
+          className="py-20 bg-gradient-to-b from-white to-blue-50"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              variants={containerVariants}
+            >
+              {[
+                {
+                  title: "Our Story",
+                  desc: "Born from a small kitchen dream, Friend's Baker grew into a community favorite, serving love in every slice with traditional recipes passed down through generations.",
+                  icon: "🥖",
+                  gradient: "from-blue-400 to-indigo-500"
+                },
+                {
+                  title: "Our Promise",
+                  desc: "We use only natural, locally sourced ingredients, ensuring freshness and flavor you can trust. Every product meets our highest standards of quality and hygiene.",
+                  icon: "🌿",
+                  gradient: "from-cyan-400 to-blue-500"
+                },
+                {
+                  title: "Our People",
+                  desc: "Every pastry is lovingly crafted by skilled artisans who treat baking as a fine art and customer service as pure joy, creating memorable experiences.",
+                  icon: "👨‍🍳",
+                  gradient: "from-indigo-400 to-purple-500"
+                },
+              ].map((item, i) => (
+                <motion.div
+  key={i}
+  variants={itemVariants}
+  whileHover={{ scale: 1.05, rotateY: 5 }}
+  transition={{ duration: 0.3, ease: "easeOut" }}
+  style={{ boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)" }}
+  className="relative group cursor-pointer overflow-hidden rounded-2xl"
+>
+
+                  <div className="h-full bg-white border border-blue-100 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+                    {/* Animated background gradient */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+                    
+                    <motion.div
+                      className="text-6xl mb-6 inline-block"
+                      whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {item.icon}
+                    </motion.div>
+                    
+                    <h3 className={`text-2xl font-bold mb-4 bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>
+                      {item.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 leading-relaxed text-lg">
+                      {item.desc}
+                    </p>
+
+                    {/* Hover effect elements */}
+                    <motion.div
+                      className="absolute -right-4 -bottom-4 w-24 h-24 bg-gradient-to-r from-blue-400/10 to-indigo-400/10 rounded-full blur-2xl"
+                      initial={{ scale: 0 }}
+                      whileHover={{ scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* Contact Section */}
+        <motion.section
+          className="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <motion.div variants={itemVariants} className="mb-12">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                Visit Us Today
+              </h2>
+              <p className="text-xl text-blue-100 leading-relaxed">
+                Experience the warmth of our bakery and taste the difference that passion makes.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              variants={containerVariants}
+            >
+              {[
+                { icon: MapPin, title: "Location", text: "123 Baker Street, Your City" },
+                { icon: Phone, title: "Call Us", text: "+1 (555) 123-4567" },
+                { icon: Mail, title: "Email", text: "hello@friendsbaker.com" }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="text-center"
+                >
+                  <div className="inline-block p-4 bg-white/20 backdrop-blur-sm rounded-full mb-4">
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                  <p className="text-blue-200">{item.text}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.section>
+      </div>
     </div>
   );
 }
