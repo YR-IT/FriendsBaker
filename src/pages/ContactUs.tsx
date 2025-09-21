@@ -1,4 +1,3 @@
-// src/pages/Contact.tsx
 import React, { type JSX } from "react";
 import { motion, type Variants } from "framer-motion";
 import {
@@ -11,6 +10,11 @@ import {
   Calendar,
   Send,
   Star,
+  MessageCircle,
+  Instagram,
+  QrCode,
+  ExternalLink,
+  Users,
 } from "lucide-react";
 
 type Feature = {
@@ -18,6 +22,17 @@ type Feature = {
   title: string;
   desc: string;
   color: string; // Tailwind gradient classes
+};
+
+type ConnectOption = {
+  icon: React.ElementType;
+  title: string;
+  subtitle: string;
+  description: string;
+  color: string;
+  hoverColor: string;
+  link: string;
+  qrPlaceholder?: boolean;
 };
 
 // --------------------
@@ -49,6 +64,25 @@ const floatingVariants: Variants = {
   },
 };
 
+const qrVariants: Variants = {
+  hidden: { scale: 0, rotate: -180 },
+  visible: { 
+    scale: 1, 
+    rotate: 0, 
+    transition: { 
+      type: "spring", 
+      stiffness: 260, 
+      damping: 20,
+      duration: 0.8 
+    } 
+  },
+  hover: { 
+    scale: 1.1, 
+    rotate: 5,
+    transition: { duration: 0.3 } 
+  },
+};
+
 // --------------------
 // Static data
 // --------------------
@@ -68,7 +102,7 @@ const features: Feature[] = [
   {
     icon: Clock,
     title: "Perfect Timing",
-    desc: "Whether it's morning coffee, afternoon tea, or celebrations — we’re here.",
+    desc: "Whether it's morning coffee, afternoon tea, or celebrations — we're here.",
     color: "from-purple-400 to-purple-600",
   },
   {
@@ -76,6 +110,49 @@ const features: Feature[] = [
     title: "Always Open",
     desc: "Mon–Sat: 8:00 AM – 9:00 PM | Sunday: 9:00 AM – 6:00 PM",
     color: "from-cyan-400 to-cyan-600",
+  },
+];
+
+const connectOptions: ConnectOption[] = [
+  {
+    icon: Star,
+    title: "Review Us",
+    subtitle: "Google Reviews",
+    description: "Share your experience and help others discover our delicious baked goods",
+    color: "from-blue-500 to-blue-600",
+    hoverColor: "from-blue-600 to-blue-700",
+    link: "https://www.google.com/maps/place/FRIENDS+BAKER/@30.6711016,76.8529354,17z",
+    qrPlaceholder: true,
+  },
+  {
+    icon: Instagram,
+    title: "Follow Us",
+    subtitle: "@friendsbaker",
+    description: "Follow our Instagram for daily updates, behind-the-scenes content and special offers",
+    color: "from-pink-500 to-rose-500",
+    hoverColor: "from-pink-600 to-rose-600",
+    link: "#",
+    qrPlaceholder: true,
+  },
+  {
+    icon: MessageCircle,
+    title: "Chat Us",
+    subtitle: "WhatsApp",
+    description: "Quick orders, custom requests, or just say hello - we're always here to chat",
+    color: "from-green-500 to-emerald-500",
+    hoverColor: "from-green-600 to-emerald-600",
+    link: "https://wa.me/918872197774",
+    qrPlaceholder: true,
+  },
+  {
+    icon: MapPin,
+    title: "Locate Us",
+    subtitle: "Find Our Store",
+    description: "Get directions to our bakery in Sector-20, Panchkula for the freshest treats",
+    color: "from-purple-500 to-violet-500",
+    hoverColor: "from-purple-600 to-violet-600",
+    link: "https://www.google.com/maps/place/FRIENDS+BAKER/@30.6711016,76.8529354,17z",
+    qrPlaceholder: true,
   },
 ];
 
@@ -131,6 +208,120 @@ export default function Contact(): JSX.Element {
             Experience the art of baking where tradition meets innovation. We&apos;d
             love to connect with you!
           </motion.p>
+        </motion.div>
+
+        {/* Connect With Us Section */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="mb-24 max-w-7xl mx-auto"
+        >
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <div className="relative inline-block">
+              <motion.div
+                className="absolute -inset-2 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-lg blur opacity-20"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <h2 className="relative text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600 mb-4">
+                Connect With Us
+              </h2>
+            </div>
+            <p className="text-blue-700/80 text-lg max-w-2xl mx-auto">
+              Scan, click, or tap to connect with Friends Baker in your preferred way
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {connectOptions.map((option, index) => {
+              const Icon = option.icon;
+              return (
+                <motion.div
+                  key={index}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover="hover"
+                  className="group relative"
+                >
+                  {/* Background glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${option.color} rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
+                  
+                  {/* Main card */}
+                  <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/50 hover:bg-white/95 transition-all duration-500 h-full flex flex-col">
+                    {/* Header */}
+                    <div className="text-center mb-6">
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.6 }}
+                        className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r ${option.color} text-white mb-4 shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
+                      >
+                        <Icon size={32} />
+                      </motion.div>
+                      
+                      <h3 className="text-xl font-bold text-gray-800 mb-1">
+                        {option.title}
+                      </h3>
+                      <p className="text-sm font-medium text-gray-600">
+                        {option.subtitle}
+                      </p>
+                    </div>
+
+                    {/* QR Code placeholder */}
+                    <motion.div
+                      variants={qrVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover="hover"
+                      className="flex justify-center mb-6"
+                    >
+                      <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center border-2 border-gray-300/50 group-hover:border-gray-400/70 transition-colors duration-300">
+                        <QrCode size={40} className="text-gray-600" />
+                      </div>
+                    </motion.div>
+
+                    {/* Description */}
+                    <p className="text-gray-600 text-sm text-center mb-6 flex-grow">
+                      {option.description}
+                    </p>
+
+                    {/* Action button */}
+                    <motion.a
+                      href={option.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`inline-flex items-center justify-center space-x-2 bg-gradient-to-r ${option.hoverColor} text-white font-semibold py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group/button`}
+                    >
+                      <span>Connect</span>
+                      <ExternalLink size={16} className="group-hover/button:translate-x-1 transition-transform duration-300" />
+                    </motion.a>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-center mt-12"
+          >
+            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/50">
+              <Users size={20} className="text-teal-600" />
+              <span className="text-gray-700 font-medium">Join thousands of happy customers</span>
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                ❤️
+              </motion.div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Main grid */}
@@ -233,17 +424,24 @@ export default function Contact(): JSX.Element {
         </div>
 
         {/* Map Section */}
-        <motion.div initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="mt-24 max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-24 max-w-7xl mx-auto"
+        >
           <div className="text-center mb-12">
             <h3 className="text-4xl font-bold text-blue-800 mb-4">Find Us Here</h3>
-            <p className="text-blue-700/80 text-lg">Located in the heart of Panchkula, easily accessible and always welcoming</p>
+            <p className="text-blue-700/80 text-lg">
+              Located in the heart of Panchkula, easily accessible and always welcoming
+            </p>
           </div>
 
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-3xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300" />
             <div className="relative w-full h-96 md:h-[600px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50 backdrop-blur-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.789740161554!2d76.8529354!3d30.6711016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1"
+                src="https://www.google.com/maps?q=FRIENDS%20BAKER%2C%20Booth%20152%2C%20Sector%2020%2C%20Panchkula%2C%20Haryana%20134117&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

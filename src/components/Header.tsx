@@ -55,6 +55,13 @@ function Navbar() {
 
   const handleCategoryClick = () => setHoveredMenu(null);
 
+  // ✅ Dynamic column calculation
+  const getGridCols = (count: number) => {
+    if (count > 12) return "grid-cols-4";
+    if (count > 6) return "grid-cols-3";
+    return "grid-cols-2";
+  };
+
   // ✅ Typed Variants
   const navVariants: Variants = {
     hidden: { y: -100, opacity: 0 },
@@ -179,26 +186,26 @@ function Navbar() {
                       initial="hidden"
                       animate="visible"
                       exit="hidden"
-                      className="absolute left-0 mt-4 bg-white shadow-xl rounded-2xl p-6 w-72 border border-gray-100"
+                      className={`absolute left-0 mt-4 bg-white shadow-xl rounded-2xl p-6 w-[28rem] border border-gray-100 grid gap-3 ${getGridCols(
+                        productCategories.length
+                      )}`}
                     >
-                      <div className="grid grid-cols-1 gap-3">
-                        {productCategories.map((cat, i) => (
-                          <motion.div
-                            key={i}
-                            whileHover={{ x: 8, backgroundColor: "#eff6ff" }}
-                            className="rounded-lg p-3 transition-all duration-200"
+                      {productCategories.map((cat, i) => (
+                        <motion.div
+                          key={i}
+                          whileHover={{ x: 8, backgroundColor: "#eff6ff" }}
+                          className="rounded-lg p-3 transition-all duration-200"
+                        >
+                          <Link
+                            to={`/menu/${cat}`}
+                            className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors"
+                            onClick={handleCategoryClick}
                           >
-                            <Link
-                              to={`/menu/${cat}`}
-                              className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors"
-                              onClick={handleCategoryClick}
-                            >
-                              <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full" />
-                              <span className="font-medium">{cat}</span>
-                            </Link>
-                          </motion.div>
-                        ))}
-                      </div>
+                            <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full" />
+                            <span className="font-medium">{cat}</span>
+                          </Link>
+                        </motion.div>
+                      ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -368,7 +375,9 @@ function Navbar() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="ml-4 mt-2 space-y-2"
+                          className={`ml-4 mt-2 grid gap-2 ${getGridCols(
+                            productCategories.length
+                          )}`}
                         >
                           {productCategories.map((cat, i) => (
                             <motion.div
@@ -403,17 +412,17 @@ function Navbar() {
                     className="flex items-center gap-3 w-full py-3 px-4 rounded-lg bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-600 transition-all duration-300"
                   >
                     <ShoppingBag className="w-5 h-5" />
-                    <span>Cart (3)</span>
+                    <span className="font-medium">Cart</span>
                   </motion.button>
 
                   <motion.a
                     href="tel:+918872197774"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-3 w-full py-3 px-4 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold transition-all duration-300"
+                    className="flex items-center gap-3 w-full py-3 px-4 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     <Phone className="w-5 h-5" />
-                    <span>Call +91 8872197774</span>
+                    <span>+91 8872197774</span>
                   </motion.a>
                 </div>
               </div>
