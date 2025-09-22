@@ -9,6 +9,7 @@ import CategoryPage from './components/CategoryPage';
 import ScrollToTop from './components/ScrollToTop';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
+import News from './pages/News';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/menu/:name" element={<CategoryPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<PrivateRoute />} />
+            <Route path="/News" element={<News />} />
           </Routes>
         </main>
         <Footer />

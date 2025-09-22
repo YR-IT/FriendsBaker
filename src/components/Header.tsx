@@ -141,6 +141,7 @@ function Navbar() {
               {[
                 { name: "Home", path: "/" },
                 { name: "Our Story", path: "/about" },
+                { name: "News", path: "/news" }, 
                 { name: "Contact", path: "/contact-us" },
               ].map((item, index) => (
                 <motion.div
