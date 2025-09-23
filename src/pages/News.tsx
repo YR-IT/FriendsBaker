@@ -23,7 +23,7 @@ function App() {
       dateCreated: '2024-01-15',
       lastModified: '2024-01-20',
       isActive: true,
-      imageUrl: 'https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=400',
+      imageUrl: '/news/news1.jpg',
       tags: ['professional', 'clean', 'modern']
     },
     {
@@ -34,7 +34,7 @@ function App() {
       dateCreated: '2024-01-10',
       lastModified: '2024-01-18',
       isActive: true,
-      imageUrl: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=400',
+      imageUrl: '/news/news2.jpg',
       tags: ['elegant', 'presentation', 'client']
     },
     {
@@ -45,7 +45,7 @@ function App() {
       dateCreated: '2024-01-05',
       lastModified: '2024-01-15',
       isActive: true,
-      imageUrl: 'https://images.pexels.com/photos/4427430/pexels-photo-4427430.jpeg?auto=compress&cs=tinysrgb&w=400',
+      imageUrl: '/news/news4.jpg',
       tags: ['legal', 'contract', 'service']
     }
   ]);
@@ -144,24 +144,26 @@ function App() {
               key={template.id}
               className="group bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]"
             >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                {template.imageUrl ? (
-                  <img
-                    src={template.imageUrl}
-                    alt={template.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                    <ImageIcon size={48} className="text-slate-400" />
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium border ${getCategoryColor(template.category)}`}>
-                  {template.category}
-                </div>
-              </div>
+            
+             {/* Image */}
+<div className="relative h-80 overflow-hidden"> {/* ⬅ bigger height */}
+  {template.imageUrl ? (
+    <img
+      src={template.imageUrl}
+      alt={template.name}
+      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+    />
+  ) : (
+    <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+      <ImageIcon size={64} className="text-slate-400" /> {/* ⬅ bigger placeholder */}
+    </div>
+  )}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium border ${getCategoryColor(template.category)}`}>
+    {template.category}
+  </div>
+</div>
+
 
               {/* Content */}
               <div className="p-6 space-y-4">

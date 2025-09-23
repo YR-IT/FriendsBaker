@@ -1,222 +1,270 @@
-import React from 'react';
-import { 
-  Cookie, 
-  Cake, 
-  Coffee, 
-  Croissant, 
-  IceCream, 
-  Cherry, 
-  Wheat, 
-  Gift,
-  Heart,
-  Star,
-  Crown,
-  Zap} from 'lucide-react';
 
-interface Category {
-  id: number;
-  name: string;
-  description: string;
-  icon: React.ComponentType<any>;
-  count: number;
-  color: string;
-  glitterColor: string;
-  image: string;
-}
+import { motion } from "framer-motion";
 
-const categories: Category[] = [
-  {
-    id: 1,
-    name: "Artisan Breads",
-    description: "Freshly baked daily with premium ingredients",
-    icon: Wheat,
-    count: 24,
-    color: "from-amber-400 via-orange-400 to-yellow-500",
-    glitterColor: "from-yellow-300 to-amber-300",
-    image: "https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 2,
-    name: "Wedding Cakes",
-    description: "Custom designed for your special day",
-    icon: Cake,
-    count: 18,
-    color: "from-pink-400 via-rose-400 to-pink-500",
-    glitterColor: "from-pink-200 to-rose-200",
-    image: "https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 3,
-    name: "Gourmet Cookies",
-    description: "Handcrafted with love and finest ingredients",
-    icon: Cookie,
-    count: 32,
-    color: "from-blue-400 via-indigo-400 to-purple-500",
-    glitterColor: "from-blue-200 to-indigo-200",
-    image: "https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 4,
-    name: "French Pastries",
-    description: "Authentic recipes from master bakers",
-    icon: Croissant,
-    count: 28,
-    color: "from-emerald-400 via-teal-400 to-cyan-500",
-    glitterColor: "from-emerald-200 to-teal-200",
-    image: "https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 5,
-    name: "Artisan Coffee",
-    description: "Premium blends to complement our pastries",
-    icon: Coffee,
-    count: 15,
-    color: "from-orange-400 via-red-400 to-pink-500",
-    glitterColor: "from-orange-200 to-red-200",
-    image: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 6,
-    name: "Ice Cream & Gelato",
-    description: "Creamy delights made fresh daily",
-    icon: IceCream,
-    count: 22,
-    color: "from-cyan-400 via-blue-400 to-indigo-500",
-    glitterColor: "from-cyan-200 to-blue-200",
-    image: "https://images.pexels.com/photos/1362534/pexels-photo-1362534.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 7,
-    name: "Seasonal Treats",
-    description: "Limited edition flavors and designs",
-    icon: Cherry,
-    count: 16,
-    color: "from-purple-400 via-violet-400 to-purple-500",
-    glitterColor: "from-purple-200 to-violet-200",
-    image: "https://images.pexels.com/photos/1028714/pexels-photo-1028714.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 8,
-    name: "Gift Boxes",
-    description: "Beautifully packaged assortments",
-    icon: Gift,
-    count: 12,
-    color: "from-rose-400 via-pink-400 to-red-500",
-    glitterColor: "from-rose-200 to-pink-200",
-    image: "https://images.pexels.com/photos/264939/pexels-photo-264939.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 9,
-    name: "Birthday Cakes",
-    description: "Make every celebration memorable",
-    icon: Star,
-    count: 26,
-    color: "from-yellow-400 via-amber-400 to-orange-500",
-    glitterColor: "from-yellow-200 to-amber-200",
-    image: "https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 10,
-    name: "Premium Chocolates",
-    description: "Handcrafted Belgian chocolate creations",
-    icon: Heart,
-    count: 19,
-    color: "from-indigo-400 via-purple-400 to-pink-500",
-    glitterColor: "from-indigo-200 to-purple-200",
-    image: "https://images.pexels.com/photos/918327/pexels-photo-918327.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 11,
-    name: "Luxury Desserts",
-    description: "Exquisite creations for special occasions",
-    icon: Crown,
-    count: 14,
-    color: "from-teal-400 via-emerald-400 to-green-500",
-    glitterColor: "from-teal-200 to-emerald-200",
-    image: "https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&w=800"
-  },
-  {
-    id: 12,
-    name: "Energy Bites",
-    description: "Healthy and delicious power snacks",
-    icon: Zap,
-    count: 21,
-    color: "from-lime-400 via-green-400 to-emerald-500",
-    glitterColor: "from-lime-200 to-green-200",
-    image: "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=800"
-  }
-];
+// ✅ Menu data (your full menu)
+const menuData: Record<string, { name: string; price: string }[]> = {
+  "Cream Cakes": [
+    { name: "Pineapple", price: "450/- (500gm), 850/- (1kg)" },
+    { name: "Vanilla", price: "450/- (500gm), 850/- (1kg)" },
+    { name: "Butter Scotch", price: "500/- / 950/-" },
+    { name: "Red Velvet", price: "600/- / 1200/-" },
+    { name: "Fresh Fruit", price: "600/- / 1200/-" },
+    { name: "Vanilla Strawberry", price: "500/- / 950/-" },
+    { name: "Vanilla Blueberry", price: "500/- / 950/-" },
+    { name: "Coconut Pineapple", price: "500/- / 950/-" },
+    { name: "Rainbow Cake", price: "650/- / 1300/-" },
+    { name: "Choco Vanilla", price: "500/- / 950/-" },
+    { name: "Chocolate Truffle", price: "600/- / 1200/-" },
+    { name: "Chocolate Mousse", price: "500/- / 950/-" },
+    { name: "Choco Blueberry", price: "500/- / 950/-" },
+    { name: "Choco Strawberry", price: "500/- / 950/-" },
+    { name: "Black Forest", price: "500/- / 950/-" },
+    { name: "Kit Kat Cake", price: "600/- / 1200/-" },
+    { name: "Praline Cake", price: "650/- / 1300/-" },
+    { name: "Coffee Cake", price: "500/- / 950/-" },
+    { name: "Mango Cake", price: "500/- / 950/-" },
+    { name: "Carrot Cake", price: "500/- / 1000/-" },
+    { name: "Rasmalai Cake", price: "500/- / 1000/-" },
+    { name: "White Forest Cake", price: "500/- / 1000/-" },
+    { name: "Sugarless Chocolate Cake", price: "700/- / 1400/-" },
+  ],
+  "Tea Time Cakes": [
+    { name: "Rich Fruit Cake", price: "180/- (250gm), 450/- (500gm)" },
+    { name: "Honey Almond Cake", price: "180/- / 450/-" },
+    { name: "Dates Walnut Cake", price: "180/- / 450/-" },
+    { name: "Mom-Made Cake", price: "180/- / 450/-" },
+    { name: "Atta Jaggery Cake", price: "180/- / 450/-" },
+    { name: "Lemon Cake", price: "180/- / 450/-" },
+    { name: "Mango Cake", price: "180/- / 450/-" },
+    { name: "Marble Cake", price: "200/- / 450/-" },
+    { name: "Choco Walnut Cake", price: "200/- / 450/-" },
+    { name: "Choco Vanilla Cake", price: "250/-" },
+    { name: "Vanilla Cake", price: "210/-" },
+    { name: "Plain Vanilla Cake", price: "210/-" },
+    { name: "Walnut S.Free Cake", price: "200/- / 450/-" },
+    { name: "Choco Chips Cake", price: "200/- / 450/-" },
+    { name: "Red Velvet Cake", price: "250/- / 500/-" },
+    { name: "Banana Walnut Cake", price: "200/- / 450/-" },
+    { name: "Coconut Pista Almond Cake", price: "200/- / 450/-" },
+    { name: "Pineapple Cake", price: "200/- / 450/-" },
+    { name: "Chocolate Orange Cake", price: "200/- / 450/-" },
+    { name: "Pineapple Upside Down Cake", price: "200/- / 450/-" },
+    { name: "Plum Cake", price: "260/-" },
+    { name: "Brownie", price: "200/-" },
+  ],
+  Puddings: [
+    { name: "Chocolate Truffle Pudding", price: "100/-" },
+    { name: "Fruit Pudding", price: "80/-" },
+    { name: "Choco Mousse Pudding", price: "80/-" },
+    { name: "Tiramisu Pudding (Jar)", price: "100/-" },
+    { name: "Banoffee Pudding (Jar)", price: "100/-" },
+    { name: "Twin Choco Mousse Pudding (Jar)", price: "100/-" },
+    { name: "Red Velvet Pudding (Jar)", price: "100/-" },
+    { name: "Caramel Crunch Pudding (Jar)", price: "100/-" },
+  ],
+  "Sugarless Cookies": [
+    { name: "Oats Sugar Less", price: "300gm 270/-" },
+    { name: "Multigrain S-Free", price: "300gm 250/-" },
+    { name: "Sugarless Italian Biscotti", price: "300gm 280/-" },
+    { name: "Sugarless Rock Almond", price: "300gm 280/-" },
+    { name: "Atta Desi Ghee Sugarless", price: "400gm 320/-" },
+  ],
+  Titbits: [
+    { name: "Brownie/Doughnut", price: "60/-" },
+    { name: "Choco Muffin", price: "40/-" },
+    { name: "Vanilla Muffin", price: "40/-" },
+    { name: "Choco Lava", price: "60/-" },
+    { name: "Cake Pops", price: "40/-" },
+    { name: "Ice Cream Cake Pops", price: "40/-" },
+    { name: "Caramel Square", price: "30/-" },
+    { name: "Caramel Toffee", price: "30/-" },
+    { name: "Apple Pie", price: "40/-" },
+    { name: "Choco Cup Cake", price: "40/-" },
+    { name: "Vanilla Cup Cake", price: "40/-" },
+    { name: "Swiss Roll", price: "40/-" },
+    { name: "Chocolate Ball", price: "40/-" },
+    { name: "Tart", price: "70/-" },
+    { name: "Cream Roll (pack of 2)", price: "100/-" },
+    { name: "Vanilla Cream in a cone", price: "50/-" },
+    { name: "Plum Muffin/Atta", price: "40/-" },
+    { name: "Jaggery Muffins", price: "40/-" },
+  ],
+  "Chips And Namkeen": [
+    { name: "Beetroot Chips", price: "200gm 120/-" },
+    { name: "Masala Chips", price: "200gm 120/-" },
+    { name: "Green Chips", price: "200gm 120/-" },
+    { name: "Millet Chips", price: "200gm 150/-" },
+    { name: "Banana Chips", price: "210gm 150/-" },
+    { name: "Pita Chips With Dip", price: "200gm 150/-" },
+    { name: "Lavash With Dip", price: "200gm 150/-" },
+    { name: "Karela Chips", price: "200gm 120/-" },
+    { name: "Beetroot Bhujia", price: "200gm 150/-" },
+    { name: "Chakli (Murukku)", price: "350gm 150/-" },
+    { name: "Bhakarwadi", price: "200gm 150/-" },
+    { name: "Oats Bhujia", price: "200gm 150/-" },
+    { name: "Ajwain Fursi", price: "200gm 150/-" },
+    { name: "Cheese Straws", price: "200gm 150/-" },
+    { name: "Kachori", price: "483gm 140/-" },
+  ],
+  "Misc. Meetha": [
+    { name: "Rock Almond Chocolate", price: "Glass Jar 200/-" },
+    { name: "Glass Jar Choco Cookies", price: "Glass Jar 200/-" },
+    { name: "Jam Papad Jar", price: "Glass Jar 100/-" },
+    { name: "Jelly Cubes", price: "Glass Jar 100/-" },
+    { name: "Colourful Candy", price: "Glass Jar 100/-" },
+    { name: "Chocolate Ladoo", price: "Glass Jar 200/-" },
+    { name: "Choco Mahbana", price: "Glass Jar 250/-" },
+    { name: "Fruit Loops", price: "160gm 80/-" },
+    { name: "Choco Sticks", price: "200gm 120/-" },
+    { name: "Mango Puff", price: "200gm 120/-" },
+  ],
+  "Biscuits And Cookies": [
+    { name: "Italian Biscotti", price: "300gm 240/-" },
+    { name: "Rock Almond", price: "300gm 260/-" },
+    { name: "Choco Chips", price: "300gm 240/-" },
+    { name: "Butter Almond", price: "250gm 200/-" },
+    { name: "Butter Coconut", price: "250gm 200/-" },
+    { name: "Butter Corn Flakes", price: "250gm 200/-" },
+    { name: "Butter Kaju Cookies", price: "300gm 240/-" },
+    { name: "Jeera Biscuits", price: "300gm 200/-" },
+    { name: "Butter Salted", price: "300gm 200/-" },
+    { name: "Besan Khatai", price: "250gm 200/-" },
+    { name: "Desi Ghee Besan Pista Khatai", price: "1kg 600/-" },
+    { name: "Almond Khatai", price: "700gm 400/-" },
+    { name: "Sweet Khatai", price: "700gm 400/-" },
+    { name: "Cake Rusk", price: "200gm 120/-" },
+    { name: "Cinnamon Toast", price: "200gm 120/-" },
+    { name: "Suji Rusk", price: "450gm 120/-" },
+  ],
+  "Atta And Multigrain Cookies": [
+    { name: "Atta Jaggery Almond", price: "300gm 240/-" },
+    { name: "Atta Muesli", price: "300gm 270/-" },
+    { name: "Atta Desi Ghee", price: "300gm 250/-" },
+    { name: "Atta Cow Desi Ghee", price: "300gm 260/-" },
+    { name: "Oats Cookies", price: "300gm 240/-" },
+    { name: "Atta Desi Ghee Salted", price: "300gm 250/-" },
+    { name: "Atta Jaggery Sesame", price: "300gm 270/-" },
+    { name: "Almond Rock Millet Cookies", price: "300gm 280/-" },
+    { name: "Multi Grain", price: "300gm 240/-" },
+    { name: "Atta Dates Banana", price: "300gm 270/-" },
+  ],
+  "NY Cheese Cakes": [
+    { name: "Tiramisu Cheese Cake", price: "700/- / 1400/-" },
+    { name: "Blueberry Cheese Cake", price: "700/- / 1400/-" },
+    { name: "Lotus Biscoff Cheese Cake", price: "800/- / 1600/-" },
+    { name: "Nutella Cheesecake", price: "750/- / 1500/-" },
+    { name: "Frozen Blueberry Cheesecake", price: "700/- / 1400/-" },
+  ],
+  "Bento Cakes": [
+    { name: "Pineapple", price: "250/- (Small), 350/- (Large)" },
+    { name: "Chocolate Mousse", price: "350/-" },
+    { name: "Chocolate Truffle", price: "350/- / 450/-" },
+  ],
+};
 
-function CategoryCard({ category, index }: { category: Category; index: number }) {
-  
+// 🎨 Section animation
+const sectionVariants: any = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" },
+  }),
+};
+
+// 🎨 Item animation
+const itemVariants: any = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  hover: { x: 5, color: "#0284c7", transition: { duration: 0.2 } },
+};
+
+// ✨ Floating bubbles background
+const Bubbles = () => {
+  const bubbles = Array.from({ length: 12 });
   return (
-    <div 
-      className="group relative overflow-hidden bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-2 hover:rotate-1 cursor-pointer h-full flex flex-col"
-      style={{
-        animationDelay: `${index * 150}ms`
-      }}
-    >
-      {/* Image Section */}
-      <div className="relative h-40 overflow-hidden">
-        <img 
-          src={category.image} 
-          alt={category.name}
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
+    <div className="absolute inset-0 overflow-hidden -z-10">
+      {bubbles.map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-sky-300/30"
+          style={{
+            width: Math.random() * 40 + 20,
+            height: Math.random() * 40 + 20,
+            left: `${Math.random() * 100}%`,
+            bottom: `-${Math.random() * 50}px`,
+          }}
+          animate={{
+            y: ["0%", "-120vh"],
+            opacity: [0.4, 0.8, 0],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
-      </div>
-
-      {/* Content Section */}
-      <div className="p-6 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text transition-all duration-500">
-            {category.name}
-          </h3>
-          <p className="text-gray-600 mb-4 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 text-sm">
-            {category.description}
-          </p>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className={`text-xs font-bold text-white px-3 py-1 rounded-full bg-gradient-to-r ${category.color}`}>
-            {category.count} items
-          </span>
-          <div className={`w-9 h-9 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center`}>
-            <div className="w-2 h-2 bg-white rounded-full"></div>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
   );
-}
+};
 
-function App() {
+// ✅ Main Menu Page
+export default function MenuPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-hidden">
-      {/* Header */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600"></div>
-        <div className="relative max-w-7xl mx-auto px-6 py-20 text-center">
-          <h1 className="text-5xl font-bold text-white">Sweet <span className="bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200 bg-clip-text text-transparent">Delights</span></h1>
-          <p className="text-lg text-purple-100 mt-4">Discover our exquisite collection of handcrafted bakery items.</p>
-        </div>
-      </div>
+    <div className="relative min-h-screen bg-gradient-to-b from-sky-50 via-blue-100 to-sky-200 py-30 px-6">
+      <Bubbles />
 
-      {/* Categories Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            Our Bakery Categories
-          </h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {categories.map((category, index) => (
-            <CategoryCard key={category.id} category={category} index={index} />
-          ))}
-        </div>
+      {/* Title */}
+      <motion.h1
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl md:text-5xl font-bold text-center text-blue-900 mb-14 drop-shadow-md"
+      >
+        🍰 Friends Bakers Menu
+      </motion.h1>
+
+      {/* Menu Cards */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {Object.entries(menuData).map(([category, items], i) => (
+          <motion.div
+            key={category}
+            custom={i}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={sectionVariants}
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-6 border-t-4 border-sky-500 hover:shadow-2xl hover:border-blue-600 transition-all duration-300"
+          >
+            {/* Category Heading */}
+            <h2 className="text-2xl font-semibold text-blue-800 mb-4 border-b pb-2">
+              {category}
+            </h2>
+
+            {/* Items */}
+            <ul className="space-y-2 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-transparent">
+              {items.map((item, idx) => (
+                <motion.li
+                  key={idx}
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true }}
+                  className="flex justify-between items-center text-gray-700 text-sm px-2 py-1 rounded-md hover:bg-blue-50"
+                >
+                  <span>{item.name}</span>
+                  <span className="font-medium text-blue-600">
+                    {item.price}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 }
-
-export default App;
