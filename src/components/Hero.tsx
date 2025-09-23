@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Sparkles, Coffee, Award, Users, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BakeryHero = () => {
   const [, setScrollY] = useState(0);
@@ -119,13 +120,17 @@ const BakeryHero = () => {
 
               {/* Button */}
               <div className="flex justify-center sm:justify-center mt-6">
-                <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-sky-400 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-300/40 hover:-translate-y-1 hover:scale-105 transition-all duration-300">
-                  <span className="relative flex items-center gap-2">
-                    <Coffee className="w-5 h-5" />
-                    Order Fresh Now
-                  </span>
-                </button>
-              </div>
+  <Link
+    to="/categories"
+    className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 to-sky-400 text-white font-semibold rounded-2xl shadow-lg hover:shadow-blue-300/40 hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+  >
+    <span className="relative flex items-center gap-2">
+      <Coffee className="w-5 h-5" />
+      Order Fresh Now
+    </span>
+  </Link>
+</div>
+
             </div>
 
             {/* Right Image Card */}
