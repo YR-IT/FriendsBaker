@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import News from './pages/News';
+import Categories from './pages/Categories';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<PrivateRoute />} />
             <Route path="/News" element={<News />} />
+            <Route path="/Categories" element={<Categories />} />
           </Routes>
         </main>
         <Footer />

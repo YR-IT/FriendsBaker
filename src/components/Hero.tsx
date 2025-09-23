@@ -64,9 +64,9 @@ const BakeryHero = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex items-center min-h-screen px-4 sm:px-6 lg:px-8 pt-26 md:pt-28">
+      <div className="relative z-10 flex items-center min-h-screen px-4 sm:px-6 lg:px-5 pt-26 md:pt-28">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 items-center text-center lg:text-left justify-items-center lg:justify-items-start">
             {/* Left Content */}
             <div
               className={`space-y-8 transition-all duration-1000 ${

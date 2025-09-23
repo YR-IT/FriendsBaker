@@ -3,64 +3,22 @@ import {
   Phone,
   Menu,
   X,
-  ChevronDown,
   Search,
   ShoppingBag,
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../../data/products";
-import type { IProduct } from "../../data/products";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
-  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
-  const [productCategories, setProductCategories] = useState<string[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const products: IProduct[] = await getProducts();
-        const uniqueCategories = Array.from(
-          new Set(products.map((p) => p.category))
-        );
-        setProductCategories(uniqueCategories);
-      } catch (error) {
-        console.error("Failed to fetch categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleMouseEnter = (menu: string) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setHoveredMenu(menu);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => setHoveredMenu(null), 200);
-  };
-
-  const handleCategoryClick = () => setHoveredMenu(null);
-
-  // ✅ Dynamic column calculation
-  const getGridCols = (count: number) => {
-    if (count > 12) return "grid-cols-4";
-    if (count > 6) return "grid-cols-3";
-    return "grid-cols-2";
-  };
 
   // ✅ Typed Variants
   const navVariants: Variants = {
@@ -78,16 +36,6 @@ function Navbar() {
       opacity: 1,
       y: 0,
       transition: { duration: 0.3 },
-    },
-  };
-
-  const dropdownVariants: Variants = {
-    hidden: { opacity: 0, y: -10, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.2, ease: "easeOut" },
     },
   };
 
@@ -141,8 +89,9 @@ function Navbar() {
               {[
                 { name: "Home", path: "/" },
                 { name: "Our Story", path: "/about" },
-                { name: "News", path: "/news" }, 
+                { name: "News", path: "/news" },
                 { name: "Contact", path: "/contact-us" },
+                { name: "Categories", path: "/categories" }, // ✅ Direct link
               ].map((item, index) => (
                 <motion.div
                   key={item.name}
@@ -160,57 +109,6 @@ function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-
-              {/* Categories Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter("categories")}
-                onMouseLeave={handleMouseLeave}
-              >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 group"
-                >
-                  Categories
-                  <motion.div
-                    animate={{ rotate: hoveredMenu === "categories" ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <ChevronDown className="w-4 h-4" />
-                  </motion.div>
-                </motion.button>
-
-                <AnimatePresence>
-                  {hoveredMenu === "categories" && (
-                    <motion.div
-                      variants={dropdownVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                      className={`absolute left-0 mt-4 bg-white shadow-xl rounded-2xl p-6 w-[28rem] border border-gray-100 grid gap-3 ${getGridCols(
-                        productCategories.length
-                      )}`}
-                    >
-                      {productCategories.map((cat, i) => (
-                        <motion.div
-                          key={i}
-                          whileHover={{ x: 8, backgroundColor: "#eff6ff" }}
-                          className="rounded-lg p-3 transition-all duration-200"
-                        >
-                          <Link
-                            to={`/menu/${cat}`}
-                            className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition-colors"
-                            onClick={handleCategoryClick}
-                          >
-                            <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full" />
-                            <span className="font-medium">{cat}</span>
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
             </nav>
 
             {/* Right Side Actions */}
@@ -337,7 +235,9 @@ function Navbar() {
                   {[
                     { name: "Home", path: "/" },
                     { name: "Our Story", path: "/about" },
+                    { name: "News", path: "/news" },
                     { name: "Contact", path: "/contact-us" },
+                    { name: "Categories", path: "/categories" }, // ✅ Direct link
                   ].map((item, index) => (
                     <motion.div
                       key={item.name}
@@ -354,55 +254,6 @@ function Navbar() {
                       </Link>
                     </motion.div>
                   ))}
-
-                  {/* Mobile Categories */}
-                  <div>
-                    <button
-                      onClick={() => setCategoriesOpen(!categoriesOpen)}
-                      className="flex justify-between items-center w-full py-3 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium transition-all duration-300"
-                    >
-                      Categories
-                      <motion.div
-                        animate={{ rotate: categoriesOpen ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <ChevronDown className="w-4 h-4" />
-                      </motion.div>
-                    </button>
-
-                    <AnimatePresence>
-                      {categoriesOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className={`ml-4 mt-2 grid gap-2 ${getGridCols(
-                            productCategories.length
-                          )}`}
-                        >
-                          {productCategories.map((cat, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.05 }}
-                            >
-                              <Link
-                                to={`/menu/${cat}`}
-                                className="block py-2 px-4 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
-                                onClick={() => {
-                                  setMenuOpen(false);
-                                  setCategoriesOpen(false);
-                                }}
-                              >
-                                {cat}
-                              </Link>
-                            </motion.div>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
                 </div>
 
                 {/* Mobile Actions */}
