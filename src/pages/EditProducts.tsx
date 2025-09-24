@@ -35,6 +35,7 @@ const EditProducts: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [newCategoryName, setNewCategoryName] = useState('');
+  const [newCategoryImage, setNewCategoryImage] = useState<File | null>(null);
 
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +56,27 @@ const EditProducts: React.FC = () => {
 
       // Update the editingProduct state with the new image
       setEditingProduct({ ...editingProduct, image: file });
+    }
+  }
+
+  const handleCategoryFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      // Validate file size (5MB limit)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        return;
+      }
+
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Please select a valid image file (JPEG, PNG, GIF, WebP)');
+        return;
+      }
+
+      // Update the newCategoryImage state with the new image
+      setNewCategoryImage(file);
     }
   }
 
@@ -131,23 +153,29 @@ const EditProducts: React.FC = () => {
 
   
   const handleAddCategory = async () => {
-    if (newCategoryName.trim() === '') {
-      alert('Category name cannot be empty.');
+    if (newCategoryName.trim() === '' || !newCategoryImage) {
+      alert('Category name and image are required.');
       return;
     }
+
+    const formData = new FormData();
+    formData.append('name', newCategoryName);
+    formData.append('image', newCategoryImage);
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('https://friends-backend-u2ve.onrender.com/api/addcategory', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ name: newCategoryName }),
+        body: formData,
       });
+
       if (response.ok) {
         fetchCategories();
         setNewCategoryName('');
+        setNewCategoryImage(null);
       } else {
         alert('Failed to add category.');
       }
@@ -287,6 +315,19 @@ const EditProducts: React.FC = () => {
             onChange={(e) => setNewCategoryName(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-3 focus:ring-purple-500 focus:border-purple-500"
           />
+          <div className="mb-4">
+            <label htmlFor="categoryImage" className="block text-sm font-medium text-gray-700 mb-1">
+              Category Image (Max 5MB)
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
+              onChange={handleCategoryFileChange}
+              className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            />
+          </div>
           <button onClick={handleAddCategory} className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">Add Category</button>
         </div>
         <ul className="space-y-2">
