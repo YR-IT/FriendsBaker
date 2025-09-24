@@ -135,7 +135,7 @@ const BakeryHero = () => {
 
             {/* Right Image Card */}
             <div
-              className={`relative transition-all duration-1000 delay-300 ${
+              className={`relative transition-all duration-1000 pl-36 delay-300 ${
                 isLoaded
                   ? "translate-x-0 opacity-100"
                   : "translate-x-12 opacity-0"

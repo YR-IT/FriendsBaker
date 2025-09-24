@@ -78,7 +78,7 @@ function Navbar() {
                     Friends Baker
                   </h1>
                   <p className="text-xs text-gray-500 -mt-1">
-                    Fresh • Delicious • Daily
+                    Freshly • Baked • Smiles
                   </p>
                 </div>
               </Link>
@@ -89,7 +89,7 @@ function Navbar() {
               {[
                 { name: "Home", path: "/" },
                 { name: "Our Story", path: "/about" },
-                { name: "News", path: "/news" },
+                { name: "Blogs", path: "/news" },
                 { name: "Contact", path: "/contact-us" },
                 { name: "Categories", path: "/categories" }, // ✅ Direct link
               ].map((item, index) => (
