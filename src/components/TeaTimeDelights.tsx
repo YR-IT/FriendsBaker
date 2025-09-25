@@ -3,12 +3,14 @@ import { useState, useEffect, useRef } from "react";
 import { ArrowLeft, ArrowRight, Sparkles, Coffee } from "lucide-react";
 
 const images = [
-  "https://images.pexels.com/photos/230477/pexels-photo-230477.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "https://images.pexels.com/photos/1638710/pexels-photo-1638710.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "https://images.pexels.com/photos/2703468/pexels-photo-2703468.jpeg?auto=compress&cs=tinysrgb&w=800",
-  "https://images.pexels.com/photos/1793037/pexels-photo-1793037.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "/TeaTimeCakes/image1.jpg",
+  "/TeaTimeCakes/image2.jpg",
+  "/TeaTimeCakes/image3.jpg",
+  "/TeaTimeCakes/image4.jpg",
+  "/TeaTimeCakes/image5.jpg",
+  "/TeaTimeCakes/image6.jpg",
+  "/TeaTimeCakes/image7.jpg",
+  "/TeaTimeCakes/image8.jpg"
 ];
 
 function TeaTimeDelights() {
@@ -189,8 +191,15 @@ function TeaTimeDelights() {
                     exit={{ opacity: 0, scale: 0.9, rotateY: -10 }}
                     transition={{ duration: 0.8 }}
                     className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
+                    onError={() => {
+                      console.error('Tea-Time image failed to load:', images[index]);
+                    }}
+                    onLoad={() => {
+                      console.log('Tea-Time image loaded successfully:', images[index]);
+                    }}
                   />
                 </AnimatePresence>
+                
                 
                 {/* Indicators */}
                 <div className="absolute bottom-3 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-1.5 sm:gap-2">

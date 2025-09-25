@@ -1,12 +1,19 @@
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useScroll, useTransform, type Variants, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Heart, Award, Users, Star, ChefHat, Clock } from "lucide-react";
 
 export default function About() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+
+  const aboutImages = [
+    "/About image/image1.jpg",
+    "/About image/image2.jpg",
+    "/About image/image3.jpg"
+  ];
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
@@ -15,6 +22,14 @@ export default function About() {
     window.addEventListener("mousemove", updateMousePosition);
     return () => window.removeEventListener("mousemove", updateMousePosition);
   }, []);
+
+  // Auto-rotate images every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % aboutImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [aboutImages.length]);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -194,14 +209,50 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div variants={itemVariants}>
               <div className="relative group">
-                <motion.img
-                  src="https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Our Bakery Story"
-                  className="rounded-3xl shadow-2xl w-full h-96 object-cover"
-                  whileHover={{ scale: 1.02, rotate: 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Image Carousel Container */}
+                <div className="relative w-full h-96 rounded-3xl overflow-hidden shadow-2xl">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={aboutImages[currentImageIndex]}
+                      alt={`Our Bakery Story ${currentImageIndex + 1}`}
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                      style={{ 
+                        objectPosition: currentImageIndex === 0 ? 'center top' : 'center center'
+                      }}
+                      initial={{ opacity: 0, scale: 1.1, x: 100 }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, x: -100 }}
+                      transition={{ 
+                        duration: 0.8, 
+                        ease: "easeInOut",
+                        scale: { duration: 0.6 },
+                        x: { duration: 0.6 }
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                    />
+                  </AnimatePresence>
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Image Indicators */}
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    {aboutImages.map((_, index) => (
+                      <motion.button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          index === currentImageIndex 
+                            ? 'bg-white shadow-lg' 
+                            : 'bg-white/50 hover:bg-white/75'
+                        }`}
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.9 }}
+                      />
+                    ))}
+                  </div>
+                </div>
                 
                 {/* Floating badge */}
                 <motion.div
@@ -310,11 +361,7 @@ export default function About() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={containerVariants}
             >
-              {[
-                "https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg?auto=compress&cs=tinysrgb&w=600",
-                "https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=600",
-                "https://images.pexels.com/photos/1395319/pexels-photo-1395319.jpeg?auto=compress&cs=tinysrgb&w=600"
-              ].map((src, i) => (
+              {aboutImages.map((src, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
@@ -325,8 +372,11 @@ export default function About() {
                 >
                   <img
                     src={src}
-                    alt={`Store view ${i + 1}`}
+                    alt={`Friend's Baker Store ${i + 1}`}
                     className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+                    style={{ 
+                      objectPosition: i === 0 ? 'center top' : 'center center'
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <motion.div 
