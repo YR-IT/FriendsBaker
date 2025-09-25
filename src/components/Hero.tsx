@@ -109,13 +109,16 @@ const BakeryHero = () => {
                   { value: "50k+", label: "Happy Customers" },
                   { value: "100+", label: "Daily Varieties" },
                 ].map((stat, i) => (
-                  <div key={i} className="group cursor-default">
-                    <div className="text-xl sm:text-2xl font-bold text-blue-700 group-hover:scale-110 transition-transform">
+                  <div key={i} className="group cursor-default ">
+                    <div className=" px-4 py-2 text-centre bg-gradient-to-r from-blue-500 to-sky-400 text-3xl rounded-xl sm:rounded-2xl backdrop-blur-sm  sm:text-4xl font-extrabold text-blue-800 group-hover:text-blue-600 transition-colors duration-300">
+                      <div className="text-xl sm:text-2xl font-bold text-white group-hover:scale-110 transition-transform">
                       {stat.value}
                     </div>
-                    <div className="text-sm text-blue-500">{stat.label}</div>
+                    <div className="text-sm text-white">{stat.label}</div>
+                    </div>
                   </div>
                 ))}
+                
               </div>
 
               {/* Button */}

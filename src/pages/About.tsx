@@ -345,6 +345,67 @@ export default function About() {
         </motion.section>
 
         {/* ...rest of your code stays unchanged */}
+        <motion.section
+          className="py-20 bg-gradient-to-b from-blue-50 to-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div variants={itemVariants} className="text-center mb-16">
+              <motion.h2 
+                className="text-4xl lg:text-6xl font-bold text-gray-800 mb-6"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                Our Founding {" "}
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  Member's
+                </span>
+              </motion.h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Founder of Friends Bakerx, passionate about crafting fresh, artisanal baked goods with a focus on quality and authenticity. Dedicated to delivering delightful experiences in every bite.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+            >
+              {[
+                "https://media.istockphoto.com/id/1076244572/photo/cooking-master-class-in-bakery-chef-with-his-assistant-showing-ready-samples-of-baking-test.webp?a=1&b=1&s=612x612&w=0&k=20&c=BYlOuVgDFIDN9YdEoGYZcVUl1enN_y92QN3nFpnDHT8=",
+                "https://media.istockphoto.com/id/1479330210/photo/artisan-baker-applying-egg-wash-on-to-pastries-in-a-small-bakery.webp?a=1&b=1&s=612x612&w=0&k=20&c=KaHDZDMaTDKZ0pUWbYTq_ayh6_fKbx3wCkunBw0TbE0=",
+                "https://media.istockphoto.com/id/627198666/photo/happy-in-the-bakery.jpg?s=612x612&w=0&k=20&c=3VAdnF68YIAYUq3gXf8ft-sFeHLg6AYrbM8JV8HlOp4="
+              ].map((src, i) => (
+                <motion.div
+                  key={i}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, rotateY: 5 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  style={{ boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)" }}
+                  className="relative group cursor-pointer overflow-hidden rounded-2xl"
+                >
+                  <img
+                    src={src}
+                    alt={`Store view ${i + 1}`}
+                    className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div 
+                    className="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100"
+                    
+                  >
+                    <h3 className="text-xl font-bold mb-2">Our Space</h3>
+                    <p className="text-sm text-blue-200">Where magic happens daily</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* next piece of code if req. */}
       </div>
     </div>
   );
