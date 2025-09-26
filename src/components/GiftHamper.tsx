@@ -1,7 +1,23 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Gift, Heart, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+  const images = [
+    { name: "image 1", src: "/Cream Cakes/image1.JPG" },
+    { name: "image 2", src: "/Cream Cakes/image2.JPG" },
+    { name: "image 3", src: "/Cream Cakes/image3.JPG" },
+    { name: "image 4", src: "https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=600" },
+  ];
 
 function GiftHamper() {
+    const [current, setCurrent] = useState(0);
+
+  // Auto slideshow (change every 4s)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000); // 4 seconds
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-14 sm:py-24 px-4 overflow-hidden">
       {/* Animated background elements */}
@@ -47,75 +63,75 @@ function GiftHamper() {
         >
           {/* Icon with animation */}
           <motion.div
-  className="flex items-center gap-4 mb-6 justify-center lg:justify-start"
-  initial={{ opacity: 0, scale: 0 }}
-  whileInView={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
-  viewport={{ once: true }}
->
-  <motion.div
-    className="p-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-lg"
-    whileHover={{ rotate: 360 }}
-    transition={{ duration: 0.8 }}
-  >
-    <Gift className="w-6 h-6 text-white" />
-  </motion.div>
-  <motion.div
-    className="flex gap-1"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    transition={{ delay: 0.3 }}
-  >
-    {[...Array(3)].map((_, i) => (
-      <motion.div
-        key={i}
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-      >
-        <Sparkles className="w-4 h-4 text-blue-500" />
-      </motion.div>
-    ))}
-  </motion.div>
-</motion.div>
-
-          <motion.h2
-  className="text-5xl sm:text-6xl  font-bold leading-tight mb-8 text-center lg:text-left"
-  initial={{ y: -40, opacity: 0 }}
-  whileInView={{ y: 0, opacity: 1 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  viewport={{ once: true }}
->
-  <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent">
-    Packed with love
-  </span>
-  <br />
-  <span className="text-gray-800">
-    & all your favourites!
-  </span>
-</motion.h2>
-
-          {/* Animated accent line */}
-          <motion.div
-  className="flex items-center gap-4 mb-8 justify-center lg:justify-start"
-  initial={{ opacity: 0, scale: 0 }}
-  whileInView={{ opacity: 1, scale: 1 }}
-  transition={{ duration: 0.6, delay: 0.4 }}
-  viewport={{ once: true }}
->
-  <div className="relative">
-    <motion.div
-      className="h-1 w-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
-      animate={{ scaleX: [1, 1.2, 1] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute top-0 left-0 h-1 w-8 bg-white rounded-full shadow-lg"
-      animate={{ x: [0, 96, 0] }}
-      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-    />
-  </div>
-  <Heart className="w-5 h-5 text-red-500 animate-pulse" />
-</motion.div>
+            className="flex items-center gap-4 mb-6 justify-center lg:justify-start"
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, type: "spring", bounce: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="p-3 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-lg"
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.8 }}
+            >
+              <Gift className="w-6 h-6 text-white" />
+            </motion.div>
+            <motion.div
+              className="flex gap-1"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                >
+                  <Sparkles className="w-4 h-4 text-blue-500" />
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+            
+                    <motion.h2
+            className="text-5xl sm:text-6xl  font-bold leading-tight mb-8 text-center lg:text-left"
+            initial={{ y: -40, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-700 to-purple-700 bg-clip-text text-transparent">
+              Packed with love
+            </span>
+            <br />
+            <span className="text-gray-800">
+              & all your favourites!
+            </span>
+          </motion.h2>
+            
+                    {/* Animated accent line */}
+                    <motion.div
+            className="flex items-center gap-4 mb-8 justify-center lg:justify-start"
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative">
+              <motion.div
+                className="h-1 w-32 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"
+                animate={{ scaleX: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="absolute top-0 left-0 h-1 w-8 bg-white rounded-full shadow-lg"
+                  animate={{ x: [0, 96, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </div>
+              <Heart className="w-5 h-5 text-red-500 animate-pulse" />
+            </motion.div>
 
           <motion.p
             className="text-gray-700 text-lg mb-8 leading-relaxed font-medium max-w-md text-justify"
@@ -173,35 +189,48 @@ function GiftHamper() {
           </motion.div>
         </motion.div>
 
-        {/* Right Image */}
-        <motion.div
-          className="flex justify-center relative"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="relative group"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          >
-            <motion.img
-              src="https://images.pexels.com/photos/1055272/pexels-photo-1055272.jpeg?auto=compress&cs=tinysrgb&w=600"
-              alt="Bakery Gift Hamper"
-              className="relative rounded-2xl shadow-xl border-4 border-white/50 backdrop-blur-sm max-w-md w-full"
-              animate={{ 
-                y: [0, -10, 0],
-                rotate: [0, 1, 0, -1, 0]
-              }}
-              transition={{ 
-                duration: 6, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-            />
-          </motion.div>
-        </motion.div>
+        
+      {/* Right Image */}
+     
+<motion.div
+  className="flex justify-center relative"
+  initial={{ opacity: 0, x: 50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  viewport={{ once: true }}
+>
+  <motion.div
+    className="relative group w-full max-w-md h-[350px] flex items-center justify-center overflow-hidden"
+    whileHover={{ scale: 1.02 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+  >
+    <AnimatePresence mode="wait">
+      <motion.img
+        key={images[current].src}
+        src={images[current].src}
+        alt={images[current].name}
+        loading="lazy"
+        className="absolute rounded-2xl shadow-xl border-4 border-white/50 backdrop-blur-sm w-full h-full object-cover"
+        initial={{ x: -300, opacity: 0, rotate: -10 }}   // 🚀 thrown from left
+        animate={{
+          x: 0,
+          opacity: 1,
+          rotate: [-2, 2, 0],  // wobble effect
+          y: [0, -8, 0],       // gentle floating
+        }}
+        exit={{ x: 300, opacity: 0, rotate: 10 }}         // thrown out to right
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 15,
+          duration: 1,
+        }}
+      />
+    </AnimatePresence>
+  </motion.div>
+</motion.div>
+
+
       </div>
     </section>
   );
