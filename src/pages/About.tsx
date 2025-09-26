@@ -457,6 +457,11 @@ export default function About() {
 
         {/* next piece of code if req. */}
       </div>
+      <div className="relative z-10 text-center py-12 bg-white/70 backdrop-blur-sm">
+        <button className="text-center font-bold rounded-2xl py-2 px-4 bg-gradient-to-r from-blue-300 to-indigo-600 hover:from-blue-400 hover:to-indigo-700 text-white shadow-lg transition-all duration-300"
+        onClick={() => window.location.href = '/contact-us'}
+        >Contact Us</button>
+      </div>
     </div>
   );
 }
