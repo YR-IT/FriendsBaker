@@ -47,7 +47,7 @@ const AddBlog: React.FC = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://friends-backend-u2ve.onrender.com/api/addblog', {
+      const response = await fetch('https://friends-backend-u2ve.onrender.com/api/addblogs', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
